@@ -25,12 +25,15 @@ class _HomeWidgetState extends State<HomeWidget> {
         ),
         tabController: tabController,
         items: items(context),
-        bodyBuilder: contentBuilder,
+        bodyBuilder: (BuildContext context, int index) => ParentView(
+          title: titles[index],
+          child: ContentView(index: index),
+        ),
       ),
     );
   }
 
-  final items = (BuildContext context) => [
+  items(BuildContext context) => [
         BottomNavigationBarItem(
           label: titles[0],
           icon: Icon(PlatformIcons(context).home),
@@ -47,11 +50,6 @@ class _HomeWidgetState extends State<HomeWidget> {
         ),
       ];
 
-  final contentBuilder = (BuildContext context, int index) => ParentView(
-        title: titles[index],
-        child: Text(index.toString()),
-      );
-
   // This needs to be captured here in a stateful widget
   PlatformTabController tabController = PlatformTabController();
   @override
@@ -60,18 +58,38 @@ class _HomeWidgetState extends State<HomeWidget> {
   }
 }
 
+@immutable
 class ParentView extends StatelessWidget {
-  ParentView({
-    required this.title,
-    required this.child,
-  });
-
   final String title;
   final Widget child;
+
+  const ParentView({super.key, required this.title, required this.child});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: child,
     );
+  }
+}
+
+@immutable
+class ContentView extends StatelessWidget {
+  final int index;
+
+  const ContentView({super.key, required this.index});
+  @override
+  Widget build(BuildContext context) {
+    switch (index) {
+      case 0:
+        return Container();
+      case 1:
+        return Container();
+      case 2:
+        return Container();
+      case 3:
+        return Container();
+      default:
+        return Container();
+    }
   }
 }
