@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'color_utils.dart' as color_utils;
+import 'utils/color_utils.dart' as color_utils;
 import 'home_widget.dart';
 
 void main() {
