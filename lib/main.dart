@@ -1,5 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'color_utils.dart' as color_utils;
 import 'home_widget.dart';
 
 void main() {
@@ -15,7 +16,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'CVJM Walheim',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
+        primaryColor: color_utils.commonThemeData.primaryColor,
+        cupertinoOverrideTheme: CupertinoThemeData(
+            primaryColor: color_utils.commonThemeData.primaryColor),
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: color_utils.commonThemeData.primaryColor,
+        backgroundColor: Colors.black,
+        scaffoldBackgroundColor: Colors.black,
+        bottomAppBarColor: Colors.black,
+        cupertinoOverrideTheme: CupertinoThemeData(
+          primaryColor: color_utils.commonThemeData.primaryColor,
+          barBackgroundColor: Colors.black,
+          scaffoldBackgroundColor: Colors.black,
+          brightness: Brightness.dark,
+          textTheme: const CupertinoTextThemeData(
+            textStyle: TextStyle(color: Colors.white),
+          ),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const HomeWidget(),
