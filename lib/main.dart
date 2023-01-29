@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: color_utils.commonThemeData.primaryColor,
-        backgroundColor: Colors.black,
+        colorScheme: const ColorScheme.dark(background: Colors.black),
         scaffoldBackgroundColor: Colors.black,
-        bottomAppBarColor: Colors.black,
+        bottomAppBarTheme: const BottomAppBarTheme(color: Colors.black),
         cupertinoOverrideTheme: CupertinoThemeData(
           primaryColor: color_utils.commonThemeData.primaryColor,
           barBackgroundColor: Colors.black,
