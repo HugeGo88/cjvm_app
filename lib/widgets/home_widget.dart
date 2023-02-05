@@ -1,3 +1,4 @@
+import 'package:cjvm_app/tabs/start_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -81,7 +82,7 @@ class ContentView extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (index) {
       case 0:
-        return Container();
+        return const StartTab();
       case 1:
         return Container();
       case 2:

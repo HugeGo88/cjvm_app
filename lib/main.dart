@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'utils/color_utils.dart' as color_utils;
-import 'home_widget.dart';
+import 'widgets/home_widget.dart';
 
 void main() {
   runApp(const MyApp());
