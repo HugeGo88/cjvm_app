@@ -32,7 +32,9 @@ class FeatureListItem extends StatelessWidget {
                 child: Column(
                   children: [
                     Container(
-                      decoration: const BoxDecoration(color: Colors.black),
+                      decoration: const BoxDecoration(
+                        color: Color(0xff292929),
+                      ),
                       width: width,
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
