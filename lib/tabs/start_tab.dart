@@ -1,4 +1,5 @@
 import 'package:cjvm_app/utils/constants.dart';
+import 'package:cjvm_app/widgets/feature_list.dart';
 import 'package:cjvm_app/widgets/list_heading.dart';
 import 'package:cjvm_app/widgets/post_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,8 +14,9 @@ class StartTab extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           const ListHeading(important),
-          Container(
+          const SizedBox(
             height: 250,
+            child: FeatureList(),
           ),
           const ListHeading(posts),
           const PostList(

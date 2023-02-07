@@ -1,3 +1,4 @@
+import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'utils/color_utils.dart' as color_utils;
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CVJM Walheim',
+      title: appTitle,
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: color_utils.commonThemeData.primaryColor,

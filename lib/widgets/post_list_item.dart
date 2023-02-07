@@ -1,10 +1,6 @@
 import 'package:cjvm_app/model/post_entitiy.dart';
 import 'package:cjvm_app/utils/constants.dart';
-import 'package:cjvm_app/widgets/post_list.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class PostListItem extends StatelessWidget {
   final PostEntity post;
@@ -19,17 +15,17 @@ class PostListItem extends StatelessWidget {
       child: Column(children: [
         Row(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: const SizedBox(
-                width: LIST_HIGHT,
-                height: LIST_HIGHT,
+            const Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: SizedBox(
+                width: listHeight,
+                height: listHeight,
                 child: Placeholder(),
               ),
             ),
             Flexible(
                 child: SizedBox(
-              width: LIST_HIGHT,
+              width: listHeight,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,

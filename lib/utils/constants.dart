@@ -1,12 +1,14 @@
+const String appTitle = "CVJM Walheim";
+
 const String important = "Wichtiges";
 const String events = "Anstehende Termine";
 const String posts = "Neueste Berichte";
 
-const String URL = "https://cvjm-walheim.de/";
+const String url = "https://cvjm-walheim.de/";
 
-const int FEATURED_CATEGORY_ID = 29;
-const String FEATURED_CATEGORY_NAME = 'Wichtiges';
+const int featuredCategoryId = 29;
+const String featuredCategoryName = 'Wichtiges';
 
-const String REST_URL_PREFIX = 'wp-json';
+const String restUrlPrefix = 'wp-json';
 
-const double LIST_HIGHT = 110;
+const double listHeight = 110;
