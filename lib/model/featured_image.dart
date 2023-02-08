@@ -21,12 +21,12 @@ class FeaturedImage {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['file'] = this.file;
-    data['mime_type'] = this.mimeType;
-    data['width'] = this.width;
-    data['source_url'] = this.sourceUrl;
-    data['height'] = this.height;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['file'] = file;
+    data['mime_type'] = mimeType;
+    data['width'] = width;
+    data['source_url'] = sourceUrl;
+    data['height'] = height;
     return data;
   }
 }

@@ -13,21 +13,21 @@ class PostEmbedded {
   PostEmbedded.fromJson(Map<String, dynamic> json) {
     if (json['author'] != null) {
       author = <PostEmbeddedAuthor>[];
-      (json['author'] as List).forEach((v) {
+      for (var v in (json['author'] as List)) {
         author?.add(PostEmbeddedAuthor.fromJson(v));
-      });
+      }
     }
     if (json['wp:term'] != null) {
       categories = <PostCategory>[];
-      (json['wp:term'][0] as List).forEach((v) {
+      for (var v in (json['wp:term'][0] as List)) {
         categories?.add(PostCategory.fromJson(v));
-      });
+      }
     }
     if (json['wp:featuredmedia'] != null) {
       image = <FeaturedImage>[];
-      (json['wp:featuredmedia'] as List).forEach((v) {
+      for (var v in (json['wp:featuredmedia'] as List)) {
         image?.add(FeaturedImage.fromJson(v));
-      });
+      }
     }
   }
 
