@@ -46,7 +46,7 @@ class PostEntity {
     }
     link = json['link'];
     id = json['id'];
-    title = json['title'].toString() != null ? json['title']['rendered'] : null;
+    title = json['title'].toString() != "" ? json['title']['rendered'] : null;
     title = _parseHtmlString(title);
     content = json['content'] != null ? json['content']['rendered'] : null;
   }
