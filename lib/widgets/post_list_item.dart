@@ -1,3 +1,4 @@
+import 'package:cjvm_app/model/cached_image.dart';
 import 'package:cjvm_app/model/post_entitiy.dart';
 import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,13 @@ class PostListItem extends StatelessWidget {
       child: Column(children: [
         Row(
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: SizedBox(
-                width: listHeight,
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: CachedImage(
+                url: post.image,
                 height: listHeight,
-                child: Placeholder(),
+                width: listHeight,
+                fit: BoxFit.cover,
               ),
             ),
             Flexible(

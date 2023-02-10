@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: color_utils.commonThemeData.primaryColor,
         brightness: Brightness.light,
-        primaryColor: color_utils.commonThemeData.primaryColor,
         cupertinoOverrideTheme: CupertinoThemeData(
             primaryColor: color_utils.commonThemeData.primaryColor),
       ),

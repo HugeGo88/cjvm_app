@@ -1,3 +1,4 @@
+import 'package:cjvm_app/model/cached_image.dart';
 import 'package:cjvm_app/model/post_entitiy.dart';
 import '../utils/color_utils.dart' as color_utils;
 import 'package:flutter/material.dart';
@@ -21,12 +22,13 @@ class FeatureListItem extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Hero(
-                tag: post.image,
-                child: SizedBox(
-                  width: width,
-                  height: size.height,
-                ),
-              ),
+                  tag: post.image,
+                  child: CachedImage(
+                    url: post.image,
+                    height: size.height,
+                    width: width,
+                    fit: BoxFit.cover,
+                  )),
               Positioned(
                 bottom: 0,
                 child: Column(
