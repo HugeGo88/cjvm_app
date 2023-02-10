@@ -14,12 +14,14 @@ class ListHeading extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Text(title.toUpperCase(),
-                textAlign: TextAlign.left,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.apply(fontWeightDelta: 2)),
+            child: Text(
+              title.toUpperCase(),
+              textAlign: TextAlign.left,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.apply(fontWeightDelta: 2),
+            ),
           ),
           Container(
             height: 3,

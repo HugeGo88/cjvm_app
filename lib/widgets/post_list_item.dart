@@ -25,7 +25,7 @@ class PostListItem extends StatelessWidget {
             ),
             Flexible(
                 child: SizedBox(
-              width: listHeight,
+              height: listHeight,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,

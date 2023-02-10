@@ -43,7 +43,7 @@ class FeatureListItem extends StatelessWidget {
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 30,
+                            fontSize: 20,
                           ),
                         ),
                       ),
