@@ -20,12 +20,16 @@ class _FeatureListState extends State<FeatureList> {
   void initState() {
     super.initState();
 
-    WpApi.getPostsList(category: featuredCategoryId).then((posts) {
-      setState(() {
-        isLoading = false;
-        allPosts.addAll(posts);
-      });
-    });
+    WpApi.getPostsList(category: featuredCategoryId).then(
+      (posts) {
+        setState(
+          () {
+            isLoading = false;
+            allPosts.addAll(posts);
+          },
+        );
+      },
+    );
   }
 
   @override

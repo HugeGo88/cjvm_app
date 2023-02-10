@@ -40,14 +40,14 @@ class PostEntity {
       required this.content});
 
   PostEntity.fromJson(Map<String, dynamic> json) {
-/*     modifiedGmt = json['modified_gmt'];
-    extra = json['_embedded'] != null
-        ? PostEmbedded.fromJson(json['_embedded'])
-        : null; */
+    modifiedGmt = json['modified_gmt'];
+    if (json['_embedded'] != null) {
+      extra = PostEmbedded.fromJson(json['_embedded']);
+    }
     link = json['link'];
     id = json['id'];
     title = json['title'].toString() != null ? json['title']['rendered'] : null;
-    //title = _parseHtmlString(title);
+    title = _parseHtmlString(title);
     content = json['content'] != null ? json['content']['rendered'] : null;
   }
 
