@@ -1,7 +1,6 @@
 import 'package:cjvm_app/model/post_entitiy.dart';
 import 'package:cjvm_app/widgets/post_list_item.dart';
 import 'package:flutter/cupertino.dart';
-import '../model/post_embedded.dart';
 import '../network/wp_api.dart';
 import '../utils/color_utils.dart' as color_utils;
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -23,29 +22,7 @@ class PostList extends StatefulWidget {
 }
 
 class _PostListState extends State<PostList> {
-  List<PostEntity> posts = <PostEntity>[
-    PostEntity(
-        extra: PostEmbedded(),
-        modifiedGmt: "",
-        link: "",
-        id: 1,
-        title: "Test1",
-        content: "content1"),
-    PostEntity(
-        extra: PostEmbedded(),
-        modifiedGmt: "",
-        link: "",
-        id: 1,
-        title: "Test2",
-        content: "content2"),
-    PostEntity(
-        extra: PostEmbedded(),
-        modifiedGmt: "",
-        link: "",
-        id: 1,
-        title: "Test3",
-        content: "content3"),
-  ];
+  List<PostEntity> allPosts = <PostEntity>[];
 
   int page = 0;
   final ScrollController _scrollController = ScrollController();
@@ -53,25 +30,31 @@ class _PostListState extends State<PostList> {
 
   void getData() {
     if (!isLoading) {
-      setState(() {
-        page++;
-        isLoading = true;
-      });
+      setState(
+        () {
+          page++;
+          isLoading = true;
+        },
+      );
 
-      WpApi.getPostsList(category: widget.category, page: page).then((posts) {
-        setState(() {
-          isLoading = false;
-          if (widget.showFeatureCategory) {
-            posts.addAll(posts);
-          } else {
-            for (var element in posts) {
-              if (element.category != featuredCategoryName) {
-                posts.add(element);
+      WpApi.getPostsList(category: widget.category, page: page).then(
+        (posts) {
+          setState(
+            () {
+              isLoading = false;
+              if (widget.showFeatureCategory) {
+                allPosts.addAll(posts);
+              } else {
+                for (var post in posts) {
+                  if (post.category != featuredCategoryName) {
+                    allPosts.add(post);
+                  }
+                }
               }
-            }
-          }
-        });
-      });
+            },
+          );
+        },
+      );
     }
   }
 
@@ -79,12 +62,14 @@ class _PostListState extends State<PostList> {
   void initState() {
     super.initState();
     getData();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        getData();
-      }
-    });
+    _scrollController.addListener(
+      () {
+        if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent) {
+          getData();
+        }
+      },
+    );
   }
 
   @override
@@ -101,8 +86,9 @@ class _PostListState extends State<PostList> {
         height: 1,
         color: color_utils.commonThemeData.primaryColor,
       ),
-      itemCount:
-          posts.length + 1 < widget.maxPosts ? posts.length : widget.maxPosts,
+      itemCount: allPosts.length + 1 < widget.maxPosts
+          ? allPosts.length
+          : widget.maxPosts,
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
@@ -111,10 +97,10 @@ class _PostListState extends State<PostList> {
   }
 
   Widget postTile(BuildContext context, int index) {
-    if (index == posts.length) {
+    if (index == allPosts.length) {
       return _buildProgressIndicator();
     } else {
-      return PostListItem(posts[index]);
+      return PostListItem(allPosts[index]);
     }
   }
 
