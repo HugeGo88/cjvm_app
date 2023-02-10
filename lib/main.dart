@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         cupertinoOverrideTheme: CupertinoThemeData(
           primaryColor: color_utils.commonThemeData.primaryColor,
           barBackgroundColor: Colors.black,
+          primaryContrastingColor: color_utils.commonThemeData.primaryColor,
           scaffoldBackgroundColor: Colors.black,
           brightness: Brightness.dark,
           textTheme: const CupertinoTextThemeData(

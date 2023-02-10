@@ -32,6 +32,7 @@ dependencies:
   flutter_platform_widgets: ^3.0.0
   html: ^0.15.1
   intl: ^0.18.0
+  flutter_html: ^2.2.1
   cached_network_image: ^3.2.3
   http: ^0.13.5
 

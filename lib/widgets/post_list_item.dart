@@ -2,6 +2,9 @@ import 'package:cjvm_app/model/cached_image.dart';
 import 'package:cjvm_app/model/post_entitiy.dart';
 import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+import '../pages/post_detail.dart';
 
 class PostListItem extends StatelessWidget {
   final PostEntity post;
@@ -12,14 +15,19 @@ class PostListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            platformPageRoute(
+                builder: (context) => PostDetail(post), context: context));
+      },
       child: Column(children: [
         Row(
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: CachedImage(
-                url: post.image,
+                post.image,
                 height: listHeight,
                 width: listHeight,
                 fit: BoxFit.cover,

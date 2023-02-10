@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 
 class CachedImage extends StatelessWidget {
   final String url;
-  final double height;
+  final double? height;
   final double width;
   final BoxFit fit;
 
-  const CachedImage(
-      {super.key,
-      required this.url,
-      required this.height,
+  const CachedImage(this.url,
+      {this.height,
       required this.width,
-      this.fit = BoxFit.fitWidth});
+      this.fit = BoxFit.fitWidth,
+      super.key});
 
   @override
   Widget build(BuildContext context) {

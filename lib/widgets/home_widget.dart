@@ -1,8 +1,9 @@
-import 'package:cjvm_app/tabs/posts_tab.dart';
-import 'package:cjvm_app/tabs/start_tab.dart';
+import 'package:cjvm_app/pages/start_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+import '../pages/posts_tab.dart';
 
 final titles = ['Aktuelles', 'Berichte', 'Termine', 'Mitteilungen'];
 
