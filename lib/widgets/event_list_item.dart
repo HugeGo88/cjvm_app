@@ -80,17 +80,19 @@ class EventListItem extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 4),
-                child: Column(children: <Widget>[
-                  Text(
-                    "${event.startDate.day}",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  Text(
-                    DateFormat.MMM('de').format(event.startDate),
-                    style: Theme.of(context).textTheme.titleLarge?.apply(
-                        color: color_utils.commonThemeData.primaryColor),
-                  ),
-                ]),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      "${event.startDate.day}",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    Text(
+                      DateFormat.MMM('de').format(event.startDate),
+                      style: Theme.of(context).textTheme.titleLarge?.apply(
+                          color: color_utils.commonThemeData.primaryColor),
+                    ),
+                  ],
+                ),
               ),
             ],
           )
