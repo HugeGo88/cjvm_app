@@ -66,13 +66,17 @@ class EventListItem extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 4),
-                        child: Icon(PlatformIcons(context).time, size: 15),
-                      ),
-                      Text(
-                        event.allDay
-                            ? "${DateFormat.Md('de').format(event.startDate)} bis ${DateFormat.Md('de').format(event.endDate)}"
-                            : "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
-                        style: Theme.of(context).textTheme.titleMedium,
+                        child: Row(
+                          children: [
+                            Icon(PlatformIcons(context).time, size: 15),
+                            Text(
+                              event.allDay
+                                  ? "${DateFormat.Md('de').format(event.startDate)} bis ${DateFormat.Md('de').format(event.endDate)}"
+                                  : "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
