@@ -9,7 +9,7 @@ class EventEntity {
   late String image;
   late bool allDay;
   late String venue = "";
-  late String address;
+  late String address = "";
   //EventEmbedded extra;
 
   String _parseHtmlString(String htmlString) {

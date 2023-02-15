@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import '../pages/event_detail.dart';
 import '../utils/color_utils.dart' as color_utils;
 
 class EventListItem extends StatelessWidget {
@@ -17,7 +18,12 @@ class EventListItem extends StatelessWidget {
     initializeDateFormatting('de', null);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            platformPageRoute(
+                builder: (context) => EventDetail(event), context: context));
+      },
       child: Column(
         children: [
           Row(
