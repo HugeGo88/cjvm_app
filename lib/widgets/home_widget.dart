@@ -1,3 +1,4 @@
+import 'package:cjvm_app/pages/events_tab.dart';
 import 'package:cjvm_app/pages/start_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,7 @@ class ContentView extends StatelessWidget {
       case 1:
         return const PostsTab();
       case 2:
-        return Container();
+        return const EventsTab();
       case 3:
         return Container();
       default:

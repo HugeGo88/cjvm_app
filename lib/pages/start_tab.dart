@@ -1,4 +1,5 @@
 import 'package:cjvm_app/utils/constants.dart';
+import 'package:cjvm_app/widgets/event_list.dart';
 import 'package:cjvm_app/widgets/feature_list.dart';
 import 'package:cjvm_app/widgets/list_heading.dart';
 import 'package:cjvm_app/widgets/post_list.dart';
@@ -28,6 +29,9 @@ class StartTab extends StatelessWidget {
             height: 8,
           ),
           const ListHeading(events),
+/*           const EventList(
+            maxEvents: 3,
+          ) */
         ],
       ),
     );

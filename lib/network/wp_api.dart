@@ -1,4 +1,5 @@
 import 'dart:convert';
+import '../model/event_entitiy.dart';
 import '../model/post_category.dart';
 import '../model/post_entitiy.dart';
 import '../utils/constants.dart';
@@ -12,9 +13,9 @@ class WpApi {
     List<PostEntity> posts = [];
     try {
       String extra = category != 0 ? '&categories=$category' : '';
-      var uri = Uri.parse('${baseUrl}posts?_embed&page=$page$extra');
 
-      dynamic response = await http.get(uri);
+      dynamic response =
+          await http.get(Uri.parse('${baseUrl}posts?_embed&page=$page$extra'));
       dynamic json = jsonDecode(response.body);
 
       for (var v in (json as List)) {
@@ -27,25 +28,25 @@ class WpApi {
     return posts;
   }
 
-/*   static Future<List<EventEntity>> getEventList(
+  static Future<List<EventEntity>> getEventList(
       {int category = 0, int page = 1}) async {
     List<EventEntity> events = [];
     try {
-      String extra = category != 0 ? '&categories=' + '$category' : '';
-      dynamic response = await http.get(
-          URL + 'wp-json/tribe/events/v1/events?_embed&page=$page' + extra);
+      String extra = category != 0 ? '&categories=$category' : '';
+      dynamic response = await http.get(Uri.parse(
+          '${url}wp-json/tribe/events/v1/events?_embed&page=$page$extra'));
       Map<String, dynamic> map = json.decode(response.body);
       dynamic data = map["events"];
 
-      (data as List).forEach((v) {
+      for (var v in (data as List)) {
         events.add(EventEntity.fromJson(v));
-      });
+      }
     } catch (e) {
       //TODO Handle No Internet Response
       print(e);
     }
     return events;
-  } */
+  }
 
   static Future<List<PostCategory>> getCategoriesList({int page = 1}) async {
     List<PostCategory> categories = [];

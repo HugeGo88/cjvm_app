@@ -1,5 +1,6 @@
 import 'package:cjvm_app/model/post_entitiy.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../network/wp_api.dart';
 import '../utils/constants.dart';
@@ -34,14 +35,18 @@ class _FeatureListState extends State<FeatureList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: allPosts.length,
-      scrollDirection: Axis.horizontal,
-      shrinkWrap: true,
-      physics: const ClampingScrollPhysics(),
-      itemBuilder: (context, index) {
-        return FeatureListItem(allPosts[index]);
-      },
-    );
+    return isLoading
+        ? Center(
+            child: PlatformCircularProgressIndicator(),
+          )
+        : ListView.builder(
+            itemCount: allPosts.length,
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
+            itemBuilder: (context, index) {
+              return FeatureListItem(allPosts[index]);
+            },
+          );
   }
 }
