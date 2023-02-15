@@ -40,18 +40,22 @@ class EventEntity {
       image = json['image'].toString() != 'false' ? json['image']['url'] : '';
 
       var venueData = json['venue'];
-      if (venueData == '_InternalLinkedHashMap<String, dynamic>') {
+      print(venueData.runtimeType.toString());
+      if (venueData.runtimeType.toString() == '_Map<String, dynamic>') {
         venue = json['venue']['venue'];
         if (venue == 'Keine Angaben') {
           venue = "";
+        } else {
+/*           String street = json['venue'].toString() != 'false'
+              ? json['venue']['address']
+              : '';
+          String city =
+              json['venue'].toString() != 'false' ? json['venue']['city'] : '';
+          String zip =
+              json['venue'].toString() != 'false' ? json['venue']['zip'] : '';
+          address = "$street, $city $zip"; */
+          address = "test";
         }
-        String street =
-            json['venue'].toString() != 'false' ? json['venue']['address'] : '';
-        String city =
-            json['venue'].toString() != 'false' ? json['venue']['city'] : '';
-        String zip =
-            json['venue'].toString() != 'false' ? json['venue']['zip'] : '';
-        address = "$street, $city $zip";
       }
     } catch (e) {
       //TODO Handle No Internet Response

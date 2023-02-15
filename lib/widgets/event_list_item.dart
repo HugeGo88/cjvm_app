@@ -60,7 +60,7 @@ class EventListItem extends StatelessWidget {
                               : Container(),
                           Text(
                             event.venue != "" ? event.venue : '',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ],
                       ),
