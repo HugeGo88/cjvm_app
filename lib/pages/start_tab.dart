@@ -29,9 +29,9 @@ class StartTab extends StatelessWidget {
             height: 8,
           ),
           const ListHeading(events),
-/*           const EventList(
+          const EventList(
             maxEvents: 3,
-          ) */
+          )
         ],
       ),
     );

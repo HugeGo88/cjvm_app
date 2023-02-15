@@ -15,7 +15,7 @@ class EventList extends StatefulWidget {
 }
 
 class _EventListState extends State<EventList> {
-  List<EventEntity> events = <EventEntity>[];
+  List<EventEntity> allEvents = <EventEntity>[];
 
   int page = 0;
   final ScrollController _scrollController = ScrollController();
@@ -35,7 +35,7 @@ class _EventListState extends State<EventList> {
           setState(
             () {
               isLoading = false;
-              events.addAll(events);
+              allEvents.addAll(events);
             },
           );
         },
@@ -47,12 +47,14 @@ class _EventListState extends State<EventList> {
   void initState() {
     super.initState();
     getData();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        getData();
-      }
-    });
+    _scrollController.addListener(
+      () {
+        if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent) {
+          getData();
+        }
+      },
+    );
   }
 
   @override
@@ -69,8 +71,8 @@ class _EventListState extends State<EventList> {
         height: 1,
         color: color_utils.commonThemeData.primaryColor,
       ),
-      itemCount: events.length + 1 < widget.maxEvents
-          ? events.length + 1
+      itemCount: allEvents.length + 1 < widget.maxEvents
+          ? allEvents.length + 1
           : widget.maxEvents,
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
@@ -80,10 +82,10 @@ class _EventListState extends State<EventList> {
   }
 
   Widget eventTile(BuildContext context, int index) {
-    if (index == events.length) {
+    if (index == allEvents.length) {
       return _buildProgressIndicator();
     } else {
-      return EventListItem(event: events[index]);
+      return EventListItem(event: allEvents[index]);
     }
   }
 

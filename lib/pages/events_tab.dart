@@ -7,7 +7,7 @@ class EventsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-        /*   child: EventList(), */
-        );
+      child: EventList(),
+    );
   }
 }

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import '../model/event_entitiy.dart';
-import '../model/post_category.dart';
 import '../model/post_entitiy.dart';
 import '../utils/constants.dart';
 import 'package:http/http.dart' as http;
@@ -33,8 +32,8 @@ class WpApi {
     List<EventEntity> events = [];
     try {
       String extra = category != 0 ? '&categories=$category' : '';
-      dynamic response = await http.get(Uri.parse(
-          '${url}wp-json/tribe/events/v1/events?_embed&page=$page$extra'));
+      var urll = '${url}wp-json/tribe/events/v1/events?_embed&page=$page$extra';
+      dynamic response = await http.get(Uri.parse(urll));
       Map<String, dynamic> map = json.decode(response.body);
       dynamic data = map["events"];
 
@@ -46,22 +45,5 @@ class WpApi {
       print(e);
     }
     return events;
-  }
-
-  static Future<List<PostCategory>> getCategoriesList({int page = 1}) async {
-    List<PostCategory> categories = [];
-    try {
-      dynamic response = await http.get(Uri.parse(
-          '${baseUrl}categories?orderby=count&order=desc&per_page=15&page=$page'));
-      dynamic json = jsonDecode(response.body);
-
-      for (var v in (json as List)) {
-        categories.add(PostCategory.fromJson(v));
-      }
-    } catch (e) {
-      //TODO Handle No Internet Response
-      print(e);
-    }
-    return categories;
   }
 }
