@@ -16,7 +16,7 @@ class StartTab extends StatelessWidget {
         children: <Widget>[
           const ListHeading(important),
           const SizedBox(
-            height: 250,
+            height: featureHeigt + 50,
             child: FeatureList(),
           ),
           const ListHeading(posts),

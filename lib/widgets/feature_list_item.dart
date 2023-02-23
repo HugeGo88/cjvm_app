@@ -1,5 +1,6 @@
 import 'package:cjvm_app/model/cached_image.dart';
 import 'package:cjvm_app/model/post_entitiy.dart';
+import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import '../pages/post_detail.dart';
 import '../utils/color_utils.dart' as color_utils;
@@ -11,9 +12,6 @@ class FeatureListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    double width = size.width * 0.8;
-
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -24,16 +22,16 @@ class FeatureListItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: SizedBox(
-          height: 200,
-          width: width,
+          height: featureHeigt,
+          width: featureWidth,
           child: Stack(
             children: <Widget>[
               Hero(
                   tag: post.image,
                   child: CachedImage(
                     post.image,
-                    height: size.height,
-                    width: width,
+                    height: featureHeigt,
+                    width: featureWidth,
                     fit: BoxFit.cover,
                   )),
               Positioned(
@@ -44,7 +42,7 @@ class FeatureListItem extends StatelessWidget {
                       decoration: const BoxDecoration(
                         color: Color(0xff292929),
                       ),
-                      width: width,
+                      width: featureWidth,
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
@@ -59,7 +57,7 @@ class FeatureListItem extends StatelessWidget {
                     ),
                     Container(
                       height: 3,
-                      width: width,
+                      width: featureWidth,
                       color: color_utils.commonThemeData.primaryColor,
                     ),
                   ],

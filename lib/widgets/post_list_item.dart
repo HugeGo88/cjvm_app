@@ -29,7 +29,7 @@ class PostListItem extends StatelessWidget {
               child: CachedImage(
                 post.image,
                 height: listHeight,
-                width: listHeight,
+                width: listWidth,
                 fit: BoxFit.cover,
               ),
             ),

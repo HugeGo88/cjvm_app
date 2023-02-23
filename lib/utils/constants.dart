@@ -11,4 +11,14 @@ const String featuredCategoryName = 'Wichtiges';
 
 const String restUrlPrefix = 'wp-json';
 
-const double listHeight = 110;
+const double featureFactor = 18;
+const double itemFactor = 10;
+
+const double heightRatio = 9;
+const double widthRatio = 16;
+
+const double listHeight = heightRatio * itemFactor;
+const double listWidth = listHeight;
+
+const double featureHeigt = heightRatio * featureFactor;
+const double featureWidth = widthRatio * featureFactor;
