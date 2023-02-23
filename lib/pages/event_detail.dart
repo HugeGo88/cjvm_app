@@ -115,6 +115,5 @@ class EventDetail extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import '../utils/color_utils.dart' as color_utils;
 import 'package:intl/intl.dart';
 
 import '../model/cached_image.dart';
@@ -36,13 +37,13 @@ class PostDetail extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(0.0),
                 child: Column(
                   children: [
                     Row(
                       children: [
                         Text(
-                          "Erstellung: ",
+                          "Erstellt: ",
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         Text(
@@ -51,6 +52,14 @@ class PostDetail extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Container(
+                        height: 3.0,
+                        width: MediaQuery.of(context).size.width,
+                        color: color_utils.commonThemeData.primaryColor,
+                      ),
                     ),
                     Html(
                       data: post.content,
