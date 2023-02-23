@@ -35,9 +35,10 @@ class WpApi {
       dynamic response = await http.get(Uri.parse(urll));
       Map<String, dynamic> map = json.decode(response.body);
       dynamic data = map["events"];
-
-      for (var v in (data as List)) {
-        events.add(EventEntity.fromJson(v));
+      if (data != null) {
+        for (var v in (data as List)) {
+          events.add(EventEntity.fromJson(v));
+        }
       }
     } catch (e) {
       //TODO Handle No Internet Response
