@@ -87,7 +87,7 @@ class _PostListState extends State<PostList> {
         color: color_utils.commonThemeData.primaryColor,
       ),
       itemCount: allPosts.length + 1 < widget.maxPosts
-          ? allPosts.length
+          ? allPosts.length + 1
           : widget.maxPosts,
       scrollDirection: Axis.vertical,
       shrinkWrap: true,

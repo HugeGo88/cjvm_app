@@ -12,7 +12,6 @@ class WpApi {
     List<PostEntity> posts = [];
     try {
       String extra = category != 0 ? '&categories=$category' : '';
-
       dynamic response =
           await http.get(Uri.parse('${baseUrl}posts?_embed&page=$page$extra'));
       dynamic json = jsonDecode(response.body);
