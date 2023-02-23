@@ -46,15 +46,22 @@ class EventEntity {
         if (venue == 'Keine Angaben') {
           venue = "";
         } else {
-/*           String street = json['venue'].toString() != 'false'
-              ? json['venue']['address']
-              : '';
-          String city =
-              json['venue'].toString() != 'false' ? json['venue']['city'] : '';
-          String zip =
-              json['venue'].toString() != 'false' ? json['venue']['zip'] : '';
-          address = "$street, $city $zip"; */
-          address = "test";
+          String street = "";
+          String city = "";
+          String zip = "";
+          if (json['venue'] != null) {
+            if (json['venue']['address'] != null) {
+              street = json['venue']['address'].toString();
+              street = "$street, ";
+            }
+            if (json['venue']['city'] != null) {
+              city = json['venue']['city'].toString();
+            }
+            if (json['venue']['zip'] != null) {
+              zip = json['venue']['zip'].toString();
+            }
+          }
+          address = "$street$zip $city ";
         }
       }
     } catch (e) {
