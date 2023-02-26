@@ -3,6 +3,7 @@ import 'package:cjvm_app/pages/start_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../pages/posts_tab.dart';
 
@@ -16,6 +17,22 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  PackageInfo _packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+  );
+
+  Future<void> _initPackageInfo() async {
+    final PackageInfo info = await PackageInfo.fromPlatform();
+    setState(
+      () {
+        _packageInfo = info;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -26,6 +43,36 @@ class _HomeWidgetState extends State<HomeWidget> {
           title: Text(
             titles[index],
           ),
+          trailingActions: [
+            PlatformIconButton(
+              icon: Icon(PlatformIcons(context).info),
+              onPressed: () => showPlatformDialog(
+                context: context,
+                builder: (_) => PlatformAlertDialog(
+                  title: const Text('CVJM Walheim'),
+                  content: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          'Version ${_packageInfo.version}.${_packageInfo.buildNumber}'),
+                      const Text('Datenschutzerklärung unter'),
+                      const Text(
+                          'https://cvjm-walheim.de/datenschutzerklaerung/'),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    PlatformDialogAction(
+                      child: PlatformText('Schließen'),
+                      onPressed: () =>
+                          Navigator.of(context, rootNavigator: true)
+                              .pop('dialog'),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
         tabController: tabController,
         items: items(context),
@@ -59,6 +106,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   void initState() {
     super.initState();
+    _initPackageInfo();
   }
 }
 
