@@ -56,6 +56,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     children: [
                       Text(
                           'Version ${_packageInfo.version}.${_packageInfo.buildNumber}'),
+                      const Text(''),
                       const Text('Datenschutzerklärung unter'),
                       const Text(
                           'https://cvjm-walheim.de/datenschutzerklaerung/'),
