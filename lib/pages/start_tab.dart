@@ -10,30 +10,72 @@ class StartTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          const ListHeading(important),
-          const SizedBox(
-            height: featureHeigt + 50,
-            child: FeatureList(),
-          ),
-          const ListHeading(posts),
-          const PostList(
-            category: 0,
-            maxPosts: 3,
-            showFeatureCategory: false,
-          ),
-          Container(
-            height: 8,
-          ),
-          const ListHeading(events),
-          const EventList(
-            maxEvents: 3,
-          )
-        ],
-      ),
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return orientation == Orientation.portrait
+            ? SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const ListHeading(important),
+                    const SizedBox(
+                      height: featureHeigt + 50,
+                      child: FeatureList(),
+                    ),
+                    const ListHeading(posts),
+                    const PostList(
+                      category: 0,
+                      maxPosts: 3,
+                      showFeatureCategory: false,
+                    ),
+                    Container(
+                      height: 8,
+                    ),
+                    const ListHeading(events),
+                    const EventList(
+                      maxEvents: 3,
+                    )
+                  ],
+                ),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    const ListHeading(important),
+                    const SizedBox(
+                      height: featureHeigt + 50,
+                      child: FeatureList(),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Column(
+                            children: [
+                              ListHeading(posts),
+                              PostList(
+                                category: 0,
+                                maxPosts: 5,
+                                showFeatureCategory: false,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              ListHeading(events),
+                              EventList(
+                                maxEvents: 5,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              );
+      },
     );
   }
 }
