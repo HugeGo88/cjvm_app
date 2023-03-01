@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 
 class StartTab extends StatelessWidget {
   const StartTab({super.key});
-
+//TODO: Check why feature list doesnt reload during reload, but the other lists
   @override
   Widget build(BuildContext context) {
     return OrientationBuilder(

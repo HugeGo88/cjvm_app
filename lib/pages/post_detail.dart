@@ -17,60 +17,130 @@ class PostDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     initializeDateFormatting();
-    return PlatformScaffold(
-      iosContentPadding: true,
-      appBar: PlatformAppBar(
-        title: Text(
-          post.title,
-        ),
-      ),
-      body: SafeArea(
-        top: false,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Hero(
-                tag: post.image,
-                child: CachedImage(
-                  post.image,
-                  width: size.width,
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return orientation == Orientation.portrait
+            ? PlatformScaffold(
+                iosContentPadding: true,
+                appBar: PlatformAppBar(
+                  title: Text(
+                    post.title,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: Column(
-                  children: [
-                    Row(
+                body: SafeArea(
+                  top: false,
+                  child: SingleChildScrollView(
+                    child: Column(
                       children: [
-                        Text(
-                          "Erstellt: ",
-                          style: Theme.of(context).textTheme.bodyMedium,
+                        Hero(
+                          tag: post.image,
+                          child: CachedImage(
+                            post.image,
+                            width: size.width,
+                          ),
                         ),
-                        Text(
-                          DateFormat.yMMMd('de')
-                              .format(DateTime.parse(post.modifiedGmt)),
-                          style: Theme.of(context).textTheme.bodyMedium,
+                        Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Erstellt: ",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  Text(
+                                    DateFormat.yMMMd('de').format(
+                                        DateTime.parse(post.modifiedGmt)),
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: Container(
+                                  height: 3.0,
+                                  width: MediaQuery.of(context).size.width,
+                                  color:
+                                      color_utils.commonThemeData.primaryColor,
+                                ),
+                              ),
+                              Html(
+                                data: post.content,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Container(
-                        height: 3.0,
-                        width: MediaQuery.of(context).size.width,
-                        color: color_utils.commonThemeData.primaryColor,
-                      ),
-                    ),
-                    Html(
-                      data: post.content,
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
+              )
+            : PlatformScaffold(
+                iosContentPadding: true,
+                appBar: PlatformAppBar(
+                  title: Text(
+                    post.title,
+                  ),
+                ),
+                body: SafeArea(
+                  top: false,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Hero(
+                              tag: post.image,
+                              child: CachedImage(
+                                post.image,
+                                width: size.width,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Erstellt: ",
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                Text(
+                                  DateFormat.yMMMd('de')
+                                      .format(DateTime.parse(post.modifiedGmt)),
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Container(
+                                height: 3.0,
+                                width: MediaQuery.of(context).size.width,
+                                color: color_utils.commonThemeData.primaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Html(
+                                data: post.content,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+      },
     );
   }
 }
