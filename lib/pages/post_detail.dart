@@ -90,7 +90,8 @@ class PostDetail extends StatelessWidget {
                   top: false,
                   child: Row(
                     children: <Widget>[
-                      Expanded(
+                      SizedBox(
+                        width: size.width / 3,
                         child: Column(
                           children: <Widget>[
                             Hero(
