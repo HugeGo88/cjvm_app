@@ -50,7 +50,7 @@ class StartTab extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: Column(
-                            children: [
+                            children: const <Widget>[
                               ListHeading(posts),
                               PostList(
                                 category: 0,
@@ -62,7 +62,7 @@ class StartTab extends StatelessWidget {
                         ),
                         Expanded(
                           child: Column(
-                            children: <Widget>[
+                            children: const <Widget>[
                               ListHeading(events),
                               EventList(
                                 maxEvents: 5,
