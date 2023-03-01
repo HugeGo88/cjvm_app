@@ -132,6 +132,10 @@ class PostDetail extends StatelessWidget {
                             children: [
                               Html(
                                 data: post.content,
+                                style: {
+                                  "a": Style(
+                                      textDecoration: TextDecoration.none),
+                                },
                               ),
                             ],
                           ),
