@@ -43,7 +43,7 @@ class _FeatureListState extends State<FeatureList> {
             itemCount: allPosts.length,
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
-            physics: const ClampingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               return FeatureListItem(allPosts[index]);
             },
