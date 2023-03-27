@@ -101,18 +101,43 @@ class PostDetail extends StatelessWidget {
                                 width: size.width,
                               ),
                             ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Erstellt: ",
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                                Text(
-                                  DateFormat.yMMMd('de')
-                                      .format(DateTime.parse(post.modifiedGmt)),
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                              ],
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    PlatformIcons(context).time,
+                                    size: 35,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Aktualisiert: ",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium,
+                                            ),
+                                            Text(
+                                              DateFormat.yMMMd('de').format(
+                                                  DateTime.parse(
+                                                      post.modifiedGmt)),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 8),
