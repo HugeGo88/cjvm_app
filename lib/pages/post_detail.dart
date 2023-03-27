@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import '../utils/color_utils.dart' as color_utils;
-import 'package:intl/intl.dart';
 
 import '../model/cached_image.dart';
 import '../model/post_entitiy.dart';
+import 'detail_elementes/html_content.dart';
+import 'detail_elementes/post_detail_data.dart';
 
 class PostDetail extends StatelessWidget {
   final PostEntity post;
@@ -30,6 +29,7 @@ class PostDetail extends StatelessWidget {
                 body: SafeArea(
                   top: false,
                   child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
                         Hero(
@@ -39,41 +39,8 @@ class PostDetail extends StatelessWidget {
                             width: size.width,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(0.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "Erstellt: ",
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                  Text(
-                                    DateFormat.yMMMd('de').format(
-                                        DateTime.parse(post.modifiedGmt)),
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8),
-                                child: Container(
-                                  height: 3.0,
-                                  width: MediaQuery.of(context).size.width,
-                                  color:
-                                      color_utils.commonThemeData.primaryColor,
-                                ),
-                              ),
-                              Html(
-                                data: post.content,
-                              ),
-                            ],
-                          ),
-                        ),
+                        PostDetailData(post),
+                        HtmlContent(post.content),
                       ],
                     ),
                   ),
@@ -101,52 +68,7 @@ class PostDetail extends StatelessWidget {
                                 width: size.width,
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    PlatformIcons(context).time,
-                                    size: 35,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "Aktualisiert: ",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium,
-                                            ),
-                                            Text(
-                                              DateFormat.yMMMd('de').format(
-                                                  DateTime.parse(
-                                                      post.modifiedGmt)),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: Container(
-                                height: 3.0,
-                                width: MediaQuery.of(context).size.width,
-                                color: color_utils.commonThemeData.primaryColor,
-                              ),
-                            ),
+                            PostDetailData(post),
                           ],
                         ),
                       ),
@@ -161,13 +83,7 @@ class PostDetail extends StatelessWidget {
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Html(
-                                    data: post.content,
-                                    style: {
-                                      "a": Style(
-                                          textDecoration: TextDecoration.none),
-                                    },
-                                  ),
+                                  HtmlContent(post.content),
                                 ],
                               ),
                             ),

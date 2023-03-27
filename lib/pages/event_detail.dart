@@ -7,6 +7,7 @@ import '../utils/color_utils.dart' as color_utils;
 
 import '../model/cached_image.dart';
 import '../model/event_entitiy.dart';
+import 'detail_elementes/html_content.dart';
 
 class EventDetail extends StatelessWidget {
   final EventEntity event;
@@ -122,9 +123,7 @@ class EventDetail extends StatelessWidget {
                             color: color_utils.commonThemeData.primaryColor,
                           ),
                         ),
-                        Html(
-                          data: event.description,
-                        ),
+                        HtmlContent(event.description),
                       ],
                     ),
                   ),
@@ -252,13 +251,7 @@ class EventDetail extends StatelessWidget {
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Html(
-                                    data: event.description,
-                                    style: {
-                                      "a": Style(
-                                          textDecoration: TextDecoration.none),
-                                    },
-                                  ),
+                                  HtmlContent(event.description),
                                 ],
                               ),
                             ),
