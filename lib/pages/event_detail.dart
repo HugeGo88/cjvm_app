@@ -156,7 +156,7 @@ class EventDetail extends StatelessWidget {
                               padding: const EdgeInsets.all(8),
                               child: Column(
                                 children: [
-                                  if (venueSet)
+                                  if (event.venue != "")
                                     Row(
                                       children: [
                                         const Icon(
