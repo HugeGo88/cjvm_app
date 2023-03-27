@@ -243,8 +243,25 @@ class EventDetail extends StatelessWidget {
                       ),
                       Expanded(
                         child: SingleChildScrollView(
-                          child: Html(
-                            data: event.description,
+                          physics: const BouncingScrollPhysics(),
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                                minWidth: MediaQuery.of(context).size.width,
+                                minHeight: MediaQuery.of(context).size.height),
+                            child: IntrinsicHeight(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Html(
+                                    data: event.description,
+                                    style: {
+                                      "a": Style(
+                                          textDecoration: TextDecoration.none),
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ),

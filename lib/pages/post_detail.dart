@@ -152,17 +152,25 @@ class PostDetail extends StatelessWidget {
                       ),
                       Expanded(
                         child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Html(
-                                data: post.content,
-                                style: {
-                                  "a": Style(
-                                      textDecoration: TextDecoration.none),
-                                },
+                          physics: const BouncingScrollPhysics(),
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                                minWidth: MediaQuery.of(context).size.width,
+                                minHeight: MediaQuery.of(context).size.height),
+                            child: IntrinsicHeight(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Html(
+                                    data: post.content,
+                                    style: {
+                                      "a": Style(
+                                          textDecoration: TextDecoration.none),
+                                    },
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
