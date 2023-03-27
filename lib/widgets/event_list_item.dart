@@ -13,6 +13,14 @@ class EventListItem extends StatelessWidget {
   final EventEntity event;
   const EventListItem({required this.event, super.key});
 
+  String allDayVenue(DateTime start, DateTime end) {
+    if (start.day != end.day) {
+      return "${DateFormat.Md('de').format(start)} bis ${DateFormat.yMd('de').format(end)}";
+    } else {
+      return DateFormat.yMd('de').format(start);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('de', null);
@@ -72,18 +80,16 @@ class EventListItem extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          event.venue != ""
-                              ? Padding(
-                                  padding: const EdgeInsets.only(right: 4),
-                                  child: Icon(
-                                    PlatformIcons(context).time,
-                                    size: 15,
-                                  ),
-                                )
-                              : Container(),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 4),
+                            child: Icon(
+                              PlatformIcons(context).time,
+                              size: 15,
+                            ),
+                          ),
                           Text(
                             event.allDay
-                                ? "${DateFormat.Md('de').format(event.startDate)} bis ${DateFormat.Md('de').format(event.endDate)}"
+                                ? allDayVenue(event.startDate, event.endDate)
                                 : "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
