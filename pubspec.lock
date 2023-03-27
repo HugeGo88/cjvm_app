@@ -234,10 +234,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_platform_widgets
-      sha256: "654379d0b1c74011b0a440140d7445d472d9ea319aebab91217b88790341552d"
+      sha256: b787f001d659ce1fb601332e908efdf44dbedab832387b33162abeed60c1eca2
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.2.0"
   flutter_svg:
     dependency: transitive
     description:
