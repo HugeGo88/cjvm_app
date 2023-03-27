@@ -211,7 +211,7 @@ class EventDetail extends StatelessWidget {
                                                       event.startDate.day !=
                                                           event.endDate.day)
                                                   ? "${DateFormat.MEd('de').format(event.startDate)} bis ${DateFormat.yMEd('de').format(event.endDate)}"
-                                                  : DateFormat.MMMMEEEEd('de')
+                                                  : DateFormat.yMMMMEEEEd('de')
                                                       .format(event.startDate),
                                             ),
                                             Text(
