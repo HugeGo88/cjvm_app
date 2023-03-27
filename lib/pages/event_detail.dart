@@ -207,8 +207,10 @@ class EventDetail extends StatelessWidget {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .bodyMedium,
-                                              event.allDay
-                                                  ? "${DateFormat.MEd('de').format(event.startDate)} bis ${DateFormat.MEd('de').format(event.endDate)}"
+                                              (event.allDay &&
+                                                      event.startDate.day !=
+                                                          event.endDate.day)
+                                                  ? "${DateFormat.MEd('de').format(event.startDate)} bis ${DateFormat.yMEd('de').format(event.endDate)}"
                                                   : DateFormat.MMMMEEEEd('de')
                                                       .format(event.startDate),
                                             ),
