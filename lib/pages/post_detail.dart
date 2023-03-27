@@ -16,19 +16,19 @@ class PostDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     initializeDateFormatting();
-    return OrientationBuilder(
-      builder: (context, orientation) {
-        return orientation == Orientation.portrait
-            ? PlatformScaffold(
-                iosContentPadding: true,
-                appBar: PlatformAppBar(
-                  title: Text(
-                    post.title,
-                  ),
-                ),
-                body: SafeArea(
-                  top: false,
-                  child: SingleChildScrollView(
+    return PlatformScaffold(
+      iosContentPadding: true,
+      appBar: PlatformAppBar(
+        title: Text(
+          post.title,
+        ),
+      ),
+      body: SafeArea(
+        top: false,
+        child: OrientationBuilder(
+          builder: (context, orientation) {
+            return orientation == Orientation.portrait
+                ? SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
@@ -43,19 +43,8 @@ class PostDetail extends StatelessWidget {
                         HtmlContent(post.content),
                       ],
                     ),
-                  ),
-                ),
-              )
-            : PlatformScaffold(
-                iosContentPadding: true,
-                appBar: PlatformAppBar(
-                  title: Text(
-                    post.title,
-                  ),
-                ),
-                body: SafeArea(
-                  top: false,
-                  child: Row(
+                  )
+                : Row(
                     children: <Widget>[
                       SizedBox(
                         width: size.width / 3,
@@ -91,10 +80,10 @@ class PostDetail extends StatelessWidget {
                         ),
                       ),
                     ],
-                  ),
-                ),
-              );
-      },
+                  );
+          },
+        ),
+      ),
     );
   }
 }
