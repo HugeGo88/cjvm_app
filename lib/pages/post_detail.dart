@@ -14,6 +14,8 @@ class PostDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller1 = ScrollController();
+    final controller2 = ScrollController();
     Size size = MediaQuery.of(context).size;
     initializeDateFormatting();
     return PlatformScaffold(
@@ -46,23 +48,28 @@ class PostDetail extends StatelessWidget {
                   )
                 : Row(
                     children: <Widget>[
-                      SizedBox(
-                        width: size.width / 3,
-                        child: Column(
-                          children: <Widget>[
-                            Hero(
-                              tag: post.image,
-                              child: CachedImage(
-                                post.image,
-                                width: size.width,
+                      SingleChildScrollView(
+                        controller: controller1,
+                        physics: const BouncingScrollPhysics(),
+                        child: SizedBox(
+                          width: size.width / 3,
+                          child: Column(
+                            children: <Widget>[
+                              Hero(
+                                tag: post.image,
+                                child: CachedImage(
+                                  post.image,
+                                  width: size.width,
+                                ),
                               ),
-                            ),
-                            PostDetailData(post),
-                          ],
+                              PostDetailData(post),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
                         child: SingleChildScrollView(
+                          controller: controller2,
                           physics: const BouncingScrollPhysics(),
                           child: ConstrainedBox(
                             constraints: BoxConstraints(

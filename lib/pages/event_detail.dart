@@ -14,6 +14,8 @@ class EventDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller1 = ScrollController();
+    final controller2 = ScrollController();
     Size size = MediaQuery.of(context).size;
     initializeDateFormatting();
     return PlatformScaffold(
@@ -46,23 +48,28 @@ class EventDetail extends StatelessWidget {
                   )
                 : Row(
                     children: <Widget>[
-                      SizedBox(
-                        width: size.width / 3,
-                        child: Column(
-                          children: <Widget>[
-                            Hero(
-                              tag: event.image,
-                              child: CachedImage(
-                                event.image,
-                                width: size.width,
+                      SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        controller: controller1,
+                        child: SizedBox(
+                          width: size.width / 3,
+                          child: Column(
+                            children: <Widget>[
+                              Hero(
+                                tag: event.image,
+                                child: CachedImage(
+                                  event.image,
+                                  width: size.width,
+                                ),
                               ),
-                            ),
-                            EventDetailData(event),
-                          ],
+                              EventDetailData(event),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
                         child: SingleChildScrollView(
+                          controller: controller2,
                           physics: const BouncingScrollPhysics(),
                           child: ConstrainedBox(
                             constraints: BoxConstraints(

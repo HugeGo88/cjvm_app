@@ -40,7 +40,6 @@ class EventEntity {
       image = json['image'].toString() != 'false' ? json['image']['url'] : '';
 
       var venueData = json['venue'];
-      print(venueData.runtimeType.toString());
       if (venueData.runtimeType.toString() == '_Map<String, dynamic>') {
         venue = json['venue']['venue'];
         if (venue == 'Keine Angaben') {
@@ -66,7 +65,6 @@ class EventEntity {
       }
     } catch (e) {
       //TODO Handle No Internet Response
-      print(e);
     }
   }
 

@@ -21,7 +21,6 @@ class WpApi {
       }
     } catch (e) {
       //TODO Handle No Internet Response
-      print(e);
     }
     return posts;
   }
@@ -42,7 +41,6 @@ class WpApi {
       }
     } catch (e) {
       //TODO Handle No Internet Response
-      print(e);
     }
     return events;
   }
