@@ -9,9 +9,11 @@ Diese App soll einen noch einfacheren Zugang zu den Daten des Vereins liefern. D
 Die App soll für iOS sowie für Android bereitgestellt werden, weshalb Flutter die Grundlage für die App bildet. Es wird dabei darauf geachtet, dass die App unter beiden System so nativ wie möglich aussieht und sich auch so verhält. Weshalb bei der Enwicklung auf das Platform Widget zurückgegriffen wurde.
 Im Endausbau soll die App folgende Funktionen aufweisen.
 
-- [ ] Anzeigen von wichtigen Nachrichten
-- [ ] Anzeigen der letzten Beiträge
-- [ ] Anzeigen der kommenden Veranstaltungen
+- [x] Anzeigen von wichtigen Nachrichten
+- [x] Anzeigen der letzten Beiträge
+- [x] Anzeigen der kommenden Veranstaltungen
+  - [ ] Veranstaltungen zum Kalender hinzufügen
+  - [ ] Karten der Veranstaltung öffnen
 - [ ] Notifications damit alle Mitglieder über diese App erreicht werden können
 
 ## Vorschau
