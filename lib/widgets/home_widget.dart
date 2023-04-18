@@ -46,32 +46,26 @@ class _HomeWidgetState extends State<HomeWidget> {
           trailingActions: [
             PlatformIconButton(
               icon: Icon(PlatformIcons(context).info),
-              onPressed: () => showPlatformDialog(
-                context: context,
-                builder: (_) => PlatformAlertDialog(
-                  title: const Text('CVJM Walheim'),
-                  content: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                          'Version ${_packageInfo.version}.${_packageInfo.buildNumber}'),
-                      const Text(''),
-                      const Text('Datenschutzerklärung unter'),
-                      const Text(
-                          'https://cvjm-walheim.de/datenschutzerklaerung/'),
-                    ],
+              onPressed: () {
+                showAboutDialog(
+                  context: context,
+                  applicationIcon: Image.asset(
+                    'images/logo.png',
+                    width: 50,
+                    fit: BoxFit.fitWidth,
                   ),
-                  actions: <Widget>[
-                    PlatformDialogAction(
-                      child: PlatformText('Schließen'),
-                      onPressed: () =>
-                          Navigator.of(context, rootNavigator: true)
-                              .pop('dialog'),
-                    )
+                  applicationName: 'CVJM Walheim',
+                  applicationVersion:
+                      '${_packageInfo.version}.(${_packageInfo.buildNumber})',
+                  applicationLegalese: '©2023 cvjm-walheim.de',
+                  children: <Widget>[
+                    const Padding(
+                        padding: EdgeInsets.only(top: 15),
+                        child: Text(
+                            'Alle wichtigen Informationen können auf der Homepage eingesehen werden.'))
                   ],
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),
