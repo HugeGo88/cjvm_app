@@ -15,6 +15,7 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
   - [ ] Veranstaltungen zum Kalender hinzufügen
   - [ ] Karten der Veranstaltung öffnen
 - [ ] Notifications damit alle Mitglieder über diese App erreicht werden können
+- [x] Neuer About-Dialog mit allen Packeten implementiert
 
 ## Vorschau
 
