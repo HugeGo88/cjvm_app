@@ -9,6 +9,14 @@ class EventDetailData extends StatelessWidget {
   final EventEntity event;
   const EventDetailData(this.event, {super.key});
 
+  String allDayVenue(DateTime start, DateTime end) {
+    if (start.day != end.day) {
+      return "${DateFormat.Md('de').format(start)} bis ${DateFormat.yMd('de').format(end)}";
+    } else {
+      return DateFormat.yMd('de').format(start);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     bool venueSet = event.venue == "" ? false : true;
@@ -48,7 +56,7 @@ class EventDetailData extends StatelessWidget {
                 Text(
                   style: Theme.of(context).textTheme.bodyMedium,
                   event.allDay
-                      ? "${DateFormat.MEd('de').format(event.startDate)} bis ${DateFormat.MEd('de').format(event.endDate)}"
+                      ? allDayVenue(event.startDate, event.endDate)
                       : DateFormat.MMMMEEEEd('de').format(event.startDate),
                 ),
                 if (!event.allDay)
