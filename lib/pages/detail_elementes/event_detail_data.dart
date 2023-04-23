@@ -1,3 +1,4 @@
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:cjvm_app/model/event_entitiy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,25 @@ class EventDetailData extends StatelessWidget {
     } else {
       return DateFormat.yMd('de').format(start);
     }
+  }
+
+  Event buildEvent({Recurrence? recurrence}) {
+    return Event(
+      title: event.title,
+      description: event.description,
+      location: event.address,
+      startDate: event.startDate,
+      endDate: event.endDate,
+      allDay: event.allDay,
+      iosParams: const IOSParams(
+        reminder: Duration(minutes: 60),
+        url: "http://cvjm-walheim.de",
+      ),
+      androidParams: const AndroidParams(
+        emailInvites: [],
+      ),
+      recurrence: recurrence,
+    );
   }
 
   @override
@@ -67,6 +87,14 @@ class EventDetailData extends StatelessWidget {
               ],
             )
           ],
+        ),
+        PlatformTextButton(
+          child: const Text("Zu Kalender hinzufügen"),
+          onPressed: () {
+            Add2Calendar.addEvent2Cal(
+              buildEvent(),
+            );
+          },
         ),
         Container(
           height: 3.0,
