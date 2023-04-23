@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cjvm_app">
+    package="de.cvjm_walheim.cvjm_app">
+   <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="cjvm_app"
+        android:label="Walheim"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
