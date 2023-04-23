@@ -44,7 +44,9 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Create events</string>
+	<string>Veranstaltung zu Kalender hinzufügen</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Veranstaltung zu Kalender hinzufügen</string>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>
