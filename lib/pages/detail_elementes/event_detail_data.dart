@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 import '../../utils/color_utils.dart' as color_utils;
 
 class EventDetailData extends StatelessWidget {
@@ -63,6 +64,12 @@ class EventDetailData extends StatelessWidget {
                 ],
               )
             ],
+          ),
+        if (venueSet)
+          PlatformTextButton(
+            child: const Text("In Karte anzeigen"),
+            onPressed: () =>
+                MapsLauncher.launchQuery("${event.address} ${event.venue}"),
           ),
         Row(
           children: [
