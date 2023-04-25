@@ -8,6 +8,7 @@ class EventEntity {
   late DateTime endDate;
   late String image;
   late bool allDay;
+  late String url;
   late String venue = "";
   late String address = "";
   //EventEmbedded extra;
@@ -25,13 +26,14 @@ class EventEntity {
       required this.title,
       required this.description,
       required this.startDate,
-      required this.endDate});
+      required this.endDate,
+      required this.url});
 
   EventEntity.fromJson(Map<String, dynamic> json) {
     try {
       id = json['id'];
       title = json['title'].toString() != "" ? json['title'] : "";
-
+      url = json['url'].toString() != "" ? json['url'] : "";
       title = _parseHtmlString(title);
       description = json['description'] != "" ? json['description'] : "";
       startDate = DateTime.parse(json['start_date']);

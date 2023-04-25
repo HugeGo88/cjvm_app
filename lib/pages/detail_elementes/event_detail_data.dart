@@ -27,9 +27,9 @@ class EventDetailData extends StatelessWidget {
       startDate: event.startDate,
       endDate: event.endDate,
       allDay: event.allDay,
-      iosParams: const IOSParams(
-        reminder: Duration(minutes: 60),
-        url: "http://cvjm-walheim.de",
+      iosParams: IOSParams(
+        reminder: const Duration(minutes: 60),
+        url: event.url,
       ),
       androidParams: const AndroidParams(
         emailInvites: [],
@@ -68,8 +68,7 @@ class EventDetailData extends StatelessWidget {
         if (venueSet)
           PlatformTextButton(
             child: const Text("In Karte anzeigen"),
-            onPressed: () =>
-                MapsLauncher.launchQuery("${event.address} ${event.venue}"),
+            onPressed: () => MapsLauncher.launchQuery(event.address),
           ),
         Row(
           children: [
