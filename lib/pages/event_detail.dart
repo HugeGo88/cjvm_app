@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../model/cached_image.dart';
 import '../model/event_entitiy.dart';
@@ -24,6 +25,14 @@ class EventDetail extends StatelessWidget {
         title: Text(
           event.title,
         ),
+        trailingActions: [
+          PlatformIconButton(
+            icon: Icon(PlatformIcons(context).share),
+            onPressed: () {
+              Share.share(event.url, subject: event.title);
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         top: false,

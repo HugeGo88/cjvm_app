@@ -12,6 +12,9 @@ class HtmlContent extends StatelessWidget {
       data: data,
       style: {
         "a": Style(textDecoration: TextDecoration.none),
+        "ul": Style(textDecoration: TextDecoration.none),
+        "li": Style(textDecoration: TextDecoration.none),
+        "p": Style(textDecoration: TextDecoration.none),
       },
     );
   }
