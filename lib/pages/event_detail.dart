@@ -13,6 +13,16 @@ class EventDetail extends StatelessWidget {
   final EventEntity event;
   const EventDetail(this.event, {super.key});
 
+  Future<void> _onShare(context, EventEntity event) async {
+    final box = context.findRenderObject() as RenderBox?;
+
+    await Share.share(
+      event.url,
+      subject: event.title,
+      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller1 = ScrollController();
@@ -26,10 +36,11 @@ class EventDetail extends StatelessWidget {
           event.title,
         ),
         trailingActions: [
-          PlatformIconButton(
-            icon: Icon(PlatformIcons(context).share),
-            onPressed: () {
-              Share.share(event.url, subject: event.title);
+          Builder(
+            builder: (context) {
+              return PlatformIconButton(
+                  icon: Icon(PlatformIcons(context).share),
+                  onPressed: () => _onShare(context, event));
             },
           ),
         ],

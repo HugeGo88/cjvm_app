@@ -1,4 +1,3 @@
-import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -14,6 +13,16 @@ class PostDetail extends StatelessWidget {
 
   const PostDetail(this.post, {super.key});
 
+  Future<void> _onShare(context, PostEntity post) async {
+    final box = context.findRenderObject() as RenderBox?;
+
+    await Share.share(
+      post.link,
+      subject: post.title,
+      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller1 = ScrollController();
@@ -27,10 +36,11 @@ class PostDetail extends StatelessWidget {
           post.title,
         ),
         trailingActions: [
-          PlatformIconButton(
-            icon: Icon(PlatformIcons(context).share),
-            onPressed: () {
-              Share.share(post.link, subject: post.title);
+          Builder(
+            builder: (context) {
+              return PlatformIconButton(
+                  icon: Icon(PlatformIcons(context).share),
+                  onPressed: () => _onShare(context, post));
             },
           ),
         ],
