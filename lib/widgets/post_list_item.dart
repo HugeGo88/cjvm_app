@@ -44,7 +44,10 @@ class PostListItem extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 4.0),
                     child: Text(
                       post.title,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.apply(fontWeightDelta: 1),
                     ),
                   )
                 ],

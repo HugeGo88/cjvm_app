@@ -55,7 +55,10 @@ class EventListItem extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 4),
                         child: Text(
                           event.title,
-                          style: Theme.of(context).textTheme.titleLarge,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.apply(fontWeightDelta: 1),
                         ),
                       ),
                       Expanded(
@@ -74,7 +77,7 @@ class EventListItem extends StatelessWidget {
                               : Container(),
                           Text(
                             event.venue != "" ? event.venue : '',
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ],
                       ),
@@ -91,7 +94,7 @@ class EventListItem extends StatelessWidget {
                             event.allDay
                                 ? allDayVenue(event.startDate, event.endDate)
                                 : "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ],
                       ),
@@ -105,11 +108,11 @@ class EventListItem extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "${event.startDate.day}",
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Text(
                       DateFormat.MMM('de').format(event.startDate),
-                      style: Theme.of(context).textTheme.titleLarge?.apply(
+                      style: Theme.of(context).textTheme.bodyMedium?.apply(
                           color: color_utils.commonThemeData.primaryColor),
                     ),
                   ],
