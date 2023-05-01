@@ -108,11 +108,12 @@ class EventListItem extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "${event.startDate.day}",
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Text(
                       DateFormat.MMM('de').format(event.startDate),
-                      style: Theme.of(context).textTheme.bodyMedium?.apply(
+                      style: Theme.of(context).textTheme.titleMedium?.apply(
+                          fontWeightDelta: 2,
                           color: color_utils.commonThemeData.primaryColor),
                     ),
                   ],
