@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
@@ -12,9 +11,16 @@ class HtmlContent extends StatelessWidget {
       data: data,
       style: {
         "a": Style(textDecoration: TextDecoration.none),
-        "ul": Style(textDecoration: TextDecoration.none),
-        "li": Style(textDecoration: TextDecoration.none),
         "p": Style(textDecoration: TextDecoration.none),
+        "li": Style(
+          listStyleType: ListStyleType.fromWidget(
+            const Icon(
+              Icons.square,
+              color: Colors.black,
+              size: 10,
+            ),
+          ),
+        )
       },
     );
   }
