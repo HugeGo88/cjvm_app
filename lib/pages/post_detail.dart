@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:http/http.dart' as http;
 
 import '../model/cached_image.dart';
 import '../model/post_entitiy.dart';
@@ -15,9 +19,18 @@ class PostDetail extends StatelessWidget {
 
   Future<void> _onShare(context, PostEntity post) async {
     final box = context.findRenderObject() as RenderBox?;
+    final urlImage = post.image;
+    final url = Uri.parse(urlImage);
+    final response = await http.get(url);
+    final bytes = response.bodyBytes;
 
-    await Share.share(
-      post.link,
+    final temp = await getTemporaryDirectory();
+    final path = '${temp.path}/image.jpg';
+    File(path).writeAsBytesSync(bytes);
+
+    await Share.shareXFiles(
+      [XFile(path)],
+      text: post.link,
       subject: post.title,
       sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
     );

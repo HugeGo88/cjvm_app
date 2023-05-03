@@ -4,6 +4,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:share_plus/share_plus.dart';
 
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+
 import '../model/cached_image.dart';
 import '../model/event_entitiy.dart';
 import 'detail_elementes/event_detail_data.dart';
@@ -15,9 +19,18 @@ class EventDetail extends StatelessWidget {
 
   Future<void> _onShare(context, EventEntity event) async {
     final box = context.findRenderObject() as RenderBox?;
+    final urlImage = event.image;
+    final url = Uri.parse(urlImage);
+    final response = await http.get(url);
+    final bytes = response.bodyBytes;
 
-    await Share.share(
-      event.url,
+    final temp = await getTemporaryDirectory();
+    final path = '${temp.path}/image.jpg';
+    File(path).writeAsBytesSync(bytes);
+
+    await Share.shareXFiles(
+      [XFile(path)],
+      text: event.url,
       subject: event.title,
       sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
     );

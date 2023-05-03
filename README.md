@@ -15,6 +15,7 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
   - [x] Veranstaltungen zum Kalender hinzufügen
   - [x] Karten der Veranstaltung öffnen
 - [x] Teilen Button für Veranstaltungen und Nachrichten
+  - [x] Mit Titelbild
 - [ ] Feedback Button für Probleme und Ideen
 - [ ] Notifications damit alle Mitglieder über diese App erreicht werden können
 - [ ] Notifications für anstehende Veranstaltungen
