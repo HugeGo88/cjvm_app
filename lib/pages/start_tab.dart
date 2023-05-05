@@ -22,19 +22,19 @@ class StartTab extends StatelessWidget {
                       height: featureHeigt + 50,
                       child: FeatureList(),
                     ),
+                    const ListHeading(events),
+                    const EventList(
+                      maxEvents: 3,
+                    ),
+                    Container(
+                      height: 8,
+                    ),
                     const ListHeading(posts),
                     const PostList(
                       category: 0,
                       maxPosts: 3,
                       showFeatureCategory: false,
                     ),
-                    Container(
-                      height: 8,
-                    ),
-                    const ListHeading(events),
-                    const EventList(
-                      maxEvents: 3,
-                    )
                   ],
                 ),
               )
@@ -51,22 +51,22 @@ class StartTab extends StatelessWidget {
                         Expanded(
                           child: Column(
                             children: const <Widget>[
-                              ListHeading(posts),
-                              PostList(
-                                category: 0,
-                                maxPosts: 5,
-                                showFeatureCategory: false,
-                              ),
+                              ListHeading(events),
+                              EventList(
+                                maxEvents: 5,
+                              )
                             ],
                           ),
                         ),
                         Expanded(
                           child: Column(
                             children: const <Widget>[
-                              ListHeading(events),
-                              EventList(
-                                maxEvents: 5,
-                              )
+                              ListHeading(posts),
+                              PostList(
+                                category: 0,
+                                maxPosts: 5,
+                                showFeatureCategory: false,
+                              ),
                             ],
                           ),
                         ),
