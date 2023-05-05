@@ -44,7 +44,7 @@ class EventListItem extends StatelessWidget {
                     width: listWidth,
                     fit: BoxFit.cover),
               ),
-              Flexible(
+              Expanded(
                 child: SizedBox(
                   height: listHeight,
                   child: Column(

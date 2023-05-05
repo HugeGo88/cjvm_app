@@ -1,4 +1,5 @@
 import 'package:cjvm_app/pages/events_tab.dart';
+import 'package:cjvm_app/pages/group_tab.dart';
 import 'package:cjvm_app/pages/start_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -94,10 +95,10 @@ class _HomeWidgetState extends State<HomeWidget> {
           label: titles[2],
           icon: Icon(PlatformIcons(context).collections),
         ),
-/*         BottomNavigationBarItem(
+        BottomNavigationBarItem(
           label: titles[3],
           icon: Icon(PlatformIcons(context).group),
-        ), */
+        ),
       ];
 
   // This needs to be captured here in a stateful widget
@@ -137,10 +138,10 @@ class ContentView extends StatelessWidget {
         return const EventsTab();
       case 2:
         return const PostsTab();
-      //case 3:
-      //  return const Placeholder();
+      case 3:
+        return const GroupTab();
       default:
-        return Container();
+        return const Placeholder();
     }
   }
 }
