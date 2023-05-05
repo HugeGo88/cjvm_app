@@ -7,7 +7,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../pages/posts_tab.dart';
 
-final titles = ['Aktuelles', 'Berichte', 'Termine', 'Mitteilungen'];
+final titles = ['Aktuelles', 'Termine', 'Berichte', 'Gruppen'];
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -86,14 +86,18 @@ class _HomeWidgetState extends State<HomeWidget> {
         ),
         BottomNavigationBarItem(
           label: titles[1],
-          icon: Icon(PlatformIcons(context).collections),
-        ),
-        BottomNavigationBarItem(
-          label: titles[2],
           icon: const Icon(
             CupertinoIcons.calendar,
           ),
         ),
+        BottomNavigationBarItem(
+          label: titles[2],
+          icon: Icon(PlatformIcons(context).collections),
+        ),
+/*         BottomNavigationBarItem(
+          label: titles[3],
+          icon: Icon(PlatformIcons(context).group),
+        ), */
       ];
 
   // This needs to be captured here in a stateful widget
@@ -130,11 +134,11 @@ class ContentView extends StatelessWidget {
       case 0:
         return const StartTab();
       case 1:
-        return const PostsTab();
-      case 2:
         return const EventsTab();
-      case 3:
-        return Container();
+      case 2:
+        return const PostsTab();
+      //case 3:
+      //  return const Placeholder();
       default:
         return Container();
     }
