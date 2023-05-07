@@ -53,7 +53,8 @@ class WpApi {
       dynamic response = await http
           .get(Uri.parse('${url}wp-json/menus/v1/locations/main_nav/'));
       Map<String, dynamic> map = json.decode(response.body);
-      dynamic data = map["items"];
+      //TODO this needs to be more robst
+      dynamic data = map["items"][3]["child_items"];
 
       if (data != null) {
         for (var v in (data as List)) {
