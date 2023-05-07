@@ -25,7 +25,7 @@ class _GroupListState extends State<GroupList> {
         },
       );
 
-      WpApi.getNavigationItemList().then(
+      WpApi.getNavigationItemList(id: 121).then(
         (navigationItems) {
           setState(
             () {
@@ -66,7 +66,7 @@ class _GroupListState extends State<GroupList> {
     } else {
       return Padding(
         padding: const EdgeInsets.only(left: 8.0),
-        child: GroupListItem(allNavigationItems[index].title),
+        child: GroupListItem(allNavigationItems[index]),
       );
     }
   }

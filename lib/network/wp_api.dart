@@ -9,6 +9,17 @@ import 'package:http/http.dart' as http;
 class WpApi {
   static const String baseUrl = '$url$restUrlPrefix/wp/v2/';
 
+  static Future<String> getHtml({required String requestUrl}) async {
+    String html = "";
+    try {
+      dynamic response = await http.get(Uri.parse(requestUrl));
+      html = response.body;
+    } catch (e) {
+      //TODO do something
+    }
+    return html;
+  }
+
   static Future<List<PostEntity>> getPostsList(
       {int category = 0, int page = 1}) async {
     List<PostEntity> posts = [];
@@ -47,18 +58,24 @@ class WpApi {
     return events;
   }
 
-  static Future<List<NavigationItemEntitiy>> getNavigationItemList() async {
+  static Future<List<NavigationItemEntitiy>> getNavigationItemList(
+      {required int id}) async {
     List<NavigationItemEntitiy> navigationItmes = [];
     try {
       dynamic response = await http
           .get(Uri.parse('${url}wp-json/menus/v1/locations/main_nav/'));
       Map<String, dynamic> map = json.decode(response.body);
       //TODO this needs to be more robst
-      dynamic data = map["items"][3]["child_items"];
+      dynamic itmes = map["items"];
 
-      if (data != null) {
-        for (var v in (data as List)) {
-          navigationItmes.add(NavigationItemEntitiy.fromJson(v));
+      if (itmes != null) {
+        for (var item in (itmes as List)) {
+          if (id == item["ID"]) {
+            var childItems = item["child_items"];
+            for (var childItem in (childItems as List)) {
+              navigationItmes.add(NavigationItemEntitiy.fromJson(childItem));
+            }
+          }
         }
       }
     } catch (e) {

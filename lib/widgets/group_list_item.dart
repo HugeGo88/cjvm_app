@@ -1,37 +1,46 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cjvm_app/model/navigation_item_entitiy.dart';
+import 'package:cjvm_app/pages/group_detail.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import '../utils/color_utils.dart' as color_utils;
 
 import '../utils/constants.dart';
 
 class GroupListItem extends StatelessWidget {
-  final String groupName;
+  final NavigationItemEntitiy groupName;
 
   const GroupListItem(this.groupName, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: listHeight,
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              groupName,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.apply(fontWeightDelta: 1),
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        Navigator.push(
+            context,
+            platformPageRoute(
+                builder: (context) => GroupDetail(groupName),
+                context: context));
+      },
+      child: SizedBox(
+        height: listHeight,
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                groupName.title,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.apply(fontWeightDelta: 1),
+              ),
             ),
-          ),
-          Icon(
-            PlatformIcons(context).forward,
-            color: color_utils.commonThemeData.primaryColor,
-          ),
-        ],
+            Icon(
+              PlatformIcons(context).forward,
+              color: color_utils.commonThemeData.primaryColor,
+            ),
+          ],
+        ),
       ),
     );
   }
