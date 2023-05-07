@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:cjvm_app/model/navigation_item_entitiy.dart';
+
 import '../model/event_entitiy.dart';
 import '../model/post_entitiy.dart';
 import '../utils/constants.dart';
@@ -43,5 +45,24 @@ class WpApi {
       //TODO Handle No Internet Response
     }
     return events;
+  }
+
+  static Future<List<NavigationItemEntitiy>> getNavigationItemList() async {
+    List<NavigationItemEntitiy> navigationItmes = [];
+    try {
+      dynamic response = await http
+          .get(Uri.parse('${url}wp-json/menus/v1/locations/main_nav/'));
+      Map<String, dynamic> map = json.decode(response.body);
+      dynamic data = map["items"];
+
+      if (data != null) {
+        for (var v in (data as List)) {
+          navigationItmes.add(NavigationItemEntitiy.fromJson(v));
+        }
+      }
+    } catch (e) {
+      //TODO do something
+    }
+    return navigationItmes;
   }
 }

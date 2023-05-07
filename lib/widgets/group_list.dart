@@ -1,7 +1,6 @@
+import 'package:cjvm_app/model/navigation_item_entitiy.dart';
+import 'package:cjvm_app/network/wp_api.dart';
 import 'package:cjvm_app/widgets/group_list_item.dart';
-import 'package:cjvm_app/widgets/post_list_item.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import '../utils/color_utils.dart' as color_utils;
@@ -14,17 +13,36 @@ class GroupList extends StatefulWidget {
 }
 
 class _GroupListState extends State<GroupList> {
-  List<String> allGroups = [
-    "Offener Abend",
-    "Sport",
-    "Gangnai",
-    "Jungschar",
-    "Jungschar",
-    "Jungschar",
-    "Jungschar"
-  ];
+  List<NavigationItemEntitiy> allNavigationItems = [];
   final ScrollController _scrollController = ScrollController();
   bool isLoading = false;
+
+  void getData() {
+    if (!isLoading) {
+      setState(
+        () {
+          isLoading = true;
+        },
+      );
+
+      WpApi.getNavigationItemList().then(
+        (navigationItems) {
+          setState(
+            () {
+              isLoading = false;
+              allNavigationItems.addAll(navigationItems);
+            },
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +52,7 @@ class _GroupListState extends State<GroupList> {
         height: 1,
         color: color_utils.commonThemeData.primaryColor,
       ),
-      itemCount: allGroups.length,
+      itemCount: allNavigationItems.length,
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
@@ -43,10 +61,13 @@ class _GroupListState extends State<GroupList> {
   }
 
   Widget groupTile(BuildContext context, int index) {
-    if (index == allGroups.length) {
+    if (index == allNavigationItems.length) {
       return _buildProgressIndicator();
     } else {
-      return GroupListItem(allGroups[index]);
+      return Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: GroupListItem(allNavigationItems[index].title),
+      );
     }
   }
 
