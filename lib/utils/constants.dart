@@ -5,6 +5,7 @@ const String events = "Anstehende Termine";
 const String posts = "Neueste Berichte";
 
 const String url = "https://cvjm-walheim.de/";
+const String baseUrl = '$url$restUrlPrefix/wp/v2/';
 
 const int featuredCategoryId = 29;
 const String featuredCategoryName = 'Wichtiges';

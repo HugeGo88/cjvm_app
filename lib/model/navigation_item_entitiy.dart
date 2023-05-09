@@ -3,6 +3,7 @@ class NavigationItemEntitiy {
   late String title;
   late String guid;
   late String url;
+  late String slug;
   late List<NavigationItemEntitiy> childItems;
 
   NavigationItemEntitiy(
@@ -10,6 +11,7 @@ class NavigationItemEntitiy {
       required this.title,
       required this.guid,
       required this.url,
+      required this.slug,
       required this.childItems});
 
   NavigationItemEntitiy.fromJson(Map<String, dynamic> json) {
@@ -18,6 +20,7 @@ class NavigationItemEntitiy {
       title = json['title'];
       guid = json['guid'];
       url = json['url'];
+      slug = json['slug'] ?? "";
     } catch (e) {
       //TODO do something
     }

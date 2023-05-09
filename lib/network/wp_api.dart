@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cjvm_app/model/navigation_item_entitiy.dart';
+import 'package:cjvm_app/model/page_entitiy.dart';
 
 import '../model/event_entitiy.dart';
 import '../model/post_entitiy.dart';
@@ -7,17 +8,19 @@ import '../utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class WpApi {
-  static const String baseUrl = '$url$restUrlPrefix/wp/v2/';
-
-  static Future<String> getHtml({required String requestUrl}) async {
-    String html = "";
+  static Future<List<PageEntity>> getPageList(
+      {required String requestUrl}) async {
+    List<PageEntity> pages = [];
     try {
       dynamic response = await http.get(Uri.parse(requestUrl));
-      html = response.body;
+      dynamic json = jsonDecode(response.body);
+      for (var v in (json as List)) {
+        pages.add(PageEntity.fromJson(v));
+      }
     } catch (e) {
       //TODO do something
     }
-    return html;
+    return pages;
   }
 
   static Future<List<PostEntity>> getPostsList(
@@ -65,7 +68,7 @@ class WpApi {
       dynamic response = await http
           .get(Uri.parse('${url}wp-json/menus/v1/locations/main_nav/'));
       Map<String, dynamic> map = json.decode(response.body);
-      //TODO this needs to be more robst
+      //TODO this needs to be more robust
       dynamic itmes = map["items"];
 
       if (itmes != null) {

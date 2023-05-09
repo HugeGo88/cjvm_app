@@ -7,21 +7,23 @@ class HtmlContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Html(
-      data: data,
-      style: {
-        "a": Style(textDecoration: TextDecoration.none),
-        "p": Style(textDecoration: TextDecoration.none),
-        "li": Style(
-          listStyleType: ListStyleType.fromWidget(
-            const Icon(
-              Icons.square,
-              color: Colors.black,
-              size: 10,
+    return SingleChildScrollView(
+      child: Html(
+        data: data,
+        style: {
+          "a": Style(textDecoration: TextDecoration.none),
+          "p": Style(textDecoration: TextDecoration.none),
+          "li": Style(
+            listStyleType: ListStyleType.fromWidget(
+              const Icon(
+                Icons.square,
+                color: Colors.black,
+                size: 10,
+              ),
             ),
-          ),
-        )
-      },
+          )
+        },
+      ),
     );
   }
 }
