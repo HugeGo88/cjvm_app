@@ -1,6 +1,5 @@
 import 'package:cjvm_app/widgets/group_list.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class GroupTab extends StatelessWidget {
   const GroupTab({super.key});
