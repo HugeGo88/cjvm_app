@@ -1,6 +1,7 @@
 import 'package:cjvm_app/model/navigation_item_entitiy.dart';
 import 'package:cjvm_app/network/wp_api.dart';
 import 'package:cjvm_app/pages/detail_elementes/html_content.dart';
+import 'package:cjvm_app/widgets/loading_fullscreen.dart';
 import 'package:flutter/widgets.dart';
 import '../utils/constants.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -42,9 +43,9 @@ class _GroupDetailState extends State<GroupDetail> {
     return PlatformScaffold(
       iosContentPadding: true,
       appBar: PlatformAppBar(title: Text(widget.navigationItem.title)),
-      //TODO Display page content
-      body: HtmlContent(htmlContent),
-      //body: Placeholder(),
+      body: htmlContent == ""
+          ? const LoadingFullscreen()
+          : HtmlContent(htmlContent),
     );
   }
 }
