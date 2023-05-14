@@ -3,6 +3,7 @@ import 'package:cjvm_app/model/post_entitiy.dart';
 import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import '../utils/color_utils.dart' as color_utils;
 
 import '../pages/post_detail.dart';
 
@@ -21,41 +22,48 @@ class PostListItem extends StatelessWidget {
             platformPageRoute(
                 builder: (context) => PostDetail(post), context: context));
       },
-      child: Column(children: [
-        Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: CachedImage(
-                post.image,
-                height: listHeight,
-                width: listWidth,
-                fit: BoxFit.cover,
+      child: Column(
+        children: [
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: CachedImage(
+                  post.image,
+                  height: listHeight,
+                  width: listWidth,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            Flexible(
+              Expanded(
                 child: SizedBox(
-              height: listHeight,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text(
-                      post.title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.apply(fontWeightDelta: 1),
-                    ),
-                  )
-                ],
+                  height: listHeight,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                        child: Text(
+                          post.title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.apply(fontWeightDelta: 1),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
-            ))
-          ],
-        )
-      ]),
+              Icon(
+                PlatformIcons(context).forward,
+                color: color_utils.commonThemeData.primaryColor,
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

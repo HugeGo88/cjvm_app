@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 const String appTitle = "CVJM Walheim";
 
 const String important = "Wichtiges";
@@ -5,9 +7,12 @@ const String events = "Anstehende Termine";
 const String posts = "Neueste Berichte";
 
 const String url = "https://cvjm-walheim.de/";
+const String baseUrl = '$url$restUrlPrefix/wp/v2/';
 
 const int featuredCategoryId = 29;
 const String featuredCategoryName = 'Wichtiges';
+
+const int groupMenuId = 121;
 
 const String restUrlPrefix = 'wp-json';
 
