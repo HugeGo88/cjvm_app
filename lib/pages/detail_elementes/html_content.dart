@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import '../../utils/color_utils.dart' as color_utils;
 
 class HtmlContent extends StatelessWidget {
   final String data;
@@ -17,7 +18,6 @@ class HtmlContent extends StatelessWidget {
             listStyleType: ListStyleType.fromWidget(
               const Icon(
                 Icons.square,
-                color: Colors.black,
                 size: 10,
               ),
             ),

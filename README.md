@@ -16,7 +16,7 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
   - [x] Karten der Veranstaltung öffnen
 - [x] Teilen Button für Veranstaltungen und Nachrichten
   - [x] Mit Titelbild
-- [ ] Seiten der Gruppen und Kreise anzeigen (Wordpress Plugin notwendig)
+- [x] Seiten der Gruppen und Kreise anzeigen (Wordpress Plugin notwendig)
 - [ ] Feedback Button für Probleme und Ideen
 - [ ] Notifications damit alle Mitglieder über diese App erreicht werden können
 - [ ] Notifications für anstehende Veranstaltungen
