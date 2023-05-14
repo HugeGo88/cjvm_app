@@ -21,6 +21,13 @@ class NavigationItemEntitiy {
       guid = json['guid'];
       url = json['url'];
       slug = json['slug'] ?? "";
+      var items = json['child_items'];
+      childItems = [];
+      if (items != null) {
+        for (var item in (items as List)) {
+          childItems.add(NavigationItemEntitiy.fromJson(item));
+        }
+      }
     } catch (e) {
       //TODO do something
     }
