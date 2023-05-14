@@ -25,6 +25,7 @@ class GroupList extends StatelessWidget {
             itemCount: allNavigationItems.length,
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
+            padding: EdgeInsets.zero,
             physics: const BouncingScrollPhysics(),
             controller: _scrollController,
           );

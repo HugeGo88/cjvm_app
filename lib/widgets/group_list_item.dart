@@ -24,7 +24,9 @@ class GroupListItem extends StatelessWidget {
                     ? PlatformScaffold(
                         iosContentPadding: true,
                         appBar: PlatformAppBar(title: Text(groupName.title)),
-                        body: GroupList(groupName.childItems),
+                        body: Builder(builder: (context) {
+                          return GroupList(groupName.childItems);
+                        }),
                       )
                     : GroupDetail(groupName),
                 context: context));
