@@ -6,34 +6,11 @@ import 'package:cjvm_app/widgets/loading_fullscreen.dart';
 import 'package:flutter/widgets.dart';
 import '../utils/color_utils.dart' as color_utils;
 
-class GroupList extends StatefulWidget {
-  const GroupList({super.key});
+class GroupList extends StatelessWidget {
+  final List<NavigationItemEntitiy> allNavigationItems;
+  GroupList(this.allNavigationItems, {super.key});
 
-  @override
-  State<GroupList> createState() => _GroupListState();
-}
-
-class _GroupListState extends State<GroupList> {
-  List<NavigationItemEntitiy> allNavigationItems = [];
   final ScrollController _scrollController = ScrollController();
-
-  void getData() {
-    WpApi.getNavigationItemList(id: groupMenuId).then(
-      (navigationItems) {
-        setState(
-          () {
-            allNavigationItems.addAll(navigationItems);
-          },
-        );
-      },
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
 
   @override
   Widget build(BuildContext context) {

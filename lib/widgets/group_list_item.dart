@@ -21,7 +21,11 @@ class GroupListItem extends StatelessWidget {
             context,
             platformPageRoute(
                 builder: (context) => groupName.childItems.isNotEmpty
-                    ? Placeholder()
+                    ? PlatformScaffold(
+                        iosContentPadding: true,
+                        appBar: PlatformAppBar(title: Text(groupName.title)),
+                        body: GroupList(groupName.childItems),
+                      )
                     : GroupDetail(groupName),
                 context: context));
       },
