@@ -14,13 +14,18 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
 - [x] Anzeigen der kommenden Veranstaltungen (Wordpress Plugin notwendig)
   - [x] Veranstaltungen zum Kalender hinzufügen
   - [x] Karten der Veranstaltung öffnen
+  - [ ] Kalenderansicht
 - [x] Teilen Button für Veranstaltungen und Nachrichten
   - [x] Mit Titelbild
 - [x] Seiten der Gruppen und Kreise anzeigen (Wordpress Plugin notwendig)
 - [ ] Feedback Button für Probleme und Ideen
 - [ ] Notifications damit alle Mitglieder über diese App erreicht werden können
 - [ ] Notifications für anstehende Veranstaltungen
-- [x] Neuer About-Dialog mit allen Packeten implementiert
+- [x] Neuer About-Dialog mit allen Paketen implementiert
+- [ ] Filter für Posts und Veranstaltungskategorien
+- [ ] Links in HTML Seiten klickbar machen
+  - [ ] Emails
+  - [ ] URLs 
 
 ## Vorschau
 
