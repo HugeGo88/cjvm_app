@@ -17,15 +17,17 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
   - [ ] Kalenderansicht
 - [x] Teilen Button für Veranstaltungen und Nachrichten
   - [x] Mit Titelbild
+  - [ ] Formatieren von Notizen in Kalenderinfo
 - [x] Seiten der Gruppen und Kreise anzeigen (Wordpress Plugin notwendig)
 - [ ] Feedback Button für Probleme und Ideen
 - [ ] Notifications damit alle Mitglieder über diese App erreicht werden können
 - [ ] Notifications für anstehende Veranstaltungen
 - [x] Neuer About-Dialog mit allen Paketen implementiert
 - [ ] Filter für Posts und Veranstaltungskategorien
-- [ ] Links in HTML Seiten klickbar machen
-  - [ ] Emails
-  - [ ] URLs 
+- [ ] HTML Ansicht
+  - [x] Emailadressen öffnen
+  - [x] URLs öffnen
+  - [ ] Zitate formatieren
 
 ## Vorschau
 
