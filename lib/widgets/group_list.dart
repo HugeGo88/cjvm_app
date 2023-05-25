@@ -1,6 +1,4 @@
 import 'package:cjvm_app/model/navigation_item_entitiy.dart';
-import 'package:cjvm_app/network/wp_api.dart';
-import 'package:cjvm_app/utils/constants.dart';
 import 'package:cjvm_app/widgets/group_list_item.dart';
 import 'package:cjvm_app/widgets/loading_fullscreen.dart';
 import 'package:flutter/widgets.dart';
