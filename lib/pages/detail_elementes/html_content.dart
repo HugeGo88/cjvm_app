@@ -1,5 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HtmlContent extends StatelessWidget {
@@ -18,10 +20,15 @@ class HtmlContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Html(
-        data: data,
-/*         onLinkTap: (String? url, RenderContext context,
-            Map<String, String> attributes, dom.Element? element) {
+      child: HtmlWidget(
+        data.replaceAll("src=\" ", "src=\""),
+        textStyle: Theme.of(context).textTheme.bodyMedium,
+        onTapUrl: (url) {
+          _launchInBrowser(Uri.parse(url));
+          return true;
+        },
+        /*
+        onLinkTap: (url, attributes, element) {
           var attributes = element?.attributes;
           if (attributes != null) {
             for (var attribute in attributes.entries) {
@@ -31,20 +38,7 @@ class HtmlContent extends StatelessWidget {
               }
             }
           }
-          //open URL in webview, or launch URL in browser, or any other logic here
-        }, */
-        style: {
-          "a": Style(textDecoration: TextDecoration.none),
-          "p": Style(textDecoration: TextDecoration.none),
-/*           "li": Style(
-            listStyleType: ListStyleType.fromWidget(
-              const Icon(
-                Icons.square,
-                size: 10,
-              ),
-            ),
-          ), */
-        },
+        },*/
       ),
     );
   }
