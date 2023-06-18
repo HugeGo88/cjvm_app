@@ -39,12 +39,8 @@ class _AboutTabState extends State<AboutTab> {
 
   @override
   Widget build(BuildContext context) {
-    return PlatformScaffold(
-      iosContentPadding: true,
-      appBar: PlatformAppBar(title: Text("Über uns")),
-      body: htmlContent == ""
-          ? const LoadingFullscreen()
-          : HtmlContent(htmlContent),
-    );
+    return htmlContent == ""
+        ? const LoadingFullscreen()
+        : HtmlContent(htmlContent);
   }
 }
