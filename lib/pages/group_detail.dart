@@ -19,6 +19,7 @@ class _GroupDetailState extends State<GroupDetail> {
   String htmlContent = "";
 
   void getData() {
+    //TODO create function to handle all the calls
     //TODO needs to be fixed
     String requestUrl = "${baseUrl}pages?slug=${widget.navigationItem.slug}";
     WpApi.getPageList(requestUrl: requestUrl).then(

@@ -1,3 +1,4 @@
+import 'package:cjvm_app/pages/about_tab.dart';
 import 'package:cjvm_app/pages/events_tab.dart';
 import 'package:cjvm_app/pages/group_tab.dart';
 import 'package:cjvm_app/pages/start_tab.dart';
@@ -8,7 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../pages/posts_tab.dart';
 
-final titles = ['Aktuelles', 'Termine', 'Berichte', 'Gruppen'];
+final titles = ['Aktuelles', 'Termine', 'Berichte', 'Gruppen', 'Über'];
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -46,7 +47,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           ),
           trailingActions: [
             PlatformIconButton(
-              icon: Icon(PlatformIcons(context).info),
+              icon: Icon(PlatformIcons(context).settings),
               onPressed: () {
                 showAboutDialog(
                   context: context,
@@ -99,6 +100,10 @@ class _HomeWidgetState extends State<HomeWidget> {
           label: titles[3],
           icon: Icon(PlatformIcons(context).group),
         ),
+        BottomNavigationBarItem(
+          label: titles[4],
+          icon: Icon(PlatformIcons(context).info),
+        ),
       ];
 
   // This needs to be captured here in a stateful widget
@@ -140,6 +145,8 @@ class ContentView extends StatelessWidget {
         return const PostsTab();
       case 3:
         return const GroupTab();
+      case 4:
+        return const AboutTab();
       default:
         return const Placeholder();
     }
