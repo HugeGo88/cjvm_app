@@ -28,6 +28,7 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
   - [x] Emailadressen öffnen
   - [x] URLs öffnen
   - [ ] Zitate formatieren
+- [ ] Zeige Über Tab an
 
 ## Vorschau
 
