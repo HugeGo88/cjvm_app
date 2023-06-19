@@ -13,7 +13,7 @@ class EventsTab extends StatefulWidget {
 class _EventsTabState extends State<EventsTab> {
   DateTime today = DateTime.now();
   //DateTime _selectedDay = DateTime.now();
-  //DateTime _focusedDay = DateTime.now();
+  late DateTime _focusedDay;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +24,15 @@ class _EventsTabState extends State<EventsTab> {
           startingDayOfWeek: StartingDayOfWeek.monday,
           locale: "de_DE",
           weekNumbersVisible: true,
+          onPageChanged: (focusedDay) {
+            _focusedDay = focusedDay;
+          },
           //rowHeight: 35,
           //TODO do something with selected date
-/*           selectedDayPredicate: (day) {
-            return isSameDay(_selectedDay, day);
-          },
-          onDaySelected: (selectedDay, focusedDay) {
+          //selectedDayPredicate: (day) {
+          //  return isSameDay(_selectedDay, day);
+          //},
+          /* onDaySelected: (selectedDay, focusedDay) {
             setState(
               () {
                 _selectedDay = selectedDay;
