@@ -38,7 +38,7 @@ class StartTab extends StatelessWidget {
                   ],
                 ),
               )
-            : const SingleChildScrollView(
+            : SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     ListHeading(important),

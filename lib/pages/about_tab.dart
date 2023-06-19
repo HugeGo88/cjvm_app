@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../network/wp_api.dart';
 import '../widgets/loading_fullscreen.dart';
