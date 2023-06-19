@@ -41,8 +41,8 @@ class StartTab extends StatelessWidget {
             : SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    ListHeading(important),
-                    SizedBox(
+                    const ListHeading(important),
+                    const SizedBox(
                       height: featureHeigt + 50,
                       child: FeatureList(),
                     ),
@@ -50,7 +50,7 @@ class StartTab extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: Column(
-                            children: <Widget>[
+                            children: const <Widget>[
                               ListHeading(events),
                               EventList(
                                 maxEvents: 5,
@@ -60,7 +60,7 @@ class StartTab extends StatelessWidget {
                         ),
                         Expanded(
                           child: Column(
-                            children: <Widget>[
+                            children: const <Widget>[
                               ListHeading(posts),
                               PostList(
                                 category: 0,

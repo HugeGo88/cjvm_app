@@ -51,6 +51,14 @@ class HtmlContent extends StatelessWidget {
             ),
           ),
         },
+        customRender: {
+          "table": (context, child) {
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: (context.tree as TableLayoutElement).toWidget(context),
+            );
+          },
+        },
       ),
     );
   }

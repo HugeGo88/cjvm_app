@@ -14,8 +14,8 @@ class _EventsTabState extends State<EventsTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return const Center(child: EventList());
+    /* 
         TableCalendar(
           focusedDay: today,
           startingDayOfWeek: StartingDayOfWeek.monday,
@@ -29,9 +29,6 @@ class _EventsTabState extends State<EventsTab> {
             titleCentered: true,
             formatButtonVisible: false,
           ),
-        ),
-        const EventList(),
-      ],
-    );
+        ), */
   }
 }

@@ -2,7 +2,7 @@ import 'package:cjvm_app/model/navigation_item_entitiy.dart';
 import 'package:cjvm_app/network/wp_api.dart';
 import 'package:cjvm_app/utils/constants.dart';
 import 'package:cjvm_app/widgets/group_list.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 
 class GroupTab extends StatefulWidget {
   const GroupTab({super.key});
