@@ -111,9 +111,11 @@ class EventListItem extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Text(
-                      DateFormat.MMM('de').format(event.startDate),
+                      DateFormat.MMM('de')
+                          .format(event.startDate)
+                          .toUpperCase(),
                       style: Theme.of(context).textTheme.titleMedium?.apply(
-                          fontWeightDelta: 2,
+                          fontWeightDelta: 3,
                           color: color_utils.commonThemeData.primaryColor),
                     ),
                   ],
