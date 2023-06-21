@@ -10,40 +10,60 @@ class EventsTab extends StatefulWidget {
   State<EventsTab> createState() => _EventsTabState();
 }
 
+/// Example event class.
+class Event {
+  final String title;
+
+  const Event(this.title);
+
+  @override
+  String toString() => title;
+}
+
 class _EventsTabState extends State<EventsTab> {
   DateTime today = DateTime.now();
-  //DateTime _selectedDay = DateTime.now();
+  late DateTime _selectedDay;
   late DateTime _focusedDay;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TableCalendar(
+/*         TableCalendar(
           focusedDay: today,
           startingDayOfWeek: StartingDayOfWeek.monday,
           locale: "de_DE",
           weekNumbersVisible: true,
           onPageChanged: (focusedDay) {
             _focusedDay = focusedDay;
+            _selectedDay = _focusedDay;
           },
-          //rowHeight: 35,
+          eventLoader: (day) {
+            if (day.weekday == DateTime.monday) {
+              return [const Event('Test')];
+            } else {
+              return [];
+            }
+          },
+          rowHeight: 35,
           //TODO do something with selected date
-          //selectedDayPredicate: (day) {
-          //  return isSameDay(_selectedDay, day);
-          //},
-          /* onDaySelected: (selectedDay, focusedDay) {
-            setState(
-              () {
-                _selectedDay = selectedDay;
-                _focusedDay = focusedDay; // update `_focusedDay` here as well
-              },
-            );
-          }, */
+          selectedDayPredicate: (day) {
+            return isSameDay(_selectedDay, day);
+          },
+          onDaySelected: (selectedDay, focusedDay) {
+            setState(() {
+              _selectedDay = selectedDay;
+              _focusedDay = focusedDay; // update `_focusedDay` here as well
+            });
+          },
           calendarStyle: CalendarStyle(
+            markerDecoration:
+                BoxDecoration(color: color_utils.commonThemeData.primaryColor),
             todayDecoration: BoxDecoration(
                 color: color_utils.commonThemeData.primaryColor,
                 shape: BoxShape.circle),
+            selectedDecoration:
+                const BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
             isTodayHighlighted: true,
           ),
           availableGestures: AvailableGestures.all,
@@ -53,7 +73,7 @@ class _EventsTabState extends State<EventsTab> {
             titleCentered: true,
             formatButtonVisible: false,
           ),
-        ),
+        ), */
         const Expanded(
           child: Center(
             child: EventList(),

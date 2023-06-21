@@ -7,6 +7,7 @@ class PageEntity {
   late PostEmbedded extra = PostEmbedded();
   late String link;
   late int id;
+  late String? pictureUrl;
   late String title;
   late String content;
 
@@ -36,6 +37,7 @@ class PageEntity {
       required this.extra,
       required this.link,
       required this.id,
+      required this.pictureUrl,
       required this.title,
       required this.content});
 
@@ -49,6 +51,7 @@ class PageEntity {
     title = json['title'].toString() != "" ? json['title']['rendered'] : null;
     title = _parseHtmlString(title);
     content = json['content'] != null ? json['content']['rendered'] : null;
+    pictureUrl = json["yoast_head_json"]?["og_image"]?[0]?["url"];
   }
 
   Map<String, dynamic> toJson() {
