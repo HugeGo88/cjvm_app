@@ -30,9 +30,6 @@ class GroupList extends StatelessWidget {
   }
 
   Widget groupTile(BuildContext context, int index) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
-      child: GroupListItem(allNavigationItems[index]),
-    );
+    return GroupListItem(allNavigationItems[index]);
   }
 }

@@ -32,7 +32,7 @@ class _GroupListItemState extends State<GroupListItem> {
       (pages) {
         setState(
           () {
-            if (pages.isNotEmpty) {
+            if (pages.isNotEmpty && widget.groupName.slug != "") {
               htmlContent = pages[0].content;
               imageUrl = pages[0].pictureUrl;
             }
