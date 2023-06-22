@@ -19,11 +19,13 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
   - [x] Mit Titelbild
   - [ ] Formatieren von Notizen in Kalenderinfo
 - [x] Seiten der Gruppen und Kreise anzeigen (Wordpress Plugin notwendig)
+  - [x] Featured Image in Gruppenansicht anzeigen
 - [ ] Feedback Button für Probleme und Ideen
 - [ ] Notifications damit alle Mitglieder über diese App erreicht werden können
 - [ ] Notifications für anstehende Veranstaltungen
 - [x] Neuer About-Dialog mit allen Paketen implementiert
 - [ ] Filter für Posts und Veranstaltungskategorien
+- [ ] Tablet Ansicht mit zwei Spalten (Master Detail) 
 - [ ] HTML Ansicht
   - [x] Emailadressen öffnen
   - [x] URLs öffnen
