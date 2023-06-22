@@ -2,7 +2,7 @@
 
 ## Idee
 
-Diese App soll einen noch einfacheren Zugang zu den Daten des Vereins liefern. Dabei wurde darauf geachtet, dass die Wordpress Homepage des CVJM als Datenquelle fungiert, so dass eine doppelte Datenhaltung vermieden wurde.
+Diese App soll einen noch einfacheren Zugang zu den Daten des Vereins liefern. Dabei wurde darauf geachtet, dass die Wordpress Homepage des CVJM als Datenquelle/Backend fungiert, so dass eine doppelte Datenhaltung vermieden wurde.
 
 ## Funktionen
 
@@ -11,15 +11,26 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
 
 - [x] Anzeigen von wichtigen Nachrichten
 - [x] Anzeigen der letzten Beiträge
-- [x] Anzeigen der kommenden Veranstaltungen
+- [x] Anzeigen der kommenden Veranstaltungen (Wordpress Plugin notwendig)
   - [x] Veranstaltungen zum Kalender hinzufügen
   - [x] Karten der Veranstaltung öffnen
+  - [ ] Kalenderansicht
 - [x] Teilen Button für Veranstaltungen und Nachrichten
   - [x] Mit Titelbild
+  - [ ] Formatieren von Notizen in Kalenderinfo
+- [x] Seiten der Gruppen und Kreise anzeigen (Wordpress Plugin notwendig)
+  - [x] Featured Image in Gruppenansicht anzeigen
 - [ ] Feedback Button für Probleme und Ideen
 - [ ] Notifications damit alle Mitglieder über diese App erreicht werden können
 - [ ] Notifications für anstehende Veranstaltungen
-- [x] Neuer About-Dialog mit allen Packeten implementiert
+- [x] Neuer About-Dialog mit allen Paketen implementiert
+- [ ] Filter für Posts und Veranstaltungskategorien
+- [ ] Tablet Ansicht mit zwei Spalten (Master Detail) 
+- [ ] HTML Ansicht
+  - [x] Emailadressen öffnen
+  - [x] URLs öffnen
+  - [ ] Zitate formatieren
+- [x] Zeige Über Tab an
 
 ## Vorschau
 
