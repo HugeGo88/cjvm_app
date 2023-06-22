@@ -2,7 +2,7 @@
 
 ## Idee
 
-Diese App soll einen noch einfacheren Zugang zu den Daten des Vereins liefern. Dabei wurde darauf geachtet, dass die Wordpress Homepage des CVJM als Datenquelle fungiert, so dass eine doppelte Datenhaltung vermieden wurde.
+Diese App soll einen noch einfacheren Zugang zu den Daten des Vereins liefern. Dabei wurde darauf geachtet, dass die Wordpress Homepage des CVJM als Datenquelle/Backend fungiert, so dass eine doppelte Datenhaltung vermieden wurde.
 
 ## Funktionen
 
