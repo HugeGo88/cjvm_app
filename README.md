@@ -34,14 +34,18 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
 
 ## Vorschau
 
-Stand 19.11.2020 HomeScreen sowie PostScreen sind bereits umgesetzt.
+Stand 27.06.2023 HomeScreen sowie PostScreen sind bereits umgesetzt.
 
 | iOS                                    | Android                                        |
 | -------------------------------------- | ---------------------------------------------- |
 | Start                                  |
 | ![iOS](images/Examples/ios/start.png)  | ![Android](images/Examples/android/start.png)  |
-| ![iOS](images/Examples/ios/start2.png) | ![Android](images/Examples/android/start2.png) |
-| Beiträge                               |
-| ![iOS](images/Examples/ios/posts.png)  | ![Android](images/Examples/android/posts.png)  |
 | Termine                                |
 | ![iOS](images/Examples/ios/events.png) | ![Android](images/Examples/android/events.png) |
+| Beiträge                               |
+| ![iOS](images/Examples/ios/posts.png)  | ![Android](images/Examples/android/posts.png)  |
+| Gruppen                                |
+| ![iOS](images/Examples/ios/groups.png) | ![Android](images/Examples/android/groups.png) |
+| Über                                   |
+| ![iOS](images/Examples/ios/about.png)  | ![Android](images/Examples/android/about.png)  |
+
