@@ -1,12 +1,10 @@
 import 'package:cjvm_app/model/navigation_item_entitiy.dart';
 import 'package:cjvm_app/network/wp_api.dart';
 import 'package:cjvm_app/pages/detail_elementes/html_content.dart';
-import 'package:cjvm_app/pages/group_detail.dart';
 import 'package:cjvm_app/widgets/group_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import '../utils/color_utils.dart' as color_utils;
-
 import '../utils/constants.dart';
 import 'cached_image.dart';
 import 'loading_fullscreen.dart';
@@ -53,41 +51,48 @@ class _GroupListItemState extends State<GroupListItem> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        Navigator.push(
-          context,
-          platformPageRoute(
-              builder: (context) => widget.groupName.childItems.isNotEmpty
-                  ? PlatformScaffold(
-                      iosContentPadding: true,
-                      appBar: PlatformAppBar(
-                        title: Text(widget.groupName.title),
-                      ),
-                      body: Builder(
-                        builder: (context) {
-                          return GroupList(widget.groupName.childItems);
-                        },
-                      ),
-                    )
-                  : PlatformScaffold(
-                      iosContentPadding: true,
-                      appBar:
-                          PlatformAppBar(title: Text(widget.groupName.title)),
-                      body: htmlContent == ""
-                          ? const LoadingFullscreen()
-                          : HtmlContent(htmlContent),
-                    ),
-              context: context),
-        );
+        htmlContent != "" || widget.groupName.childItems.isNotEmpty
+            ? Navigator.push(
+                context,
+                platformPageRoute(
+                    builder: (context) => widget.groupName.childItems.isNotEmpty
+                        ? PlatformScaffold(
+                            iosContentPadding: true,
+                            appBar: PlatformAppBar(
+                              title: Text(widget.groupName.title),
+                            ),
+                            body: Builder(
+                              builder: (context) {
+                                return GroupList(widget.groupName.childItems);
+                              },
+                            ),
+                          )
+                        : PlatformScaffold(
+                            iosContentPadding: true,
+                            appBar: PlatformAppBar(
+                                title: Text(widget.groupName.title)),
+                            body: htmlContent == ""
+                                ? const LoadingFullscreen()
+                                : HtmlContent(htmlContent),
+                          ),
+                    context: context),
+              )
+            : {};
       },
       child: Row(
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
-            child: CachedImage(
-                url: imageUrl ?? "",
-                height: listHeight,
-                width: listWidth,
-                fit: BoxFit.cover),
+            child: htmlContent != "" || widget.groupName.childItems.isNotEmpty
+                ? CachedImage(
+                    url: imageUrl ?? "",
+                    height: listHeight,
+                    width: listWidth,
+                    fit: BoxFit.cover)
+                : SizedBox(
+                    width: listWidth,
+                    height: listHeight,
+                    child: PlatformCircularProgressIndicator()),
           ),
           Expanded(
             child: SizedBox(
@@ -103,10 +108,12 @@ class _GroupListItemState extends State<GroupListItem> {
                           ?.apply(fontWeightDelta: 1),
                     ),
                   ),
-                  Icon(
-                    PlatformIcons(context).forward,
-                    color: color_utils.commonThemeData.primaryColor,
-                  ),
+                  htmlContent != "" || widget.groupName.childItems.isNotEmpty
+                      ? Icon(
+                          PlatformIcons(context).forward,
+                          color: color_utils.commonThemeData.primaryColor,
+                        )
+                      : Container(),
                 ],
               ),
             ),
