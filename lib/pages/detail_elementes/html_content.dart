@@ -38,6 +38,17 @@ class HtmlContent extends StatelessWidget {
           //open URL in webview, or launch URL in browser, or any other logic here
         },
         style: {
+          "blockquote": Style(
+            margin: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 20),
+            fontStyle: FontStyle.italic,
+            border: Border(
+              left: BorderSide(
+                  color: color_utils.commonThemeData.primaryColor,
+                  style: BorderStyle.solid,
+                  width: 5.0),
+            ),
+          ),
           "a": Style(
               textDecoration: TextDecoration.none,
               color: color_utils.commonThemeData.primaryColor),
