@@ -26,10 +26,10 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
 - [x] Neuer About-Dialog mit allen Paketen implementiert
 - [ ] Filter für Posts und Veranstaltungskategorien
 - [ ] Tablet Ansicht mit zwei Spalten (Master Detail) 
-- [ ] HTML Ansicht
+- [x] HTML Ansicht
   - [x] Emailadressen öffnen
   - [x] URLs öffnen
-  - [ ] Zitate formatieren
+  - [x] Zitate formatieren
 - [x] Zeige Über Tab an
 
 ## Vorschau
