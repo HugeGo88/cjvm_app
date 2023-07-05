@@ -22,24 +22,24 @@ class Event {
 
 class _EventsTabState extends State<EventsTab> {
   DateTime today = DateTime.now();
-  late DateTime _selectedDay;
-  late DateTime _focusedDay;
+  late DateTime _selectedDay = DateTime.now();
+  late DateTime _focusedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-/*         TableCalendar(
-          focusedDay: today,
+        TableCalendar(
+          focusedDay: _focusedDay,
           startingDayOfWeek: StartingDayOfWeek.monday,
           locale: "de_DE",
           weekNumbersVisible: true,
           onPageChanged: (focusedDay) {
-            _focusedDay = focusedDay;
             _selectedDay = _focusedDay;
+            _focusedDay = focusedDay;
           },
           eventLoader: (day) {
-            if (day.weekday == DateTime.monday) {
+            if (day.weekday == DateTime.sunday) {
               return [const Event('Test')];
             } else {
               return [];
@@ -73,7 +73,7 @@ class _EventsTabState extends State<EventsTab> {
             titleCentered: true,
             formatButtonVisible: false,
           ),
-        ), */
+        ),
         const Expanded(
           child: Center(
             child: EventList(),
