@@ -5,7 +5,6 @@ import 'package:cjvm_app/pages/start_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import '../pages/posts_tab.dart';
 
@@ -19,22 +18,6 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  PackageInfo _packageInfo = PackageInfo(
-    appName: 'Unknown',
-    packageName: 'Unknown',
-    version: 'Unknown',
-    buildNumber: 'Unknown',
-  );
-
-  Future<void> _initPackageInfo() async {
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    setState(
-      () {
-        _packageInfo = info;
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -46,29 +29,29 @@ class _HomeWidgetState extends State<HomeWidget> {
             titles[index],
           ),
           trailingActions: [
-            PlatformIconButton(
-              icon: Icon(PlatformIcons(context).settings),
-              onPressed: () {
-                showAboutDialog(
-                  context: context,
-                  applicationIcon: Image.asset(
-                    'images/logo.png',
-                    width: 50,
-                    fit: BoxFit.fitWidth,
-                  ),
-                  applicationName: 'CVJM Walheim',
-                  applicationVersion:
-                      '${_packageInfo.version}.(${_packageInfo.buildNumber})',
-                  applicationLegalese: '©2023 cvjm-walheim.de',
-                  children: <Widget>[
-                    const Padding(
-                        padding: EdgeInsets.only(top: 15),
-                        child: Text(
-                            'Alle wichtigen Informationen können auf der Homepage eingesehen werden.'))
-                  ],
-                );
-              },
-            ),
+            // PlatformIconButton(
+            //   icon: Icon(PlatformIcons(context).settings),
+            //   onPressed: () {
+            //     showAboutDialog(
+            //       context: context,
+            //       applicationIcon: Image.asset(
+            //         'images/logo.png',
+            //         width: 50,
+            //         fit: BoxFit.fitWidth,
+            //       ),
+            //       applicationName: 'CVJM Walheim',
+            //       applicationVersion:
+            //           '${_packageInfo.version}.(${_packageInfo.buildNumber})',
+            //       applicationLegalese: '©2023 cvjm-walheim.de',
+            //       children: <Widget>[
+            //         const Padding(
+            //             padding: EdgeInsets.only(top: 15),
+            //             child: Text(
+            //                 'Alle wichtigen Informationen können auf der Homepage eingesehen werden.'))
+            //       ],
+            //     );
+            //   },
+            // ),
           ],
         ),
         tabController: tabController,
