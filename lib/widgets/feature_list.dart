@@ -41,7 +41,7 @@ class _FeatureListState extends State<FeatureList> {
           )
         : ListView.builder(
             itemCount: allPosts.length,
-            scrollDirection: Axis.horizontal,
+            scrollDirection: Axis.vertical,
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {

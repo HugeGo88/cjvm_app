@@ -17,24 +17,22 @@ class StartTab extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    const ListHeading(important),
                     const SizedBox(
-                      height: featureHeigt + 50,
                       child: FeatureList(),
                     ),
-                    const ListHeading(events),
-                    const EventList(
-                      maxEvents: 3,
-                    ),
-                    Container(
-                      height: 8,
-                    ),
-                    const ListHeading(posts),
-                    const PostList(
-                      category: 0,
-                      maxPosts: 3,
-                      showFeatureCategory: false,
-                    ),
+                    // const ListHeading(events),
+                    // const EventList(
+                    //   maxEvents: 3,
+                    // ),
+                    // Container(
+                    //   height: 8,
+                    // ),
+                    // const ListHeading(posts),
+                    // const PostList(
+                    //   category: 0,
+                    //   maxPosts: 3,
+                    //   showFeatureCategory: false,
+                    // ),
                   ],
                 ),
               )

@@ -22,18 +22,17 @@ class FeatureListItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: SizedBox(
-          height: featureHeigt,
-          width: featureWidth,
+          width: MediaQuery.of(context).size.width,
           child: Stack(
             children: <Widget>[
               Hero(
-                  tag: post.image,
-                  child: CachedImage(
-                    post.image,
-                    height: featureHeigt,
-                    width: featureWidth,
-                    fit: BoxFit.cover,
-                  )),
+                tag: post.image,
+                child: CachedImage(
+                  post.image,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.cover,
+                ),
+              ),
               Positioned(
                 bottom: 0,
                 child: Column(
@@ -42,11 +41,11 @@ class FeatureListItem extends StatelessWidget {
                       decoration: const BoxDecoration(
                         color: Color(0xff292929),
                       ),
-                      width: featureWidth,
+                      width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
-                          post.title.toUpperCase(),
+                          post.title,
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -57,7 +56,7 @@ class FeatureListItem extends StatelessWidget {
                     ),
                     Container(
                       height: 3,
-                      width: featureWidth,
+                      width: MediaQuery.of(context).size.width,
                       color: color_utils.commonThemeData.primaryColor,
                     ),
                   ],
