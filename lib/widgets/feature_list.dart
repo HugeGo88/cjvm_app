@@ -37,6 +37,7 @@ class _FeatureListState extends State<FeatureList> {
   @override
   void initState() {
     super.initState();
+    _initPackageInfo();
 
     WpApi.getPostsList(category: featuredCategoryId).then(
       (posts) {
@@ -53,9 +54,7 @@ class _FeatureListState extends State<FeatureList> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? const Center(
-            child: LoadingFullscreen(),
-          )
+        ? const LoadingFullscreen()
         : ListView.builder(
             itemCount: allPosts.length + 1,
             scrollDirection: Axis.vertical,

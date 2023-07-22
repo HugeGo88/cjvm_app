@@ -13,9 +13,7 @@ class StartTab extends StatelessWidget {
     return OrientationBuilder(
       builder: (context, orientation) {
         return orientation == Orientation.portrait
-            ? const SingleChildScrollView(
-                child: FeatureList(),
-              )
+            ? const FeatureList()
             : SingleChildScrollView(
                 child: Column(
                   children: <Widget>[

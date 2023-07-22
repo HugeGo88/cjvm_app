@@ -28,31 +28,6 @@ class _HomeWidgetState extends State<HomeWidget> {
           title: Text(
             titles[index],
           ),
-          trailingActions: [
-            // PlatformIconButton(
-            //   icon: Icon(PlatformIcons(context).settings),
-            //   onPressed: () {
-            //     showAboutDialog(
-            //       context: context,
-            //       applicationIcon: Image.asset(
-            //         'images/logo.png',
-            //         width: 50,
-            //         fit: BoxFit.fitWidth,
-            //       ),
-            //       applicationName: 'CVJM Walheim',
-            //       applicationVersion:
-            //           '${_packageInfo.version}.(${_packageInfo.buildNumber})',
-            //       applicationLegalese: '©2023 cvjm-walheim.de',
-            //       children: <Widget>[
-            //         const Padding(
-            //             padding: EdgeInsets.only(top: 15),
-            //             child: Text(
-            //                 'Alle wichtigen Informationen können auf der Homepage eingesehen werden.'))
-            //       ],
-            //     );
-            //   },
-            // ),
-          ],
         ),
         tabController: tabController,
         items: items(context),
@@ -94,7 +69,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   void initState() {
     super.initState();
-    _initPackageInfo();
   }
 }
 
