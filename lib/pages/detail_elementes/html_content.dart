@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -39,8 +40,8 @@ class HtmlContent extends StatelessWidget {
         },
         style: {
           "blockquote": Style(
-            margin: const EdgeInsets.only(left: 10),
-            padding: const EdgeInsets.only(left: 20),
+            margin: const EdgeInsets.only(left: edgePadding),
+            padding: const EdgeInsets.only(left: edgePadding * 2),
             fontStyle: FontStyle.italic,
             border: Border(
               left: BorderSide(

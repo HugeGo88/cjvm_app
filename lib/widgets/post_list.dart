@@ -106,7 +106,7 @@ class _PostListState extends State<PostList> {
 
   Widget _buildProgressIndicator() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(edgePadding),
       child: Center(
         child: Visibility(
           visible: isLoading,

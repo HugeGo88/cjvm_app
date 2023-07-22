@@ -1,3 +1,4 @@
+import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class LogoProgress extends StatefulWidget {
@@ -24,7 +25,7 @@ class _LogoProgressState extends State<LogoProgress>
     return RotationTransition(
       turns: _animation,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(edgePadding),
         child: Image.asset(
           'images/logo.png',
           width: 150,

@@ -1,3 +1,4 @@
+import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -91,7 +92,7 @@ class _EventListState extends State<EventList> {
 
   Widget _buildProgressIndicator() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(edgePadding),
       child: Center(
         child: Visibility(
           visible: isLoading,

@@ -27,7 +27,7 @@ class PostListItem extends StatelessWidget {
           Row(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(right: 8.0),
+                padding: const EdgeInsets.only(right: edgePadding),
                 child: CachedImage(
                   post.image,
                   height: listHeight,
@@ -43,7 +43,7 @@ class PostListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
+                        padding: const EdgeInsets.only(top: contentPadding),
                         child: Text(
                           post.title,
                           style: Theme.of(context)

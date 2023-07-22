@@ -78,7 +78,7 @@ class _FeatureListState extends State<FeatureList> {
                         applicationLegalese: '©2023 cvjm-walheim.de',
                         children: <Widget>[
                           const Padding(
-                              padding: EdgeInsets.only(top: 15),
+                              padding: EdgeInsets.only(top: edgePadding * 2),
                               child: Text(
                                   'Alle wichtigen Informationen können auf der Homepage eingesehen werden.'))
                         ],

@@ -82,7 +82,7 @@ class _GroupListItemState extends State<GroupListItem> {
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const EdgeInsets.only(right: edgePadding),
             child: htmlContent != "" || widget.groupName.childItems.isNotEmpty
                 ? CachedImage(
                     url: imageUrl ?? "",

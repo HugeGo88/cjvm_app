@@ -38,7 +38,7 @@ class EventListItem extends StatelessWidget {
           Row(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(right: 8.0),
+                padding: const EdgeInsets.only(right: edgePadding),
                 // child: SizedBox(
                 //   width: listWidth,
                 //   height: listHeight,
@@ -58,7 +58,7 @@ class EventListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(top: 4),
+                        padding: const EdgeInsets.only(top: edgePadding),
                         child: Text(
                           event.title,
                           style: Theme.of(context)
@@ -74,7 +74,8 @@ class EventListItem extends StatelessWidget {
                         children: [
                           event.venue != ""
                               ? const Padding(
-                                  padding: EdgeInsets.only(right: 4),
+                                  padding:
+                                      EdgeInsets.only(right: contentPadding),
                                   child: Icon(
                                     CupertinoIcons.map_pin_ellipse,
                                     size: 15,
@@ -90,7 +91,8 @@ class EventListItem extends StatelessWidget {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 4),
+                            padding:
+                                const EdgeInsets.only(right: contentPadding),
                             child: Icon(
                               PlatformIcons(context).time,
                               size: 15,
@@ -109,7 +111,7 @@ class EventListItem extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 4),
+                padding: const EdgeInsets.only(right: contentPadding),
                 child: Column(
                   children: <Widget>[
                     Text(
