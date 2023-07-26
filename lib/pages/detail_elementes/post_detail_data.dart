@@ -1,4 +1,5 @@
 import 'package:cjvm_app/model/post_entitiy.dart';
+import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/intl.dart';
@@ -14,9 +15,12 @@ class PostDetailData extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(
-              PlatformIcons(context).time,
-              size: 35,
+            Padding(
+              padding: const EdgeInsets.all(edgePadding),
+              child: Icon(
+                PlatformIcons(context).time,
+                size: 20,
+              ),
             ),
             Column(
               children: [

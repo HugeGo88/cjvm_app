@@ -48,7 +48,7 @@ class PostListItem extends StatelessWidget {
                           post.title,
                           style: Theme.of(context)
                               .textTheme
-                              .titleMedium
+                              .titleLarge
                               ?.apply(fontWeightDelta: 1),
                         ),
                       )
@@ -56,9 +56,12 @@ class PostListItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Icon(
-                PlatformIcons(context).forward,
-                color: color_utils.commonThemeData.primaryColor,
+              Padding(
+                padding: const EdgeInsets.all(edgePadding),
+                child: Icon(
+                  PlatformIcons(context).forward,
+                  color: color_utils.commonThemeData.primaryColor,
+                ),
               ),
             ],
           )

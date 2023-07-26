@@ -56,7 +56,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         ),
         BottomNavigationBarItem(
           label: titles[3],
-          icon: Icon(PlatformIcons(context).group),
+          icon: Icon(PlatformIcons(context).person),
         ),
         BottomNavigationBarItem(
           label: titles[4],

@@ -23,54 +23,57 @@ class HtmlContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Html(
-        data: data,
-        onLinkTap: (String? url, RenderContext context,
-            Map<String, String> attributes, dom.Element? element) {
-          var attributes = element?.attributes;
-          if (attributes != null) {
-            for (var attribute in attributes.entries) {
-              if (attribute.key == "href") {
-                var url = attribute.value;
-                _launchInBrowser(Uri.parse(url));
+      child: Padding(
+        padding: const EdgeInsets.all(edgePadding),
+        child: Html(
+          data: data,
+          onLinkTap: (String? url, RenderContext context,
+              Map<String, String> attributes, dom.Element? element) {
+            var attributes = element?.attributes;
+            if (attributes != null) {
+              for (var attribute in attributes.entries) {
+                if (attribute.key == "href") {
+                  var url = attribute.value;
+                  _launchInBrowser(Uri.parse(url));
+                }
               }
             }
-          }
-          //open URL in webview, or launch URL in browser, or any other logic here
-        },
-        style: {
-          "blockquote": Style(
-            margin: const EdgeInsets.only(left: edgePadding),
-            padding: const EdgeInsets.only(left: edgePadding * 2),
-            fontStyle: FontStyle.italic,
-            border: Border(
-              left: BorderSide(
-                  color: color_utils.commonThemeData.primaryColor,
-                  style: BorderStyle.solid,
-                  width: 5.0),
-            ),
-          ),
-          "a": Style(
-              textDecoration: TextDecoration.none,
-              color: color_utils.commonThemeData.primaryColor),
-          "p": Style(textDecoration: TextDecoration.none),
-          "li": Style(
-            listStyleType: ListStyleType.fromWidget(
-              const Icon(
-                Icons.square,
-                size: 10,
+            //open URL in webview, or launch URL in browser, or any other logic here
+          },
+          style: {
+            "blockquote": Style(
+              margin: const EdgeInsets.only(left: edgePadding),
+              padding: const EdgeInsets.only(left: edgePadding * 2),
+              fontStyle: FontStyle.italic,
+              border: Border(
+                left: BorderSide(
+                    color: color_utils.commonThemeData.primaryColor,
+                    style: BorderStyle.solid,
+                    width: 5.0),
               ),
             ),
-          ),
-        },
-        customRender: {
-          "table": (context, child) {
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: (context.tree as TableLayoutElement).toWidget(context),
-            );
+            "a": Style(
+                textDecoration: TextDecoration.none,
+                color: color_utils.commonThemeData.primaryColor),
+            "p": Style(textDecoration: TextDecoration.none),
+            "li": Style(
+              listStyleType: ListStyleType.fromWidget(
+                const Icon(
+                  Icons.square,
+                  size: 10,
+                ),
+              ),
+            ),
           },
-        },
+          customRender: {
+            "table": (context, child) {
+              return SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: (context.tree as TableLayoutElement).toWidget(context),
+              );
+            },
+          },
+        ),
       ),
     );
   }

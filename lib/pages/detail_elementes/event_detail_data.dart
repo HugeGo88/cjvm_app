@@ -1,5 +1,6 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:cjvm_app/model/event_entitiy.dart';
+import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -46,9 +47,12 @@ class EventDetailData extends StatelessWidget {
         if (venueSet)
           Row(
             children: [
-              const Icon(
-                CupertinoIcons.map_pin_ellipse,
-                size: 35,
+              const Padding(
+                padding: EdgeInsets.all(edgePadding),
+                child: Icon(
+                  CupertinoIcons.map_pin_ellipse,
+                  size: iconSizeBig,
+                ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,9 +76,12 @@ class EventDetailData extends StatelessWidget {
           ),
         Row(
           children: [
-            Icon(
-              PlatformIcons(context).time,
-              size: 35,
+            Padding(
+              padding: const EdgeInsets.all(edgePadding),
+              child: Icon(
+                PlatformIcons(context).time,
+                size: iconSizeBig,
+              ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
