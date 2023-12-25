@@ -43,8 +43,6 @@ class HtmlContent extends StatelessWidget {
             "blockquote": Style(
               margin: Margins(left: Margin(0)),
               padding: HtmlPaddings(left: HtmlPadding(edgePadding * 2)),
-              // margin: const EdgeInsets.only(left: edgePadding),
-              // padding: const EdgeInsets.only(left: edgePadding * 2),
               fontStyle: FontStyle.italic,
               border: Border(
                 left: BorderSide(

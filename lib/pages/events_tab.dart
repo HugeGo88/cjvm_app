@@ -20,8 +20,8 @@ class Event {
 
 class _EventsTabState extends State<EventsTab> {
   DateTime today = DateTime.now();
-  late final DateTime _selectedDay = DateTime.now();
-  late final DateTime _focusedDay = DateTime.now();
+  // late final DateTime _selectedDay = DateTime.now();
+  // late final DateTime _focusedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
