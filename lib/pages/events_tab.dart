@@ -1,7 +1,5 @@
 import 'package:cjvm_app/widgets/event_list.dart';
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
-import '../utils/color_utils.dart' as color_utils;
 
 class EventsTab extends StatefulWidget {
   const EventsTab({super.key});
@@ -22,12 +20,12 @@ class Event {
 
 class _EventsTabState extends State<EventsTab> {
   DateTime today = DateTime.now();
-  late DateTime _selectedDay = DateTime.now();
-  late DateTime _focusedDay = DateTime.now();
+  late final DateTime _selectedDay = DateTime.now();
+  late final DateTime _focusedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         // TableCalendar(
         //   focusedDay: _focusedDay,
@@ -74,7 +72,7 @@ class _EventsTabState extends State<EventsTab> {
         //     formatButtonVisible: false,
         //   ),
         // ),
-        const Expanded(
+        Expanded(
           child: Center(
             child: EventList(),
           ),

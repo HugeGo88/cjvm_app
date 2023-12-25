@@ -20,7 +20,7 @@ class FeatureListItem extends StatelessWidget {
                 builder: (context) => PostDetail(post), context: context));
       },
       child: Padding(
-        padding: const EdgeInsets.all(edgePadding),
+        padding: const EdgeInsets.only(bottom: edgePadding * 2),
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Column(

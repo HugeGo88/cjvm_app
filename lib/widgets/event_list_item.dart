@@ -1,7 +1,5 @@
 import 'package:cjvm_app/model/event_entitiy.dart';
 import 'package:cjvm_app/utils/constants.dart';
-import 'package:cjvm_app/widgets/cached_image.dart';
-import 'package:cjvm_app/widgets/logo_progress.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';

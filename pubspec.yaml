@@ -29,25 +29,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_platform_widgets: ^3.3.5
-  html: ^0.15.1
+  add_2_calendar: ^3.0.1
+  cached_network_image: ^3.3.0
+  flutter_html: ^3.0.0-beta.2
+  flutter_launcher_icons: ^0.13.1
+  flutter_platform_widgets: ^6.0.2
+  http: ^1.1.2
   intl: ^0.18.0
-  flutter_html: ^2.2.1
-  cached_network_image: ^3.2.3
-  http: ^0.13.5
-  flutter_launcher_icons: ^0.11.0
-  package_info_plus: ^3.1.2
-  add_2_calendar: ^2.2.3
   maps_launcher: ^2.2.0
+  package_info_plus: ^5.0.1
+  path_provider: ^2.1.1
+  share_plus: ^7.2.1
   table_calendar: ^3.0.9
-  share_plus: ^6.3.4
-  path_provider: ^2.0.14
-  url_launcher: ^6.1.11
+  url_launcher: ^6.2.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
-  firebase_messaging: ^14.6.7
+  #firebase_messaging: ^14.6.7
 
 flutter_icons:
   android: true
@@ -63,7 +62,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

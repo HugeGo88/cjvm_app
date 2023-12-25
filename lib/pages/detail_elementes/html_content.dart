@@ -4,7 +4,6 @@ import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:html/dom.dart' as dom;
 import '../../utils/color_utils.dart' as color_utils;
 
 class HtmlContent extends StatelessWidget {
@@ -27,23 +26,25 @@ class HtmlContent extends StatelessWidget {
         padding: const EdgeInsets.all(edgePadding),
         child: Html(
           data: data,
-          onLinkTap: (String? url, RenderContext context,
-              Map<String, String> attributes, dom.Element? element) {
-            var attributes = element?.attributes;
-            if (attributes != null) {
-              for (var attribute in attributes.entries) {
-                if (attribute.key == "href") {
-                  var url = attribute.value;
-                  _launchInBrowser(Uri.parse(url));
-                }
-              }
-            }
-            //open URL in webview, or launch URL in browser, or any other logic here
-          },
+          // onLinkTap: (String? url, RenderContext context,
+          //     Map<String, String> attributes, dom.Element? element) {
+          //   var attributes = element?.attributes;
+          //   if (attributes != null) {
+          //     for (var attribute in attributes.entries) {
+          //       if (attribute.key == "href") {
+          //         var url = attribute.value;
+          //         _launchInBrowser(Uri.parse(url));
+          //       }
+          //     }
+          //   }
+          //   //open URL in webview, or launch URL in browser, or any other logic here
+          // },
           style: {
             "blockquote": Style(
-              margin: const EdgeInsets.only(left: edgePadding),
-              padding: const EdgeInsets.only(left: edgePadding * 2),
+              margin: Margins(left: Margin(0)),
+              padding: HtmlPaddings(left: HtmlPadding(edgePadding * 2)),
+              // margin: const EdgeInsets.only(left: edgePadding),
+              // padding: const EdgeInsets.only(left: edgePadding * 2),
               fontStyle: FontStyle.italic,
               border: Border(
                 left: BorderSide(
@@ -56,23 +57,23 @@ class HtmlContent extends StatelessWidget {
                 textDecoration: TextDecoration.none,
                 color: color_utils.commonThemeData.primaryColor),
             "p": Style(textDecoration: TextDecoration.none),
-            "li": Style(
-              listStyleType: ListStyleType.fromWidget(
-                const Icon(
-                  Icons.square,
-                  size: 10,
-                ),
-              ),
-            ),
+            // "li": Style(
+            //   listStyleType: ListStyleType.fromWidget(
+            //     const Icon(
+            //       Icons.square,
+            //       size: 10,
+            //     ),
+            //   ),
+            // ),
           },
-          customRender: {
-            "table": (context, child) {
-              return SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: (context.tree as TableLayoutElement).toWidget(context),
-              );
-            },
-          },
+          // customRender: {
+          //   "table": (context, child) {
+          //     return SingleChildScrollView(
+          //       scrollDirection: Axis.horizontal,
+          //       child: (context.tree as TableLayoutElement).toWidget(context),
+          //     );
+          //   },
+          // },
         ),
       ),
     );
