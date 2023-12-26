@@ -52,23 +52,8 @@ class HtmlContent extends StatelessWidget {
                   textDecoration: TextDecoration.none,
                   color: color_utils.commonThemeData.primaryColor),
               "p": Style(textDecoration: TextDecoration.none),
-              // "li": Style(
-              //   listStyleType: ListStyleType.fromWidget(
-              //     const Icon(
-              //       Icons.square,
-              //       size: 10,
-              //     ),
-              //   ),
-              // ),
+              "li": Style(listStyleType: ListStyleType.square),
             },
-            // customRender: {
-            //   "table": (context, child) {
-            //     return SingleChildScrollView(
-            //       scrollDirection: Axis.horizontal,
-            //       child: (context.tree as TableLayoutElement).toWidget(context),
-            //     );
-            //   },
-            // },
           ),
         ),
       ),
