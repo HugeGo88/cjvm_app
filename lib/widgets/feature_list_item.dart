@@ -30,6 +30,9 @@ class FeatureListItem extends StatelessWidget {
                 child: CachedImage(
                   post.image,
                   width: MediaQuery.of(context).size.width,
+                  height: post.extra.image!.first.height!.toDouble() *
+                      (MediaQuery.of(context).size.width /
+                          post.extra.image!.first.width!.toDouble()),
                   fit: BoxFit.cover,
                 ),
               ),
