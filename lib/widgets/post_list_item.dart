@@ -36,24 +36,21 @@ class PostListItem extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: SizedBox(
-                  height: listHeight,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: contentPadding),
-                        child: Text(
-                          post.title,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge
-                              ?.apply(fontWeightDelta: 1),
-                        ),
-                      )
-                    ],
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: contentPadding),
+                      child: Text(
+                        post.title,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge
+                            ?.apply(fontWeightDelta: 1),
+                      ),
+                    )
+                  ],
                 ),
               ),
               Padding(
