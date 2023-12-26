@@ -1,8 +1,7 @@
 import 'dart:async';
-
+import 'package:flutter_html/flutter_html.dart';
 import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/color_utils.dart' as color_utils;
 
@@ -21,24 +20,21 @@ class HtmlContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(data);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(edgePadding),
         child: Html(
           data: data,
-          // onLinkTap: (String? url, RenderContext context,
-          //     Map<String, String> attributes, dom.Element? element) {
-          //   var attributes = element?.attributes;
-          //   if (attributes != null) {
-          //     for (var attribute in attributes.entries) {
-          //       if (attribute.key == "href") {
-          //         var url = attribute.value;
-          //         _launchInBrowser(Uri.parse(url));
-          //       }
-          //     }
-          //   }
-          //   //open URL in webview, or launch URL in browser, or any other logic here
-          // },
+          onLinkTap: (url, attributes, element) {
+            var attributes = element?.attributes;
+            if (attributes != null) {
+              for (var entry in attributes.entries) {
+                var url = entry.value;
+                _launchInBrowser(Uri.parse(url));
+              }
+            }
+          },
           style: {
             "blockquote": Style(
               margin: Margins(left: Margin(0)),
