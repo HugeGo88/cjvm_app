@@ -12,6 +12,13 @@ class FeatureListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double? imageHeight = post.extra.image?.first.height?.toDouble();
+    double? imageWidth = post.extra.image?.first.width?.toDouble();
+    double? actualHeight;
+    if (imageHeight != null && imageWidth != null) {
+      actualHeight =
+          imageHeight * (MediaQuery.of(context).size.width / imageWidth);
+    }
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -30,9 +37,8 @@ class FeatureListItem extends StatelessWidget {
                 child: CachedImage(
                   post.image,
                   width: MediaQuery.of(context).size.width,
-                  height: post.extra.image!.first.height!.toDouble() *
-                      (MediaQuery.of(context).size.width /
-                          post.extra.image!.first.width!.toDouble()),
+                  // TODO make sure there will be no null
+                  height: actualHeight,
                   fit: BoxFit.cover,
                 ),
               ),
