@@ -7,6 +7,8 @@ class EventEntity {
   late DateTime startDate;
   late DateTime endDate;
   late String image;
+  late int imageWidth;
+  late int imageHeight;
   late bool allDay;
   late String url;
   late String venue = "";
@@ -40,6 +42,10 @@ class EventEntity {
       endDate = DateTime.parse(json['end_date']);
       allDay = json['all_day'];
       image = json['image'].toString() != 'false' ? json['image']['url'] : '';
+      imageWidth =
+          json['image'].toString() != 'false' ? json['image']['width'] : '';
+      imageHeight =
+          json['image'].toString() != 'false' ? json['image']['height'] : '';
 
       var venueData = json['venue'];
       if (venueData.runtimeType.toString() == '_Map<String, dynamic>') {

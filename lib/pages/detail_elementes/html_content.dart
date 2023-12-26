@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_html/flutter_html.dart';
+
 import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,54 +21,55 @@ class HtmlContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(edgePadding),
-        child: Html(
-          data: data,
-          onLinkTap: (url, attributes, element) {
-            var attributes = element?.attributes;
-            if (attributes != null) {
-              for (var entry in attributes.entries) {
-                var url = entry.value;
-                _launchInBrowser(Uri.parse(url));
+        child: Material(
+          child: Html(
+            data: data,
+            onLinkTap: (url, attributes, element) {
+              var attributes = element?.attributes;
+              if (attributes != null) {
+                for (var entry in attributes.entries) {
+                  var url = entry.value;
+                  _launchInBrowser(Uri.parse(url));
+                }
               }
-            }
-          },
-          style: {
-            "blockquote": Style(
-              margin: Margins(left: Margin(0)),
-              padding: HtmlPaddings(left: HtmlPadding(edgePadding * 2)),
-              fontStyle: FontStyle.italic,
-              border: Border(
-                left: BorderSide(
-                    color: color_utils.commonThemeData.primaryColor,
-                    style: BorderStyle.solid,
-                    width: 5.0),
+            },
+            style: {
+              "blockquote": Style(
+                margin: Margins(left: Margin(0)),
+                padding: HtmlPaddings(left: HtmlPadding(edgePadding * 2)),
+                fontStyle: FontStyle.italic,
+                border: Border(
+                  left: BorderSide(
+                      color: color_utils.commonThemeData.primaryColor,
+                      style: BorderStyle.solid,
+                      width: 5.0),
+                ),
               ),
-            ),
-            "a": Style(
-                textDecoration: TextDecoration.none,
-                color: color_utils.commonThemeData.primaryColor),
-            "p": Style(textDecoration: TextDecoration.none),
-            // "li": Style(
-            //   listStyleType: ListStyleType.fromWidget(
-            //     const Icon(
-            //       Icons.square,
-            //       size: 10,
-            //     ),
-            //   ),
-            // ),
-          },
-          // customRender: {
-          //   "table": (context, child) {
-          //     return SingleChildScrollView(
-          //       scrollDirection: Axis.horizontal,
-          //       child: (context.tree as TableLayoutElement).toWidget(context),
-          //     );
-          //   },
-          // },
+              "a": Style(
+                  textDecoration: TextDecoration.none,
+                  color: color_utils.commonThemeData.primaryColor),
+              "p": Style(textDecoration: TextDecoration.none),
+              // "li": Style(
+              //   listStyleType: ListStyleType.fromWidget(
+              //     const Icon(
+              //       Icons.square,
+              //       size: 10,
+              //     ),
+              //   ),
+              // ),
+            },
+            // customRender: {
+            //   "table": (context, child) {
+            //     return SingleChildScrollView(
+            //       scrollDirection: Axis.horizontal,
+            //       child: (context.tree as TableLayoutElement).toWidget(context),
+            //     );
+            //   },
+            // },
+          ),
         ),
       ),
     );
