@@ -125,38 +125,52 @@ class EventDetailData extends StatelessWidget {
             ],
           ),
         if (event.ticket != null)
-          Row(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(edgePadding),
-                child: Icon(
-                  CupertinoIcons.ticket,
-                  size: iconSizeBig,
-                ),
-              ),
-              if (event.ticket!.stock != "-1")
-                Expanded(
+              if (event.ticket?.capacity != "-1")
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: edgePadding),
                   child: Text(
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    "${event.ticket!.stock} Plätze übrig",
-                  ),
-                )
-              else
-                Expanded(
-                  child: Text(
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    "Plätze übrig",
+                    "Anmeldung erforderlich",
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
-              PlatformIconButton(
-                icon: Icon(
-                  PlatformIcons(context).add,
-                ),
-                onPressed: () {
-                  _launchInBrowser(
-                    Uri.parse("${event.url}/#rsvp-now"),
-                  );
-                },
+              Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(edgePadding),
+                    child: Icon(
+                      CupertinoIcons.ticket,
+                      size: iconSizeBig,
+                    ),
+                  ),
+                  if (event.ticket!.stock != "-1")
+                    Expanded(
+                      child: Text(
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        "${event.ticket!.stock} Plätze übrig",
+                      ),
+                    )
+                  else
+                    Expanded(
+                      child: Text(
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        "Plätze übrig",
+                      ),
+                    ),
+                  PlatformIconButton(
+                    icon: Icon(
+                      PlatformIcons(context).add,
+                    ),
+                    onPressed: () {
+                      _launchInBrowser(
+                        Uri.parse("${event.url}/#rsvp-now"),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
