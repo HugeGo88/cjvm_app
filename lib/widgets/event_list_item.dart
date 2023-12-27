@@ -66,23 +66,37 @@ class EventListItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        event.venue != ""
-                            ? const Padding(
+                    event.venue != ""
+                        ? Row(
+                            children: [
+                              const Padding(
                                 padding: EdgeInsets.only(right: contentPadding),
                                 child: Icon(
                                   CupertinoIcons.map_pin_ellipse,
                                   size: iconSize,
                                 ),
-                              )
-                            : Container(),
-                        Text(
-                          event.venue != "" ? event.venue : '',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
+                              ),
+                              Text(
+                                event.venue,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ],
+                          )
+                        : Container(),
+                    event.ticket != null && event.ticket?.capacity != "-1"
+                        ? Row(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(right: contentPadding),
+                                child: Icon(
+                                  CupertinoIcons.ticket,
+                                  size: iconSize,
+                                ),
+                              ),
+                              Text("${event.ticket!.stock} Plätze übrig"),
+                            ],
+                          )
+                        : Container(),
                   ],
                 ),
               ),
@@ -109,92 +123,6 @@ class EventListItem extends StatelessWidget {
           ),
         ),
       ),
-      // child: Padding(
-      //   padding: const EdgeInsets.symmetric(horizontal: edgePadding),
-      //   child: Column(
-      //     children: [
-      //       Row(
-      //         children: <Widget>[
-      //           Expanded(
-      //             child: SizedBox(
-      //               height: listHeight,
-      //               child: Column(
-      //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //                 mainAxisSize: MainAxisSize.min,
-      //                 crossAxisAlignment: CrossAxisAlignment.start,
-      //                 children: <Widget>[
-      //                   Padding(
-      //                     padding: const EdgeInsets.only(top: contentPadding),
-      //                     child: Text(
-      //                       event.title,
-      //                       style: Theme.of(context)
-      //                           .textTheme
-      //                           .titleLarge
-      //                           ?.apply(fontWeightDelta: 1),
-      //                     ),
-      //                   ),
-      //                   Row(
-      //                     children: [
-      //                       Padding(
-      //                         padding:
-      //                             const EdgeInsets.only(right: contentPadding),
-      //                         child: Icon(
-      //                           PlatformIcons(context).time,
-      //                           size: iconSize,
-      //                         ),
-      //                       ),
-      //                       Text(
-      //                         event.allDay
-      //                             ? allDayVenue(event.startDate, event.endDate)
-      //                             : "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
-      //                         style: Theme.of(context).textTheme.bodyMedium,
-      //                       ),
-      //                     ],
-      //                   ),
-      //                   Row(
-      //                     children: [
-      //                       event.venue != ""
-      //                           ? const Padding(
-      //                               padding:
-      //                                   EdgeInsets.only(right: contentPadding),
-      //                               child: Icon(
-      //                                 CupertinoIcons.map_pin_ellipse,
-      //                                 size: iconSize,
-      //                               ),
-      //                             )
-      //                           : Container(),
-      //                       Text(
-      //                         event.venue != "" ? event.venue : '',
-      //                         style: Theme.of(context).textTheme.bodyMedium,
-      //                       ),
-      //                     ],
-      //                   ),
-      //                   Expanded(child: Container())
-      //                 ],
-      //               ),
-      //             ),
-      //           ),
-      //           Column(
-      //             children: <Widget>[
-      //               Text(
-      //                 "${event.startDate.day}",
-      //                 style: Theme.of(context).textTheme.titleLarge,
-      //               ),
-      //               Text(
-      //                 DateFormat.MMM('de')
-      //                     .format(event.startDate)
-      //                     .toUpperCase(),
-      //                 style: Theme.of(context).textTheme.titleMedium?.apply(
-      //                     fontWeightDelta: 3,
-      //                     color: color_utils.commonThemeData.primaryColor),
-      //               ),
-      //             ],
-      //           ),
-      //         ],
-      //       )
-      //     ],
-      //   ),
-      // ),
     );
   }
 }

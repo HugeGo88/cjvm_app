@@ -1,3 +1,4 @@
+import 'package:cjvm_app/model/ticket_entitiy.dart';
 import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -17,6 +18,7 @@ class EventList extends StatefulWidget {
 
 class _EventListState extends State<EventList> {
   List<EventEntity> allEvents = <EventEntity>[];
+  List<TicketEntity> allTickets = <TicketEntity>[];
 
   int page = 0;
   final ScrollController _scrollController = ScrollController();
@@ -28,6 +30,17 @@ class _EventListState extends State<EventList> {
         () {
           page++;
           isLoading = true;
+        },
+      );
+
+      WpApi.getTicketList(page: page).then(
+        (tickets) {
+          setState(
+            () {
+              isLoading = false;
+              allTickets.addAll(tickets);
+            },
+          );
         },
       );
 
@@ -66,6 +79,13 @@ class _EventListState extends State<EventList> {
 
   @override
   Widget build(BuildContext context) {
+    for (var event in allEvents) {
+      for (var ticket in allTickets) {
+        if (ticket.eventId == event.id.toString()) {
+          event.ticket = ticket;
+        }
+      }
+    }
     return ListView.separated(
       itemBuilder: eventTile,
       separatorBuilder: (context, index) => Container(

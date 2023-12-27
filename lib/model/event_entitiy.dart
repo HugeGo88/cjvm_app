@@ -1,3 +1,4 @@
+import 'package:cjvm_app/model/ticket_entitiy.dart';
 import 'package:html/parser.dart';
 
 class EventEntity {
@@ -13,6 +14,7 @@ class EventEntity {
   late String url;
   late String venue = "";
   late String address = "";
+  TicketEntity? ticket;
   //EventEmbedded extra;
 
   String _parseHtmlString(String htmlString) {
