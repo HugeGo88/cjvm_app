@@ -1,5 +1,5 @@
 import 'package:cjvm_app/model/post_entitiy.dart';
-import 'package:cjvm_app/widgets/loading_fullscreen.dart';
+import 'package:cjvm_app/widgets/loading_confetti.dart';
 import 'package:flutter/material.dart';
 
 import '../network/wp_api.dart';
@@ -36,7 +36,7 @@ class _FeatureListState extends State<FeatureList> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? const LoadingFullscreen()
+        ? const LoadingConfetti()
         : ListView.builder(
             itemCount: allPosts.length,
             scrollDirection: Axis.vertical,
