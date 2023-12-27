@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:confetti/confetti.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/color_utils.dart' as color_utils;
 
@@ -39,6 +36,17 @@ class _LoadingConfettiState extends State<LoadingConfetti> {
             blastDirectionality: BlastDirectionality.explosive,
             shouldLoop: true,
             numberOfParticles: 10,
+            gravity: 0.08,
+            createParticlePath: (size) {
+              double x = 20;
+              double y = 20;
+              final path = Path()
+                ..moveTo(0, y)
+                ..lineTo(x / 2, 0)
+                ..lineTo(x, y)
+                ..lineTo(0, y);
+              return path;
+            },
             emissionFrequency: 0.1,
             colors: [
               Colors.red,

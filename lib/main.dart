@@ -1,10 +1,16 @@
+import 'package:cjvm_app/firebase_options.dart';
 import 'package:cjvm_app/utils/constants.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'utils/color_utils.dart' as color_utils;
 import 'widgets/home_widget.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const CvjmApp());
 }
 
