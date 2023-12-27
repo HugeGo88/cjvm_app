@@ -44,6 +44,44 @@ class EventDetailData extends StatelessWidget {
     bool venueSet = event.venue == "" ? false : true;
     return Column(
       children: [
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(edgePadding),
+              child: Icon(
+                PlatformIcons(context).time,
+                size: iconSizeBig,
+              ),
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    event.allDay
+                        ? allDayVenue(event.startDate, event.endDate)
+                        : DateFormat.MMMMEEEEd('de').format(event.startDate),
+                  ),
+                  if (!event.allDay)
+                    Text(
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
+                    ),
+                ],
+              ),
+            ),
+            PlatformIconButton(
+              materialIcon: const Icon(Icons.edit_calendar_outlined),
+              cupertinoIcon: const Icon(CupertinoIcons.calendar_badge_plus),
+              onPressed: () {
+                Add2Calendar.addEvent2Cal(
+                  buildEvent(),
+                );
+              },
+            ),
+          ],
+        ),
         if (venueSet)
           Row(
             children: [
@@ -54,61 +92,28 @@ class EventDetailData extends StatelessWidget {
                   size: iconSizeBig,
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    event.venue,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  Text(
-                    event.address,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-              )
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      event.venue,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text(
+                      event.address,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              PlatformIconButton(
+                cupertinoIcon: const Icon(CupertinoIcons.map),
+                materialIcon: const Icon(Icons.map_outlined),
+                onPressed: () => MapsLauncher.launchQuery(event.address),
+              ),
             ],
           ),
-        if (venueSet)
-          PlatformTextButton(
-            child: const Text("In Karte anzeigen"),
-            onPressed: () => MapsLauncher.launchQuery(event.address),
-          ),
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(edgePadding),
-              child: Icon(
-                PlatformIcons(context).time,
-                size: iconSizeBig,
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  event.allDay
-                      ? allDayVenue(event.startDate, event.endDate)
-                      : DateFormat.MMMMEEEEd('de').format(event.startDate),
-                ),
-                if (!event.allDay)
-                  Text(
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
-                  ),
-              ],
-            )
-          ],
-        ),
-        PlatformTextButton(
-          child: const Text("Zu Kalender hinzufügen"),
-          onPressed: () {
-            Add2Calendar.addEvent2Cal(
-              buildEvent(),
-            );
-          },
-        ),
         if (event.ticket != null)
           Row(
             children: [
@@ -119,10 +124,26 @@ class EventDetailData extends StatelessWidget {
                   size: iconSizeBig,
                 ),
               ),
-              Text(
-                style: Theme.of(context).textTheme.bodyMedium,
-                "${event.ticket!.stock} Plätze übrig",
-              )
+              if (event.ticket!.stock != "-1")
+                Expanded(
+                  child: Text(
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    "${event.ticket!.stock} Plätze übrig",
+                  ),
+                )
+              else
+                Expanded(
+                  child: Text(
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    "Plätze übrig",
+                  ),
+                ),
+              PlatformIconButton(
+                icon: Icon(
+                  PlatformIcons(context).add,
+                ),
+                onPressed: () {},
+              ),
             ],
           ),
         Container(

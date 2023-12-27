@@ -83,7 +83,7 @@ class EventListItem extends StatelessWidget {
                             ],
                           )
                         : Container(),
-                    event.ticket != null && event.ticket?.capacity != "-1"
+                    event.ticket != null
                         ? Row(
                             children: [
                               const Padding(
@@ -93,7 +93,10 @@ class EventListItem extends StatelessWidget {
                                   size: iconSize,
                                 ),
                               ),
-                              Text("${event.ticket!.stock} Plätze übrig"),
+                              if (event.ticket!.stock != "-1")
+                                Text("${event.ticket!.stock} Plätze übrig")
+                              else
+                                const Text("Plätze übrig")
                             ],
                           )
                         : Container(),
