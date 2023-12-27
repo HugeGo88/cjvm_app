@@ -132,9 +132,21 @@ class EventDetailData extends StatelessWidget {
               if (event.ticket?.capacity != "-1")
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: edgePadding),
-                  child: Text(
-                    "Anmeldung erforderlich",
-                    style: Theme.of(context).textTheme.titleMedium,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Anmeldung erforderlich",
+                        style: Theme.of(context).textTheme.titleMedium?.apply(
+                            color: color_utils.commonThemeData.primaryColor),
+                      ),
+                      if (DateTime.now().isBefore(event.ticket!.startDate))
+                        Text(
+                          "Buchungsfreischaltung ab ${DateFormat.yMd('DE').add_jm().format(event.ticket!.startDate)} Uhr",
+                          style: Theme.of(context).textTheme.titleMedium?.apply(
+                              color: color_utils.commonThemeData.primaryColor),
+                        ),
+                    ],
                   ),
                 ),
               Row(
@@ -160,16 +172,17 @@ class EventDetailData extends StatelessWidget {
                         "Plätze übrig",
                       ),
                     ),
-                  PlatformIconButton(
-                    icon: Icon(
-                      PlatformIcons(context).add,
+                  if (DateTime.now().isAfter(event.ticket!.startDate))
+                    PlatformIconButton(
+                      icon: Icon(
+                        PlatformIcons(context).add,
+                      ),
+                      onPressed: () {
+                        _launchInBrowser(
+                          Uri.parse("${event.url}/#rsvp-now"),
+                        );
+                      },
                     ),
-                    onPressed: () {
-                      _launchInBrowser(
-                        Uri.parse("${event.url}/#rsvp-now"),
-                      );
-                    },
-                  ),
                 ],
               ),
             ],

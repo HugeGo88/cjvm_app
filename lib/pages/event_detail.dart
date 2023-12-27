@@ -38,13 +38,12 @@ class EventDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double? imageHeight = event.imageHeight.toDouble();
-    double? imageWidth = event.imageWidth.toDouble();
+    double imageHeight = event.imageHeight.toDouble();
+    double imageWidth = event.imageWidth.toDouble();
     double? actualHeight;
-    if (imageHeight != null && imageWidth != null) {
-      actualHeight =
-          imageHeight * (MediaQuery.of(context).size.width / imageWidth);
-    }
+    actualHeight =
+        imageHeight * (MediaQuery.of(context).size.width / imageWidth);
+
     final controller1 = ScrollController();
     final controller2 = ScrollController();
     Size size = MediaQuery.of(context).size;
