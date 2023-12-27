@@ -1,3 +1,4 @@
+import 'package:cjvm_app/model/ticket_entitiy.dart';
 import 'package:html/parser.dart';
 
 class EventEntity {
@@ -7,10 +8,13 @@ class EventEntity {
   late DateTime startDate;
   late DateTime endDate;
   late String image;
+  late int imageWidth;
+  late int imageHeight;
   late bool allDay;
   late String url;
   late String venue = "";
   late String address = "";
+  TicketEntity? ticket;
   //EventEmbedded extra;
 
   String _parseHtmlString(String htmlString) {
@@ -40,6 +44,10 @@ class EventEntity {
       endDate = DateTime.parse(json['end_date']);
       allDay = json['all_day'];
       image = json['image'].toString() != 'false' ? json['image']['url'] : '';
+      imageWidth =
+          json['image'].toString() != 'false' ? json['image']['width'] : '';
+      imageHeight =
+          json['image'].toString() != 'false' ? json['image']['height'] : '';
 
       var venueData = json['venue'];
       if (venueData.runtimeType.toString() == '_Map<String, dynamic>') {

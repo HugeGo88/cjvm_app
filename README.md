@@ -18,6 +18,7 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
 - [x] Teilen Button für Veranstaltungen und Nachrichten
   - [x] Mit Titelbild
   - [ ] Formatieren von Notizen in Kalenderinfo
+- [x] Ticketanzeige in EventDetail Ansicht
 - [x] Seiten der Gruppen und Kreise anzeigen (Wordpress Plugin notwendig)
   - [x] Featured Image in Gruppenansicht anzeigen
 - [ ] Feedback Button für Probleme und Ideen

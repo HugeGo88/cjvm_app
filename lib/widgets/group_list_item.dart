@@ -82,7 +82,7 @@ class _GroupListItemState extends State<GroupListItem> {
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const EdgeInsets.only(right: edgePadding),
             child: htmlContent != "" || widget.groupName.childItems.isNotEmpty
                 ? CachedImage(
                     url: imageUrl ?? "",
@@ -104,14 +104,17 @@ class _GroupListItemState extends State<GroupListItem> {
                       widget.groupName.title,
                       style: Theme.of(context)
                           .textTheme
-                          .titleMedium
+                          .titleLarge
                           ?.apply(fontWeightDelta: 1),
                     ),
                   ),
                   htmlContent != "" || widget.groupName.childItems.isNotEmpty
-                      ? Icon(
-                          PlatformIcons(context).forward,
-                          color: color_utils.commonThemeData.primaryColor,
+                      ? Padding(
+                          padding: const EdgeInsets.only(right: edgePadding),
+                          child: Icon(
+                            PlatformIcons(context).forward,
+                            color: color_utils.commonThemeData.primaryColor,
+                          ),
                         )
                       : Container(),
                 ],

@@ -1,6 +1,5 @@
 import 'package:cjvm_app/model/event_entitiy.dart';
 import 'package:cjvm_app/utils/constants.dart';
-import 'package:cjvm_app/widgets/cached_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -32,78 +31,80 @@ class EventListItem extends StatelessWidget {
             platformPageRoute(
                 builder: (context) => EventDetail(event), context: context));
       },
-      child: Column(
-        children: [
-          Row(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: CachedImage(
-                    url: event.image,
-                    height: listHeight,
-                    width: listWidth,
-                    fit: BoxFit.cover),
-              ),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: listHeight),
+        child: Padding(
+          padding: const EdgeInsets.all(edgePadding),
+          child: Row(
+            children: [
               Expanded(
-                child: SizedBox(
-                  height: listHeight,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: Text(
-                          event.title,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.apply(fontWeightDelta: 1),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      event.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.apply(fontWeightDelta: 1),
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: contentPadding),
+                          child: Icon(
+                            PlatformIcons(context).time,
+                            size: iconSize,
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: Container(),
-                      ),
-                      Row(
-                        children: [
-                          event.venue != ""
-                              ? const Padding(
-                                  padding: EdgeInsets.only(right: 4),
-                                  child: Icon(
-                                    CupertinoIcons.map_pin_ellipse,
-                                    size: 15,
-                                  ),
-                                )
-                              : Container(),
-                          Text(
-                            event.venue != "" ? event.venue : '',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 4),
-                            child: Icon(
-                              PlatformIcons(context).time,
-                              size: 15,
-                            ),
-                          ),
-                          Text(
-                            event.allDay
-                                ? allDayVenue(event.startDate, event.endDate)
-                                : "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        Text(
+                          event.allDay
+                              ? allDayVenue(event.startDate, event.endDate)
+                              : "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
+                    event.venue != ""
+                        ? Row(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(right: contentPadding),
+                                child: Icon(
+                                  CupertinoIcons.map_pin_ellipse,
+                                  size: iconSize,
+                                ),
+                              ),
+                              Text(
+                                event.venue,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ],
+                          )
+                        : Container(),
+                    event.ticket != null
+                        ? Row(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(right: contentPadding),
+                                child: Icon(
+                                  CupertinoIcons.ticket,
+                                  size: iconSize,
+                                ),
+                              ),
+                              if (event.ticket!.stock != "-1")
+                                Text("${event.ticket!.stock} Plätze übrig")
+                              else
+                                const Text("Plätze übrig")
+                            ],
+                          )
+                        : Container(),
+                  ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 4),
+                padding: const EdgeInsets.only(left: contentPadding),
                 child: Column(
                   children: <Widget>[
                     Text(
@@ -122,8 +123,8 @@ class EventListItem extends StatelessWidget {
                 ),
               ),
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }

@@ -13,36 +13,12 @@ class StartTab extends StatelessWidget {
     return OrientationBuilder(
       builder: (context, orientation) {
         return orientation == Orientation.portrait
-            ? SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    const ListHeading(important),
-                    const SizedBox(
-                      height: featureHeigt + 50,
-                      child: FeatureList(),
-                    ),
-                    const ListHeading(events),
-                    const EventList(
-                      maxEvents: 3,
-                    ),
-                    Container(
-                      height: 8,
-                    ),
-                    const ListHeading(posts),
-                    const PostList(
-                      category: 0,
-                      maxPosts: 3,
-                      showFeatureCategory: false,
-                    ),
-                  ],
-                ),
-              )
-            : SingleChildScrollView(
+            ? const FeatureList()
+            : const SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    const ListHeading(important),
-                    const SizedBox(
+                    ListHeading(important),
+                    SizedBox(
                       height: featureHeigt + 50,
                       child: FeatureList(),
                     ),
@@ -50,7 +26,7 @@ class StartTab extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: Column(
-                            children: const <Widget>[
+                            children: <Widget>[
                               ListHeading(events),
                               EventList(
                                 maxEvents: 5,
@@ -60,7 +36,7 @@ class StartTab extends StatelessWidget {
                         ),
                         Expanded(
                           child: Column(
-                            children: const <Widget>[
+                            children: <Widget>[
                               ListHeading(posts),
                               PostList(
                                 category: 0,

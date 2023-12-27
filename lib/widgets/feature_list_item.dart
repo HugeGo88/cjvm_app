@@ -12,6 +12,13 @@ class FeatureListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double? imageHeight = post.extra.image?.first.height?.toDouble();
+    double? imageWidth = post.extra.image?.first.width?.toDouble();
+    double? actualHeight;
+    if (imageHeight != null && imageWidth != null) {
+      actualHeight =
+          imageHeight * (MediaQuery.of(context).size.width / imageWidth);
+    }
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -20,49 +27,43 @@ class FeatureListItem extends StatelessWidget {
                 builder: (context) => PostDetail(post), context: context));
       },
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.only(bottom: edgePadding * 2),
         child: SizedBox(
-          height: featureHeigt,
-          width: featureWidth,
-          child: Stack(
+          width: MediaQuery.of(context).size.width,
+          child: Column(
             children: <Widget>[
               Hero(
-                  tag: post.image,
-                  child: CachedImage(
-                    post.image,
-                    height: featureHeigt,
-                    width: featureWidth,
-                    fit: BoxFit.cover,
-                  )),
-              Positioned(
-                bottom: 0,
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Color(0xff292929),
-                      ),
-                      width: featureWidth,
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          post.title.toUpperCase(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 3,
-                      width: featureWidth,
-                      color: color_utils.commonThemeData.primaryColor,
-                    ),
-                  ],
+                tag: post.image,
+                child: CachedImage(
+                  post.image,
+                  width: MediaQuery.of(context).size.width,
+                  // TODO make sure there will be no null
+                  height: actualHeight,
+                  fit: BoxFit.cover,
                 ),
-              )
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  color: Color(0xff292929),
+                ),
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(contentPadding),
+                  child: Text(
+                    post.title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: 3,
+                width: MediaQuery.of(context).size.width,
+                color: color_utils.commonThemeData.primaryColor,
+              ),
             ],
           ),
         ),

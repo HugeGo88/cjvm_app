@@ -29,6 +29,7 @@ class CachedImage extends StatelessWidget {
             placeholder: (_, __) => Image.asset(
               'images/logo.png',
               width: width,
+              height: height,
               fit: BoxFit.fitWidth,
             ),
             errorWidget: (_, __, ___) => Image.asset(

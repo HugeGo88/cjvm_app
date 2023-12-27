@@ -38,6 +38,12 @@ class EventDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double imageHeight = event.imageHeight.toDouble();
+    double imageWidth = event.imageWidth.toDouble();
+    double? actualHeight;
+    actualHeight =
+        imageHeight * (MediaQuery.of(context).size.width / imageWidth);
+
     final controller1 = ScrollController();
     final controller2 = ScrollController();
     Size size = MediaQuery.of(context).size;
@@ -71,6 +77,7 @@ class EventDetail extends StatelessWidget {
                           tag: event.image,
                           child: CachedImage(
                             event.image,
+                            height: actualHeight,
                             width: size.width,
                           ),
                         ),

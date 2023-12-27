@@ -27,7 +27,7 @@ class PostListItem extends StatelessWidget {
           Row(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(right: 8.0),
+                padding: const EdgeInsets.only(right: edgePadding),
                 child: CachedImage(
                   post.image,
                   height: listHeight,
@@ -36,29 +36,29 @@ class PostListItem extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: SizedBox(
-                  height: listHeight,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
-                        child: Text(
-                          post.title,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.apply(fontWeightDelta: 1),
-                        ),
-                      )
-                    ],
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: contentPadding),
+                      child: Text(
+                        post.title,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge
+                            ?.apply(fontWeightDelta: 1),
+                      ),
+                    )
+                  ],
                 ),
               ),
-              Icon(
-                PlatformIcons(context).forward,
-                color: color_utils.commonThemeData.primaryColor,
+              Padding(
+                padding: const EdgeInsets.all(edgePadding),
+                child: Icon(
+                  PlatformIcons(context).forward,
+                  color: color_utils.commonThemeData.primaryColor,
+                ),
               ),
             ],
           )

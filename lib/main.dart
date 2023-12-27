@@ -5,11 +5,11 @@ import 'utils/color_utils.dart' as color_utils;
 import 'widgets/home_widget.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const CvjmApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class CvjmApp extends StatelessWidget {
+  const CvjmApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       theme: ThemeData(
-        //useMaterial3: true,
+        useMaterial3: true,
         colorSchemeSeed: color_utils.commonThemeData.primaryColor,
         brightness: Brightness.light,
         cupertinoOverrideTheme: CupertinoThemeData(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cjvm_app/model/navigation_item_entitiy.dart';
 import 'package:cjvm_app/model/page_entitiy.dart';
+import 'package:cjvm_app/model/ticket_entitiy.dart';
 
 import '../model/event_entitiy.dart';
 import '../model/post_entitiy.dart';
@@ -59,6 +60,23 @@ class WpApi {
       //TODO Handle No Internet Response
     }
     return events;
+  }
+
+  static Future<List<TicketEntity>> getTicketList({int page = 1}) async {
+    List<TicketEntity> tickets = [];
+    try {
+      var urll = '${url}wp-json/wp/v2/tribe_rsvp_tickets?page=$page';
+      dynamic response = await http.get(Uri.parse(urll));
+      dynamic json = jsonDecode(response.body);
+      if (json != null) {
+        for (var v in (json as List)) {
+          tickets.add(TicketEntity.fromJson(v));
+        }
+      }
+    } catch (e) {
+      //TODO Handle No Internet Response
+    }
+    return tickets;
   }
 
   static Future<List<NavigationItemEntitiy>> getNavigationItemList(

@@ -38,6 +38,13 @@ class PostDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double? imageHeight = post.extra.image?.first.height?.toDouble();
+    double? imageWidth = post.extra.image?.first.width?.toDouble();
+    double? actualHeight;
+    if (imageHeight != null && imageWidth != null) {
+      actualHeight =
+          imageHeight * (MediaQuery.of(context).size.width / imageWidth);
+    }
     final controller1 = ScrollController();
     final controller2 = ScrollController();
     Size size = MediaQuery.of(context).size;
@@ -72,6 +79,7 @@ class PostDetail extends StatelessWidget {
                           child: CachedImage(
                             post.image,
                             width: size.width,
+                            height: actualHeight,
                           ),
                         ),
                         PostDetailData(post),

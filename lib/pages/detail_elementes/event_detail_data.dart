@@ -1,15 +1,26 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:cjvm_app/model/event_entitiy.dart';
+import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../utils/color_utils.dart' as color_utils;
 
 class EventDetailData extends StatelessWidget {
   final EventEntity event;
   const EventDetailData(this.event, {super.key});
+
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   String allDayVenue(DateTime start, DateTime end) {
     if (start.day != end.day) {
@@ -43,65 +54,139 @@ class EventDetailData extends StatelessWidget {
     bool venueSet = event.venue == "" ? false : true;
     return Column(
       children: [
-        if (venueSet)
-          Row(
-            children: [
-              const Icon(
-                CupertinoIcons.map_pin_ellipse,
-                size: 35,
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(edgePadding),
+              child: Icon(
+                PlatformIcons(context).time,
+                size: iconSizeBig,
               ),
-              Column(
+            ),
+            Expanded(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    event.venue,
                     style: Theme.of(context).textTheme.bodyMedium,
+                    event.allDay
+                        ? allDayVenue(event.startDate, event.endDate)
+                        : DateFormat.MMMMEEEEd('de').format(event.startDate),
                   ),
-                  Text(
-                    event.address,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
+                  if (!event.allDay)
+                    Text(
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
+                    ),
                 ],
-              )
-            ],
-          ),
-        if (venueSet)
-          PlatformTextButton(
-            child: const Text("In Karte anzeigen"),
-            onPressed: () => MapsLauncher.launchQuery(event.address),
-          ),
-        Row(
-          children: [
-            Icon(
-              PlatformIcons(context).time,
-              size: 35,
+              ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  event.allDay
-                      ? allDayVenue(event.startDate, event.endDate)
-                      : DateFormat.MMMMEEEEd('de').format(event.startDate),
-                ),
-                if (!event.allDay)
-                  Text(
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
-                  ),
-              ],
-            )
+            PlatformIconButton(
+              materialIcon: const Icon(Icons.edit_calendar_outlined),
+              cupertinoIcon: const Icon(CupertinoIcons.calendar_badge_plus),
+              onPressed: () {
+                Add2Calendar.addEvent2Cal(
+                  buildEvent(),
+                );
+              },
+            ),
           ],
         ),
-        PlatformTextButton(
-          child: const Text("Zu Kalender hinzufügen"),
-          onPressed: () {
-            Add2Calendar.addEvent2Cal(
-              buildEvent(),
-            );
-          },
-        ),
+        if (venueSet)
+          Row(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(edgePadding),
+                child: Icon(
+                  CupertinoIcons.map_pin_ellipse,
+                  size: iconSizeBig,
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      event.venue,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text(
+                      event.address,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              PlatformIconButton(
+                cupertinoIcon: const Icon(CupertinoIcons.map),
+                materialIcon: const Icon(Icons.map_outlined),
+                onPressed: () => MapsLauncher.launchQuery(event.address),
+              ),
+            ],
+          ),
+        if (event.ticket != null)
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (event.ticket?.capacity != "-1")
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: edgePadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Anmeldung erforderlich",
+                        style: Theme.of(context).textTheme.titleMedium?.apply(
+                            color: color_utils.commonThemeData.primaryColor),
+                      ),
+                      if (DateTime.now().isBefore(event.ticket!.startDate))
+                        Text(
+                          "Buchungsfreischaltung ab ${DateFormat.yMd('DE').add_jm().format(event.ticket!.startDate)} Uhr",
+                          style: Theme.of(context).textTheme.titleMedium?.apply(
+                              color: color_utils.commonThemeData.primaryColor),
+                        ),
+                    ],
+                  ),
+                ),
+              Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(edgePadding),
+                    child: Icon(
+                      CupertinoIcons.ticket,
+                      size: iconSizeBig,
+                    ),
+                  ),
+                  if (event.ticket!.stock != "-1")
+                    Expanded(
+                      child: Text(
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        "${event.ticket!.stock} Plätze übrig",
+                      ),
+                    )
+                  else
+                    Expanded(
+                      child: Text(
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        "Plätze übrig",
+                      ),
+                    ),
+                  if (DateTime.now().isAfter(event.ticket!.startDate))
+                    PlatformIconButton(
+                      icon: Icon(
+                        PlatformIcons(context).add,
+                      ),
+                      onPressed: () {
+                        _launchInBrowser(
+                          Uri.parse("${event.url}/#rsvp-now"),
+                        );
+                      },
+                    ),
+                ],
+              ),
+            ],
+          ),
         Container(
           height: 3.0,
           width: MediaQuery.of(context).size.width,

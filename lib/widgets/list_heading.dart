@@ -1,3 +1,4 @@
+import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cjvm_app/utils/color_utils.dart' as color_utils;
 
@@ -13,7 +14,8 @@ class ListHeading extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8),
+            padding:
+                const EdgeInsets.only(left: edgePadding, right: edgePadding),
             child: Text(
               title.toUpperCase(),
               textAlign: TextAlign.left,
