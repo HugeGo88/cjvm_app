@@ -109,6 +109,22 @@ class EventDetailData extends StatelessWidget {
             );
           },
         ),
+        if (event.ticket != null)
+          Row(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(edgePadding),
+                child: Icon(
+                  CupertinoIcons.ticket,
+                  size: iconSizeBig,
+                ),
+              ),
+              Text(
+                style: Theme.of(context).textTheme.bodyMedium,
+                "${event.ticket!.stock} Plätze übrig",
+              )
+            ],
+          ),
         Container(
           height: 3.0,
           width: MediaQuery.of(context).size.width,
