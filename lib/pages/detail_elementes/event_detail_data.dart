@@ -6,11 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../utils/color_utils.dart' as color_utils;
 
 class EventDetailData extends StatelessWidget {
   final EventEntity event;
   const EventDetailData(this.event, {super.key});
+
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   String allDayVenue(DateTime start, DateTime end) {
     if (start.day != end.day) {
@@ -142,7 +152,11 @@ class EventDetailData extends StatelessWidget {
                 icon: Icon(
                   PlatformIcons(context).add,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  _launchInBrowser(
+                    Uri.parse("${event.url}/#rsvp-now"),
+                  );
+                },
               ),
             ],
           ),
