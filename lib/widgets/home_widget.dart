@@ -2,6 +2,7 @@ import 'package:cjvm_app/pages/about_tab.dart';
 import 'package:cjvm_app/pages/events_tab.dart';
 import 'package:cjvm_app/pages/group_tab.dart';
 import 'package:cjvm_app/pages/start_tab.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -18,6 +19,7 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -68,6 +70,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   PlatformTabController tabController = PlatformTabController();
   @override
   void initState() {
+    analytics.setAnalyticsCollectionEnabled(true);
     super.initState();
   }
 }
