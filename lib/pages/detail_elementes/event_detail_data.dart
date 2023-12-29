@@ -85,7 +85,7 @@ class _EventDetailDataState extends State<EventDetailData> {
                   if (!widget.event.allDay)
                     Text(
                       style: Theme.of(context).textTheme.bodyMedium,
-                      "${DateFormat.Hm('de').format(widget.event.startDate)}Uhr bis ${DateFormat.Hm('de').format(widget.event.endDate)}Uhr",
+                      "${DateFormat.Hm('de').format(widget.event.startDate)} Uhr bis ${DateFormat.Hm('de').format(widget.event.endDate)} Uhr",
                     ),
                 ],
               ),
