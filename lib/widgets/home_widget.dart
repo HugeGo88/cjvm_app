@@ -12,7 +12,7 @@ import '../pages/posts_tab.dart';
 final titles = ['Aktuelles', 'Termine', 'Berichte', 'Gruppen', 'Über'];
 
 class HomeWidget extends StatefulWidget {
-  const HomeWidget({Key? key}) : super(key: key);
+  const HomeWidget({super.key});
 
   @override
   State<HomeWidget> createState() => _HomeWidgetState();
@@ -90,13 +90,28 @@ class ParentView extends StatelessWidget {
 }
 
 @immutable
-class ContentView extends StatelessWidget {
+class ContentView extends StatefulWidget {
   final int index;
 
   const ContentView({super.key, required this.index});
+
+  @override
+  State<ContentView> createState() => _ContentViewState();
+}
+
+class _ContentViewState extends State<ContentView> {
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
   @override
   Widget build(BuildContext context) {
-    switch (index) {
+    analytics.logEvent(
+      name: "pages_tracked",
+      parameters: {
+        "page_name": titles[widget.index],
+        "page_index": widget.index
+      },
+    );
+    switch (widget.index) {
       case 0:
         return const StartTab();
       case 1:
