@@ -1,6 +1,7 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:cjvm_app/model/event_entitiy.dart';
 import 'package:cjvm_app/utils/constants.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -9,10 +10,16 @@ import 'package:maps_launcher/maps_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/color_utils.dart' as color_utils;
 
-class EventDetailData extends StatelessWidget {
+class EventDetailData extends StatefulWidget {
   final EventEntity event;
   const EventDetailData(this.event, {super.key});
 
+  @override
+  State<EventDetailData> createState() => _EventDetailDataState();
+}
+
+class _EventDetailDataState extends State<EventDetailData> {
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   Future<void> _launchInBrowser(Uri url) async {
     if (!await launchUrl(
       url,
@@ -32,15 +39,15 @@ class EventDetailData extends StatelessWidget {
 
   Event buildEvent({Recurrence? recurrence}) {
     return Event(
-      title: event.title,
-      description: event.description,
-      location: event.address,
-      startDate: event.startDate,
-      endDate: event.endDate,
-      allDay: event.allDay,
+      title: widget.event.title,
+      description: widget.event.description,
+      location: widget.event.address,
+      startDate: widget.event.startDate,
+      endDate: widget.event.endDate,
+      allDay: widget.event.allDay,
       iosParams: IOSParams(
         reminder: const Duration(minutes: 60),
-        url: event.url,
+        url: widget.event.url,
       ),
       androidParams: const AndroidParams(
         emailInvites: [],
@@ -51,7 +58,7 @@ class EventDetailData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool venueSet = event.venue == "" ? false : true;
+    bool venueSet = widget.event.venue == "" ? false : true;
     return Column(
       children: [
         Row(
@@ -69,14 +76,16 @@ class EventDetailData extends StatelessWidget {
                 children: [
                   Text(
                     style: Theme.of(context).textTheme.bodyMedium,
-                    event.allDay
-                        ? allDayVenue(event.startDate, event.endDate)
-                        : DateFormat.MMMMEEEEd('de').format(event.startDate),
+                    widget.event.allDay
+                        ? allDayVenue(
+                            widget.event.startDate, widget.event.endDate)
+                        : DateFormat.MMMMEEEEd('de')
+                            .format(widget.event.startDate),
                   ),
-                  if (!event.allDay)
+                  if (!widget.event.allDay)
                     Text(
                       style: Theme.of(context).textTheme.bodyMedium,
-                      "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
+                      "${DateFormat.Hm('de').format(widget.event.startDate)}Uhr bis ${DateFormat.Hm('de').format(widget.event.endDate)}Uhr",
                     ),
                 ],
               ),
@@ -84,7 +93,13 @@ class EventDetailData extends StatelessWidget {
             PlatformIconButton(
               materialIcon: const Icon(Icons.edit_calendar_outlined),
               cupertinoIcon: const Icon(CupertinoIcons.calendar_badge_plus),
-              onPressed: () {
+              onPressed: () async {
+                await analytics.logEvent(
+                  name: "button_tracked",
+                  parameters: {
+                    "button_name": "AddCalendar",
+                  },
+                );
                 Add2Calendar.addEvent2Cal(
                   buildEvent(),
                 );
@@ -107,11 +122,11 @@ class EventDetailData extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      event.venue,
+                      widget.event.venue,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Text(
-                      event.address,
+                      widget.event.address,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -120,16 +135,24 @@ class EventDetailData extends StatelessWidget {
               PlatformIconButton(
                 cupertinoIcon: const Icon(CupertinoIcons.map),
                 materialIcon: const Icon(Icons.map_outlined),
-                onPressed: () => MapsLauncher.launchQuery(event.address),
+                onPressed: () async {
+                  await analytics.logEvent(
+                    name: "button_tracked",
+                    parameters: {
+                      "button_name": "OpenMap",
+                    },
+                  );
+                  MapsLauncher.launchQuery(widget.event.address);
+                },
               ),
             ],
           ),
-        if (event.ticket != null)
+        if (widget.event.ticket != null)
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (event.ticket?.capacity != "-1")
+              if (widget.event.ticket?.capacity != "-1")
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: edgePadding),
                   child: Column(
@@ -140,9 +163,10 @@ class EventDetailData extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleMedium?.apply(
                             color: color_utils.commonThemeData.primaryColor),
                       ),
-                      if (DateTime.now().isBefore(event.ticket!.startDate))
+                      if (DateTime.now()
+                          .isBefore(widget.event.ticket!.startDate))
                         Text(
-                          "Buchungsfreischaltung ab ${DateFormat.yMd('DE').add_jm().format(event.ticket!.startDate)} Uhr",
+                          "Buchungsfreischaltung ab ${DateFormat.yMd('DE').add_jm().format(widget.event.ticket!.startDate)} Uhr",
                           style: Theme.of(context).textTheme.titleMedium?.apply(
                               color: color_utils.commonThemeData.primaryColor),
                         ),
@@ -158,11 +182,11 @@ class EventDetailData extends StatelessWidget {
                       size: iconSizeBig,
                     ),
                   ),
-                  if (event.ticket!.stock != "-1")
+                  if (widget.event.ticket!.stock != "-1")
                     Expanded(
                       child: Text(
                         style: Theme.of(context).textTheme.bodyMedium,
-                        "${event.ticket!.stock} Plätze übrig",
+                        "${widget.event.ticket!.stock} Plätze übrig",
                       ),
                     )
                   else
@@ -172,14 +196,20 @@ class EventDetailData extends StatelessWidget {
                         "Plätze übrig",
                       ),
                     ),
-                  if (DateTime.now().isAfter(event.ticket!.startDate))
+                  if (DateTime.now().isAfter(widget.event.ticket!.startDate))
                     PlatformIconButton(
                       icon: Icon(
                         PlatformIcons(context).add,
                       ),
-                      onPressed: () {
+                      onPressed: () async {
+                        await analytics.logEvent(
+                          name: "button_tracked",
+                          parameters: {
+                            "button_name": "AddTicket",
+                          },
+                        );
                         _launchInBrowser(
-                          Uri.parse("${event.url}/#rsvp-now"),
+                          Uri.parse("${widget.event.url}/#rsvp-now"),
                         );
                       },
                     ),

@@ -6,7 +6,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-
 import '../pages/posts_tab.dart';
 
 final titles = ['Aktuelles', 'Termine', 'Berichte', 'Gruppen', 'Über'];
@@ -104,26 +103,30 @@ class _ContentViewState extends State<ContentView> {
 
   @override
   Widget build(BuildContext context) {
-    analytics.logEvent(
-      name: "pages_tracked",
-      parameters: {
-        "page_name": titles[widget.index],
-        "page_index": widget.index
+    return FutureBuilder(
+      future: analytics.logEvent(
+        name: "pages_tracked",
+        parameters: {
+          "page_name": titles[widget.index],
+          "page_index": widget.index
+        },
+      ),
+      builder: (context, snapshot) {
+        switch (widget.index) {
+          case 0:
+            return const StartTab();
+          case 1:
+            return const EventsTab();
+          case 2:
+            return const PostsTab();
+          case 3:
+            return const GroupTab();
+          case 4:
+            return const AboutTab();
+          default:
+            return const Placeholder();
+        }
       },
     );
-    switch (widget.index) {
-      case 0:
-        return const StartTab();
-      case 1:
-        return const EventsTab();
-      case 2:
-        return const PostsTab();
-      case 3:
-        return const GroupTab();
-      case 4:
-        return const AboutTab();
-      default:
-        return const Placeholder();
-    }
   }
 }
