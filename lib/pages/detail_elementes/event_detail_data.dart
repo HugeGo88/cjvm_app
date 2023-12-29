@@ -64,7 +64,8 @@ class _EventDetailDataState extends State<EventDetailData> {
         Row(
           children: [
             Padding(
-              padding: const EdgeInsets.all(edgePadding),
+              padding: const EdgeInsets.only(
+                  left: edgePadding, right: contentPadding),
               child: Icon(
                 PlatformIcons(context).time,
                 size: iconSizeBig,
@@ -111,7 +112,8 @@ class _EventDetailDataState extends State<EventDetailData> {
           Row(
             children: [
               const Padding(
-                padding: EdgeInsets.all(edgePadding),
+                padding:
+                    EdgeInsets.only(left: edgePadding, right: contentPadding),
                 child: Icon(
                   CupertinoIcons.map_pin_ellipse,
                   size: iconSizeBig,
@@ -176,7 +178,8 @@ class _EventDetailDataState extends State<EventDetailData> {
               Row(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.all(edgePadding),
+                    padding: EdgeInsets.only(
+                        left: edgePadding, right: contentPadding),
                     child: Icon(
                       CupertinoIcons.ticket,
                       size: iconSizeBig,

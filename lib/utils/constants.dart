@@ -17,7 +17,7 @@ const double iconSizeBig = 20;
 
 const String restUrlPrefix = 'wp-json';
 
-const double edgePadding = 10.0;
+const double edgePadding = 20.0;
 const double contentPadding = 5.0;
 
 const double featureFactor = 18;

@@ -48,7 +48,8 @@ class FeatureListItem extends StatelessWidget {
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
-                  padding: const EdgeInsets.all(contentPadding),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: edgePadding, vertical: contentPadding),
                   child: Text(
                     post.title,
                     style: const TextStyle(
