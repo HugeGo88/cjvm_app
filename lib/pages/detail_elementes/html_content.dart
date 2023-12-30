@@ -53,6 +53,12 @@ class HtmlContent extends StatelessWidget {
                   color: color_utils.commonThemeData.primaryColor),
               "p": Style(textDecoration: TextDecoration.none),
               "li": Style(listStyleType: ListStyleType.square),
+              'img': Style(
+                width: Width(
+                  MediaQuery.of(context).size.width,
+                  Unit.auto,
+                ),
+              )
             },
           ),
         ),
