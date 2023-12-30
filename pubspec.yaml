@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: "none"
 
-version: 1.5.1+75
+version: 1.5.2+76
 
 environment:
   sdk: ">=2.19.0 <3.0.0"
@@ -35,7 +35,8 @@ dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "images/logo.png"
+  remove_alpha_ios: true
+  image_path: "images/logo125.png"
 
 dev_dependencies:
   flutter_test:
