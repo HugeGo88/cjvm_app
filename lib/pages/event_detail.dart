@@ -65,16 +65,17 @@ class _EventDetailState extends State<EventDetail> {
           Builder(
             builder: (context) {
               return PlatformIconButton(
-                  icon: Icon(PlatformIcons(context).share),
-                  onPressed: () async {
-                    await analytics.logEvent(
-                      name: "button_tracked",
-                      parameters: {
-                        "button_name": "ShareEvent",
-                      },
-                    );
-                    _onShare(context, widget.event);
-                  });
+                icon: Icon(PlatformIcons(context).share),
+                onPressed: () async {
+                  await analytics.logEvent(
+                    name: "button_tracked",
+                    parameters: {
+                      "button_name": "ShareEvent",
+                    },
+                  );
+                  _onShare(context, widget.event);
+                },
+              );
             },
           ),
         ],
