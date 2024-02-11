@@ -9,6 +9,7 @@ class PostEntity {
   late int id;
   late String title;
   late String content;
+  late String preview;
 
   String _parseHtmlString(String htmlString) {
     final document = parse(htmlString);
@@ -37,7 +38,8 @@ class PostEntity {
       required this.link,
       required this.id,
       required this.title,
-      required this.content});
+      required this.content,
+      required this.preview});
 
   PostEntity.fromJson(Map<String, dynamic> json) {
     modifiedGmt = json['modified_gmt'];
@@ -49,6 +51,7 @@ class PostEntity {
     title = json['title'].toString() != "" ? json['title']['rendered'] : null;
     title = _parseHtmlString(title);
     content = json['content'] != null ? json['content']['rendered'] : null;
+    preview = json['excerpt'] != null ? json['excerpt']['rendered'] : null;
   }
 
   Map<String, dynamic> toJson() {
