@@ -46,7 +46,7 @@ class EventListItem extends StatelessWidget {
                       event.title,
                       style: Theme.of(context)
                           .textTheme
-                          .titleLarge
+                          .titleMedium
                           ?.apply(fontWeightDelta: 1),
                     ),
                     Row(

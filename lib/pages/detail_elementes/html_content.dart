@@ -54,7 +54,9 @@ class HtmlContent extends StatelessWidget {
               "a": Style(
                   textDecoration: TextDecoration.none,
                   color: color_utils.commonThemeData.primaryColor),
-              "p": Style(textDecoration: TextDecoration.none),
+              "p": Style(
+                  textDecoration: TextDecoration.none,
+                  margin: Margins(left: Margin(-8), top: Margin(0))),
               "li": Style(listStyleType: ListStyleType.square),
               "img": Style(
                 width: Width(
