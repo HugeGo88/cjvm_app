@@ -43,12 +43,22 @@ class PostListItem extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(top: contentPadding),
-                      child: Text(
-                        post.title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.apply(fontWeightDelta: 1),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              post.title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.apply(fontWeightDelta: 1),
+                            ),
+                          ),
+                          Icon(
+                            PlatformIcons(context).forward,
+                            color: color_utils.commonThemeData.primaryColor,
+                          ),
+                        ],
                       ),
                     ),
                     HtmlContent(
@@ -57,13 +67,6 @@ class PostListItem extends StatelessWidget {
                       edge: 0,
                     ),
                   ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(edgePadding),
-                child: Icon(
-                  PlatformIcons(context).forward,
-                  color: color_utils.commonThemeData.primaryColor,
                 ),
               ),
             ],
