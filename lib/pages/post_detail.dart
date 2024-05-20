@@ -43,6 +43,23 @@ class _PostDetailState extends State<PostDetail> {
     );
   }
 
+  Future<void> _onSharePicture(context, PostEntity post) async {
+    final box = context.findRenderObject() as RenderBox?;
+    final urlImage = post.image;
+    final url = Uri.parse(urlImage);
+    final response = await http.get(url);
+    final bytes = response.bodyBytes;
+
+    final temp = await getTemporaryDirectory();
+    final path = '${temp.path}/image.jpg';
+    File(path).writeAsBytesSync(bytes);
+
+    await Share.shareXFiles(
+      [XFile(path)],
+      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double? imageHeight = widget.post.extra.image?.first.height?.toDouble();
@@ -71,7 +88,7 @@ class _PostDetailState extends State<PostDetail> {
                   await analytics.logEvent(
                     name: "button_tracked",
                     parameters: {
-                      "button_name": "SharePost",
+                      "button_name": "SharePostPicture",
                     },
                   );
                   _onShare(context, widget.post);
@@ -92,10 +109,21 @@ class _PostDetailState extends State<PostDetail> {
                       children: [
                         Hero(
                           tag: widget.post.image,
-                          child: CachedImage(
-                            widget.post.image,
-                            width: size.width,
-                            height: actualHeight,
+                          child: GestureDetector(
+                            onTap: () async {
+                              await analytics.logEvent(
+                                name: "button_tracked",
+                                parameters: {
+                                  "button_name": "SharePost",
+                                },
+                              );
+                              _onSharePicture(context, widget.post);
+                            },
+                            child: CachedImage(
+                              widget.post.image,
+                              width: size.width,
+                              height: actualHeight,
+                            ),
                           ),
                         ),
                         PostDetailData(widget.post),

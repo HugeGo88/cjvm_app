@@ -43,6 +43,23 @@ class _EventDetailState extends State<EventDetail> {
     );
   }
 
+  Future<void> _onSharePicture(context, EventEntity event) async {
+    final box = context.findRenderObject() as RenderBox?;
+    final urlImage = event.image;
+    final url = Uri.parse(urlImage);
+    final response = await http.get(url);
+    final bytes = response.bodyBytes;
+
+    final temp = await getTemporaryDirectory();
+    final path = '${temp.path}/image.jpg';
+    File(path).writeAsBytesSync(bytes);
+
+    await Share.shareXFiles(
+      [XFile(path)],
+      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double imageHeight = widget.event.imageHeight.toDouble();
@@ -91,10 +108,21 @@ class _EventDetailState extends State<EventDetail> {
                       children: [
                         Hero(
                           tag: widget.event.image,
-                          child: CachedImage(
-                            widget.event.image,
-                            height: actualHeight,
-                            width: size.width,
+                          child: GestureDetector(
+                            onTap: () async {
+                              await analytics.logEvent(
+                                name: "button_tracked",
+                                parameters: {
+                                  "button_name": "ShareEvent",
+                                },
+                              );
+                              _onSharePicture(context, widget.event);
+                            },
+                            child: CachedImage(
+                              widget.event.image,
+                              height: actualHeight,
+                              width: size.width,
+                            ),
                           ),
                         ),
                         EventDetailData(widget.event),
