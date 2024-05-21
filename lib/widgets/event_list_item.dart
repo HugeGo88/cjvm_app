@@ -46,7 +46,7 @@ class EventListItem extends StatelessWidget {
                       event.title,
                       style: Theme.of(context)
                           .textTheme
-                          .titleLarge
+                          .titleMedium
                           ?.apply(fontWeightDelta: 1),
                     ),
                     Row(
@@ -61,7 +61,7 @@ class EventListItem extends StatelessWidget {
                         Text(
                           event.allDay
                               ? allDayVenue(event.startDate, event.endDate)
-                              : "${DateFormat.Hm('de').format(event.startDate)}Uhr bis ${DateFormat.Hm('de').format(event.endDate)}Uhr",
+                              : "${DateFormat.Hm('de').format(event.startDate)} Uhr bis ${DateFormat.Hm('de').format(event.endDate)} Uhr",
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],

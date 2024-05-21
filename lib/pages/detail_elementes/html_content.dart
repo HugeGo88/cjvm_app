@@ -8,7 +8,10 @@ import '../../utils/color_utils.dart' as color_utils;
 
 class HtmlContent extends StatelessWidget {
   final String data;
-  const HtmlContent(this.data, {super.key});
+  final bool tapLinks;
+  final double edge;
+  const HtmlContent(this.data,
+      {super.key, this.tapLinks = true, this.edge = edgePadding});
 
   Future<void> _launchInBrowser(Uri url) async {
     if (!await launchUrl(
@@ -23,13 +26,13 @@ class HtmlContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(edgePadding),
+        padding: EdgeInsets.all(edge),
         child: Material(
           child: Html(
             data: data,
             onLinkTap: (url, attributes, element) {
               var attributes = element?.attributes;
-              if (attributes != null) {
+              if (attributes != null && tapLinks) {
                 for (var entry in attributes.entries) {
                   var url = entry.value;
                   _launchInBrowser(Uri.parse(url));
@@ -38,7 +41,7 @@ class HtmlContent extends StatelessWidget {
             },
             style: {
               "blockquote": Style(
-                margin: Margins(left: Margin(0)),
+                margin: Margins(left: Margin(-8)),
                 padding: HtmlPaddings(left: HtmlPadding(edgePadding * 2)),
                 fontStyle: FontStyle.italic,
                 border: Border(
@@ -51,8 +54,21 @@ class HtmlContent extends StatelessWidget {
               "a": Style(
                   textDecoration: TextDecoration.none,
                   color: color_utils.commonThemeData.primaryColor),
-              "p": Style(textDecoration: TextDecoration.none),
+              "p": Style(
+                  textDecoration: TextDecoration.none,
+                  margin: Margins(left: Margin(-8), top: Margin(0))),
+              "h1": Style(
+                  textDecoration: TextDecoration.none,
+                  margin: Margins(left: Margin(-8), top: Margin(0))),
+              "h2": Style(
+                  textDecoration: TextDecoration.none,
+                  margin: Margins(left: Margin(-8), top: Margin(0))),
               "li": Style(listStyleType: ListStyleType.square),
+              "img": Style(
+                width: Width(
+                  MediaQuery.of(context).size.width - (3 * edgePadding),
+                ),
+              ),
             },
           ),
         ),

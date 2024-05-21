@@ -1,5 +1,6 @@
 import 'package:cjvm_app/model/cached_image.dart';
 import 'package:cjvm_app/model/post_entitiy.dart';
+import 'package:cjvm_app/pages/detail_elementes/html_content.dart';
 import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -42,22 +43,30 @@ class PostListItem extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(top: contentPadding),
-                      child: Text(
-                        post.title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.apply(fontWeightDelta: 1),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              post.title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.apply(fontWeightDelta: 1),
+                            ),
+                          ),
+                          Icon(
+                            PlatformIcons(context).forward,
+                            color: color_utils.commonThemeData.primaryColor,
+                          ),
+                        ],
                       ),
-                    )
+                    ),
+                    HtmlContent(
+                      post.preview,
+                      tapLinks: false,
+                      edge: 0,
+                    ),
                   ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(edgePadding),
-                child: Icon(
-                  PlatformIcons(context).forward,
-                  color: color_utils.commonThemeData.primaryColor,
                 ),
               ),
             ],

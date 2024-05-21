@@ -19,7 +19,7 @@ Im Endausbau soll die App folgende Funktionen aufweisen.
   - [x] Mit Titelbild
   - [ ] Formatieren von Notizen in Kalenderinfo
 - [x] Ticketanzeige in EventDetail Ansicht
-- [x] Seiten der Gruppen und Kreise anzeigen (Wordpress Plugin notwendig)
+- [x] Seiten der Gruppen und Kreise anzeigen (Wordpress Plugin notwendig [Yoast SEO, WP-REST-API V2 Menus])
   - [x] Featured Image in Gruppenansicht anzeigen
 - [ ] Feedback Button für Probleme und Ideen
 - [ ] Notifications damit alle Mitglieder über diese App erreicht werden können

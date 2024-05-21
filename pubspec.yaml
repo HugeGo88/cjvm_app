@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: "none"
 
-version: 1.5.0+62
+version: 1.6.0+84
 
 environment:
   sdk: ">=2.19.0 <3.0.0"
@@ -11,8 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #firebase_messaging: ^14.6.7
   add_2_calendar: ^3.0.1
   cached_network_image: ^3.3.0
+  confetti: ^0.7.0
   flutter_html: ^3.0.0-beta.2
   flutter_launcher_icons: ^0.13.1
   flutter_platform_widgets: ^6.0.2
@@ -25,14 +27,16 @@ dependencies:
   share_plus: ^7.2.1
   table_calendar: ^3.0.9
   url_launcher: ^6.2.2
-  #firebase_messaging: ^14.6.7
 
   cupertino_icons: ^1.0.5
+  firebase_analytics: ^10.7.4
+  firebase_core: ^2.24.2
 
 flutter_icons:
   android: true
   ios: true
-  image_path: "images/logo.png"
+  remove_alpha_ios: true
+  image_path: "images/logo125.png"
 
 dev_dependencies:
   flutter_test:

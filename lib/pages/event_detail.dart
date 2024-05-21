@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -13,10 +14,16 @@ import '../model/event_entitiy.dart';
 import 'detail_elementes/event_detail_data.dart';
 import 'detail_elementes/html_content.dart';
 
-class EventDetail extends StatelessWidget {
+class EventDetail extends StatefulWidget {
   final EventEntity event;
   const EventDetail(this.event, {super.key});
 
+  @override
+  State<EventDetail> createState() => _EventDetailState();
+}
+
+class _EventDetailState extends State<EventDetail> {
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   Future<void> _onShare(context, EventEntity event) async {
     final box = context.findRenderObject() as RenderBox?;
     final urlImage = event.image;
@@ -36,10 +43,27 @@ class EventDetail extends StatelessWidget {
     );
   }
 
+  Future<void> _onSharePicture(context, EventEntity event) async {
+    final box = context.findRenderObject() as RenderBox?;
+    final urlImage = event.image;
+    final url = Uri.parse(urlImage);
+    final response = await http.get(url);
+    final bytes = response.bodyBytes;
+
+    final temp = await getTemporaryDirectory();
+    final path = '${temp.path}/image.jpg';
+    File(path).writeAsBytesSync(bytes);
+
+    await Share.shareXFiles(
+      [XFile(path)],
+      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    double imageHeight = event.imageHeight.toDouble();
-    double imageWidth = event.imageWidth.toDouble();
+    double imageHeight = widget.event.imageHeight.toDouble();
+    double imageWidth = widget.event.imageWidth.toDouble();
     double? actualHeight;
     actualHeight =
         imageHeight * (MediaQuery.of(context).size.width / imageWidth);
@@ -52,14 +76,23 @@ class EventDetail extends StatelessWidget {
       iosContentPadding: true,
       appBar: PlatformAppBar(
         title: Text(
-          event.title,
+          widget.event.title,
         ),
         trailingActions: [
           Builder(
             builder: (context) {
               return PlatformIconButton(
-                  icon: Icon(PlatformIcons(context).share),
-                  onPressed: () => _onShare(context, event));
+                icon: Icon(PlatformIcons(context).share),
+                onPressed: () async {
+                  await analytics.logEvent(
+                    name: "button_tracked",
+                    parameters: {
+                      "button_name": "ShareEvent",
+                    },
+                  );
+                  _onShare(context, widget.event);
+                },
+              );
             },
           ),
         ],
@@ -74,15 +107,26 @@ class EventDetail extends StatelessWidget {
                     child: Column(
                       children: [
                         Hero(
-                          tag: event.image,
-                          child: CachedImage(
-                            event.image,
-                            height: actualHeight,
-                            width: size.width,
+                          tag: widget.event.image,
+                          child: GestureDetector(
+                            onTap: () async {
+                              await analytics.logEvent(
+                                name: "button_tracked",
+                                parameters: {
+                                  "button_name": "ShareEvent",
+                                },
+                              );
+                              _onSharePicture(context, widget.event);
+                            },
+                            child: CachedImage(
+                              widget.event.image,
+                              height: actualHeight,
+                              width: size.width,
+                            ),
                           ),
                         ),
-                        EventDetailData(event),
-                        HtmlContent(event.description),
+                        EventDetailData(widget.event),
+                        HtmlContent(widget.event.description),
                       ],
                     ),
                   )
@@ -96,13 +140,13 @@ class EventDetail extends StatelessWidget {
                           child: Column(
                             children: <Widget>[
                               Hero(
-                                tag: event.image,
+                                tag: widget.event.image,
                                 child: CachedImage(
-                                  event.image,
+                                  widget.event.image,
                                   width: size.width,
                                 ),
                               ),
-                              EventDetailData(event),
+                              EventDetailData(widget.event),
                             ],
                           ),
                         ),
@@ -119,7 +163,7 @@ class EventDetail extends StatelessWidget {
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  HtmlContent(event.description),
+                                  HtmlContent(widget.event.description),
                                 ],
                               ),
                             ),

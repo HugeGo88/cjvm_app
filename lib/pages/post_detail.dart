@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -12,11 +13,17 @@ import '../model/post_entitiy.dart';
 import 'detail_elementes/html_content.dart';
 import 'detail_elementes/post_detail_data.dart';
 
-class PostDetail extends StatelessWidget {
+class PostDetail extends StatefulWidget {
   final PostEntity post;
 
   const PostDetail(this.post, {super.key});
 
+  @override
+  State<PostDetail> createState() => _PostDetailState();
+}
+
+class _PostDetailState extends State<PostDetail> {
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   Future<void> _onShare(context, PostEntity post) async {
     final box = context.findRenderObject() as RenderBox?;
     final urlImage = post.image;
@@ -36,10 +43,27 @@ class PostDetail extends StatelessWidget {
     );
   }
 
+  Future<void> _onSharePicture(context, PostEntity post) async {
+    final box = context.findRenderObject() as RenderBox?;
+    final urlImage = post.image;
+    final url = Uri.parse(urlImage);
+    final response = await http.get(url);
+    final bytes = response.bodyBytes;
+
+    final temp = await getTemporaryDirectory();
+    final path = '${temp.path}/image.jpg';
+    File(path).writeAsBytesSync(bytes);
+
+    await Share.shareXFiles(
+      [XFile(path)],
+      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    double? imageHeight = post.extra.image?.first.height?.toDouble();
-    double? imageWidth = post.extra.image?.first.width?.toDouble();
+    double? imageHeight = widget.post.extra.image?.first.height?.toDouble();
+    double? imageWidth = widget.post.extra.image?.first.width?.toDouble();
     double? actualHeight;
     if (imageHeight != null && imageWidth != null) {
       actualHeight =
@@ -53,14 +77,23 @@ class PostDetail extends StatelessWidget {
       iosContentPadding: true,
       appBar: PlatformAppBar(
         title: Text(
-          post.title,
+          widget.post.title,
         ),
         trailingActions: [
           Builder(
             builder: (context) {
               return PlatformIconButton(
-                  icon: Icon(PlatformIcons(context).share),
-                  onPressed: () => _onShare(context, post));
+                icon: Icon(PlatformIcons(context).share),
+                onPressed: () async {
+                  await analytics.logEvent(
+                    name: "button_tracked",
+                    parameters: {
+                      "button_name": "SharePostPicture",
+                    },
+                  );
+                  _onShare(context, widget.post);
+                },
+              );
             },
           ),
         ],
@@ -75,15 +108,26 @@ class PostDetail extends StatelessWidget {
                     child: Column(
                       children: [
                         Hero(
-                          tag: post.image,
-                          child: CachedImage(
-                            post.image,
-                            width: size.width,
-                            height: actualHeight,
+                          tag: widget.post.image,
+                          child: GestureDetector(
+                            onTap: () async {
+                              await analytics.logEvent(
+                                name: "button_tracked",
+                                parameters: {
+                                  "button_name": "SharePost",
+                                },
+                              );
+                              _onSharePicture(context, widget.post);
+                            },
+                            child: CachedImage(
+                              widget.post.image,
+                              width: size.width,
+                              height: actualHeight,
+                            ),
                           ),
                         ),
-                        PostDetailData(post),
-                        HtmlContent(post.content),
+                        PostDetailData(widget.post),
+                        HtmlContent(widget.post.content),
                       ],
                     ),
                   )
@@ -97,13 +141,13 @@ class PostDetail extends StatelessWidget {
                           child: Column(
                             children: <Widget>[
                               Hero(
-                                tag: post.image,
+                                tag: widget.post.image,
                                 child: CachedImage(
-                                  post.image,
+                                  widget.post.image,
                                   width: size.width,
                                 ),
                               ),
-                              PostDetailData(post),
+                              PostDetailData(widget.post),
                             ],
                           ),
                         ),
@@ -120,7 +164,7 @@ class PostDetail extends StatelessWidget {
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  HtmlContent(post.content),
+                                  HtmlContent(widget.post.content),
                                 ],
                               ),
                             ),
