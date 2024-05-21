@@ -41,7 +41,7 @@ class HtmlContent extends StatelessWidget {
             },
             style: {
               "blockquote": Style(
-                margin: Margins(left: Margin(0)),
+                margin: Margins(left: Margin(-8)),
                 padding: HtmlPaddings(left: HtmlPadding(edgePadding * 2)),
                 fontStyle: FontStyle.italic,
                 border: Border(
@@ -55,6 +55,12 @@ class HtmlContent extends StatelessWidget {
                   textDecoration: TextDecoration.none,
                   color: color_utils.commonThemeData.primaryColor),
               "p": Style(
+                  textDecoration: TextDecoration.none,
+                  margin: Margins(left: Margin(-8), top: Margin(0))),
+              "h1": Style(
+                  textDecoration: TextDecoration.none,
+                  margin: Margins(left: Margin(-8), top: Margin(0))),
+              "h2": Style(
                   textDecoration: TextDecoration.none,
                   margin: Margins(left: Margin(-8), top: Margin(0))),
               "li": Style(listStyleType: ListStyleType.square),
