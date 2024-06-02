@@ -37,7 +37,7 @@ class _AboutTabState extends State<AboutTab> {
     //TODO create function to handle all the calls
     //TODO needs to be fixed
     String requestUrl =
-        "https://cvjm-walheim.de/wp-json/wp/v2/pages?slug=ueber-uns";
+        "https://cvjm-walheim.de/wp-json/wp/v2/pages?slug=vereinsleitung/";
     WpApi.getPageList(requestUrl: requestUrl).then(
       (pages) {
         setState(
@@ -62,7 +62,7 @@ class _AboutTabState extends State<AboutTab> {
         ? const LoadingFullscreen()
         : Column(
             children: [
-              Expanded(child: HtmlContent(htmlContent)),
+              Flexible(child: HtmlContent(htmlContent)),
               PlatformTextButton(
                 child: const Text("Über diese App"),
                 onPressed: () {
