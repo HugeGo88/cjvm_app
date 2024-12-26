@@ -32,7 +32,7 @@ class CvjmApp extends StatelessWidget {
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: color_utils.commonThemeData.primaryColor,
-        colorScheme: const ColorScheme.dark(background: Colors.black),
+        colorScheme: const ColorScheme.dark(surface: Colors.black),
         scaffoldBackgroundColor: Colors.black,
         bottomAppBarTheme: const BottomAppBarTheme(color: Colors.black),
         cupertinoOverrideTheme: CupertinoThemeData(
