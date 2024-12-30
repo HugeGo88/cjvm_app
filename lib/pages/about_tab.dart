@@ -37,7 +37,7 @@ class _AboutTabState extends State<AboutTab> {
     //TODO create function to handle all the calls
     //TODO needs to be fixed
     String requestUrl =
-        "https://cvjm-walheim.de/wp-json/wp/v2/pages?slug=vereinsleitung/";
+        "https://cvjm-walheim.de/wp-json/wp/v2/pages?slug=ueber-uns/";
     WpApi.getPageList(requestUrl: requestUrl).then(
       (pages) {
         setState(

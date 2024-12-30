@@ -10,7 +10,7 @@ const String baseUrl = '$url$restUrlPrefix/wp/v2/';
 const int featuredCategoryId = 29;
 const String featuredCategoryName = 'Wichtiges';
 
-const int groupMenuId = 121;
+const int groupMenuId = 4270;
 
 const double iconSize = 15;
 const double iconSizeBig = 20;
