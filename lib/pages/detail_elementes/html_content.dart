@@ -12,6 +12,9 @@ class HtmlContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColorHex = color_utils.commonThemeData.primaryColor.value
+        .toRadixString(16)
+        .substring(2);
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(edge),
@@ -29,65 +32,26 @@ class HtmlContent extends StatelessWidget {
             customStylesBuilder: (element) {
               if (element.localName == 'a') {
                 return {
-                  'color': color_utils.commonThemeData.primaryColor.value
-                      .toRadixString(16),
+                  'color': '#$primaryColorHex',
                   "text-decoration": "none"
                 };
               }
               if (element.localName == 'blockquote') {
                 return {
-                  'color': color_utils.commonThemeData.primaryColor.value
-                      .toRadixString(16)
+                  'font-style': 'italic',
+                  'border-left': '5px solid #$primaryColorHex',
+                  'padding-left': '10px',
+                  'margin-left': '-20px',
+                };
+              }
+              if (element.localName == 'li') {
+                return {
+                  'list-style-type': 'square', // Use square for list style
                 };
               }
               return null;
             },
           ),
-
-          ///TODO: Remove old code!
-          // child: Html(
-          //   data: data,
-          //   onLinkTap: (url, attributes, element) {
-          //     var attributes = element?.attributes;
-          //     if (attributes != null && tapLinks) {
-          //       for (var entry in attributes.entries) {
-          //         var url = entry.value;
-          //         _launchInBrowser(Uri.parse(url));
-          //       }
-          //     }
-          //   },
-          //   style: {
-          //     "blockquote": Style(
-          //       margin: Margins(left: Margin(-8)),
-          //       padding: HtmlPaddings(left: HtmlPadding(edgePadding * 2)),
-          //       fontStyle: FontStyle.italic,
-          //       border: Border(
-          //         left: BorderSide(
-          //             color: color_utils.commonThemeData.primaryColor,
-          //             style: BorderStyle.solid,
-          //             width: 5.0),
-          //       ),
-          //     ),
-          //     "a": Style(
-          //         textDecoration: TextDecoration.none,
-          //         color: color_utils.commonThemeData.primaryColor),
-          //     "p": Style(
-          //         textDecoration: TextDecoration.none,
-          //         margin: Margins(left: Margin(-8), top: Margin(0))),
-          //     "h1": Style(
-          //         textDecoration: TextDecoration.none,
-          //         margin: Margins(left: Margin(-8), top: Margin(0))),
-          //     "h2": Style(
-          //         textDecoration: TextDecoration.none,
-          //         margin: Margins(left: Margin(-8), top: Margin(0))),
-          //     "li": Style(listStyleType: ListStyleType.square),
-          //     "img": Style(
-          //       width: Width(
-          //         MediaQuery.of(context).size.width - (3 * edgePadding),
-          //       ),
-          //     ),
-          //   },
-          // ),
         ),
       ),
     );
