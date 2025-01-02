@@ -81,8 +81,9 @@ class _EventDetailState extends State<EventDetail> {
         trailingActions: [
           Builder(
             builder: (context) {
-              return PlatformIconButton(
-                icon: Icon(PlatformIcons(context).share),
+              return PlatformTextButton(
+                child: Text("Teilen"),
+                padding: EdgeInsets.symmetric(horizontal: 0),
                 onPressed: () async {
                   await analytics.logEvent(
                     name: "button_tracked",
