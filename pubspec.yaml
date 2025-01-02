@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: "none"
 
-version: 1.6.0+84
+version: 1.6.5+90
 
 environment:
   sdk: ">=2.19.0 <3.0.0"
@@ -16,7 +16,7 @@ dependencies:
   cached_network_image: ^3.3.0
   confetti: ^0.7.0
   flutter_html: ^3.0.0-beta.2
-  flutter_widget_from_html: ^0.15.0
+  flutter_widget_from_html: ^0.15.3
   flutter_launcher_icons: ^0.13.1
   flutter_platform_widgets: ^7.0.0
   html: ^0.15.4
