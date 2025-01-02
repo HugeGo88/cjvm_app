@@ -82,8 +82,9 @@ class _PostDetailState extends State<PostDetail> {
         trailingActions: [
           Builder(
             builder: (context) {
-              return PlatformIconButton(
-                icon: Icon(PlatformIcons(context).share),
+              return PlatformTextButton(
+                padding: EdgeInsets.symmetric(horizontal: 0),
+                child: Text("Teilen"),
                 onPressed: () async {
                   await analytics.logEvent(
                     name: "button_tracked",
