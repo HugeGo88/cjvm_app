@@ -18,10 +18,7 @@ class PostListItem extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        Navigator.push(
-            context,
-            platformPageRoute(
-                builder: (context) => PostDetail(post), context: context));
+        onTapUrl(context);
       },
       child: Column(
         children: [
@@ -63,7 +60,7 @@ class PostListItem extends StatelessWidget {
                     ),
                     HtmlContent(
                       post.preview,
-                      tapLinks: false,
+                      onTapUrl: (url) => onTapUrl(context),
                       edge: 0,
                     ),
                   ],
@@ -74,5 +71,12 @@ class PostListItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void onTapUrl(BuildContext context) {
+    Navigator.push(
+        context,
+        platformPageRoute(
+            builder: (context) => PostDetail(post), context: context));
   }
 }

@@ -1,26 +1,14 @@
-import 'dart:async';
-
 import 'package:cjvm_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../utils/color_utils.dart' as color_utils;
 
 class HtmlContent extends StatelessWidget {
   final String data;
-  final bool tapLinks;
+  final Function(BuildContext)? onTapUrl;
   final double edge;
   const HtmlContent(this.data,
-      {super.key, this.tapLinks = true, this.edge = edgePadding});
-
-  Future<void> _launchInBrowser(Uri url) async {
-    if (!await launchUrl(
-      url,
-      mode: LaunchMode.externalApplication,
-    )) {
-      throw Exception('Could not launch $url');
-    }
-  }
+      {super.key, this.onTapUrl, this.edge = edgePadding});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +18,14 @@ class HtmlContent extends StatelessWidget {
         child: Material(
           child: HtmlWidget(
             data,
+            onTapUrl: (url) {
+              if (onTapUrl == null) {
+                return false;
+              } else {
+                onTapUrl!(context);
+                return true;
+              }
+            },
             customStylesBuilder: (element) {
               if (element.localName == 'a') {
                 return {
@@ -47,6 +43,8 @@ class HtmlContent extends StatelessWidget {
               return null;
             },
           ),
+
+          ///TODO: Remove old code!
           // child: Html(
           //   data: data,
           //   onLinkTap: (url, attributes, element) {
