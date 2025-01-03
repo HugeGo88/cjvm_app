@@ -32,7 +32,7 @@ flutter_icons:
   android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "images/logo125.png"
+  image_path: "images/logo.png"
 
 dev_dependencies:
   flutter_test:

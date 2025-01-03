@@ -62,7 +62,7 @@ class _LoadingConfettiState extends State<LoadingConfetti> {
           child: Image(
             width: 125,
             height: 125,
-            image: AssetImage('images/logo125.png'),
+            image: AssetImage('images/logo_frei.png'),
           ),
         ),
       ],
