@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: "none"
 
-version: 1.6.5+92
+version: 1.6.6+98
 
 environment:
   sdk: ">=2.19.0 <3.0.0"
@@ -14,36 +14,34 @@ dependencies:
   #firebase_messaging: ^14.6.7
   add_2_calendar: ^3.0.1
   cached_network_image: ^3.3.0
-  confetti: ^0.7.0
-  flutter_html: ^3.0.0-beta.2
-  flutter_widget_from_html: ^0.15.3
-  flutter_launcher_icons: ^0.13.1
+  confetti: ^0.8.0
+  firebase_analytics: ^11.3.6
+  firebase_core: ^3.9.0
   flutter_platform_widgets: ^7.0.1
+  flutter_widget_from_html: ^0.15.3
   html: ^0.15.4
   http: ^1.1.2
-  intl: ^0.19.0
-  maps_launcher: ^2.2.0
+  intl: ^0.20.1
+  maps_launcher: ^3.0.0+1
   package_info_plus: ^8.0.0
   path_provider: ^2.1.1
-  share_plus: ^9.0.0
-  table_calendar: ^3.0.9
+  share_plus: ^10.1.3
   url_launcher: ^6.3.1
-  url_launcher_ios: ^6.3.2
 
-  cupertino_icons: ^1.0.5
-  firebase_analytics: ^10.7.4
-  firebase_core: ^2.24.2
-
-flutter_icons:
+flutter_launcher_icons:
   android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "images/logo125.png"
+  image_path: "images/logo.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "images/logo.png"
+  min_sdk_android: 21
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.2
 
 flutter:
   uses-material-design: true
