@@ -13,33 +13,42 @@ class PostDetailData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(edgePadding),
-              child: Icon(
-                PlatformIcons(context).time,
-                size: 20,
-              ),
-            ),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "Aktualisiert: ",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    Text(
-                      DateFormat.yMMMd('de')
-                          .format(DateTime.parse(post.modifiedGmt)),
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
+        Padding(
+          padding: const EdgeInsets.all(edgePadding),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: contentPadding, right: contentPadding),
+                child: Icon(
+                  PlatformIcons(context).time,
+                  size: 20,
                 ),
-              ],
-            ),
-          ],
+              ),
+              Text(
+                DateFormat.yMMMd('de').format(DateTime.parse(post.modifiedGmt)),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: edgePadding, right: contentPadding),
+                child: Icon(
+                  PlatformIcons(context).folderOpen,
+                  size: 20,
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  post.extra.categories!
+                      .map((category) => category.name)
+                      .join(', '),
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+            ],
+          ),
         ),
         Container(
           height: 3.0,
