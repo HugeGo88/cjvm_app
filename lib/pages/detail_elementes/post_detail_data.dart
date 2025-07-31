@@ -41,9 +41,11 @@ class PostDetailData extends StatelessWidget {
                 child: Text(
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
-                  post.extra.categories!
-                      .map((category) => category.name)
-                      .join(', '),
+                  post.extra.categories != null
+                      ? post.extra.categories!
+                          .map((category) => category.name)
+                          .join(', ')
+                      : 'No categories',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),

@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -50,7 +47,7 @@ class DefaultFirebaseOptions {
     projectId: 'cvjm-274115',
     authDomain: 'cvjm-274115.firebaseapp.com',
     databaseURL: 'https://cvjm-274115.firebaseio.com',
-    storageBucket: 'cvjm-274115.appspot.com',
+    storageBucket: 'cvjm-274115.firebasestorage.app',
     measurementId: 'G-5JMN1G5ZKV',
   );
 
@@ -60,7 +57,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '168778905526',
     projectId: 'cvjm-274115',
     databaseURL: 'https://cvjm-274115.firebaseio.com',
-    storageBucket: 'cvjm-274115.appspot.com',
+    storageBucket: 'cvjm-274115.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -69,7 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '168778905526',
     projectId: 'cvjm-274115',
     databaseURL: 'https://cvjm-274115.firebaseio.com',
-    storageBucket: 'cvjm-274115.appspot.com',
+    storageBucket: 'cvjm-274115.firebasestorage.app',
     iosClientId: '168778905526-evvddnakcq5let2nj53j5fbh204te81j.apps.googleusercontent.com',
     iosBundleId: 'de.cvjm-walheim.cvjm-app',
   );
@@ -80,7 +77,19 @@ class DefaultFirebaseOptions {
     messagingSenderId: '168778905526',
     projectId: 'cvjm-274115',
     databaseURL: 'https://cvjm-274115.firebaseio.com',
-    storageBucket: 'cvjm-274115.appspot.com',
+    storageBucket: 'cvjm-274115.firebasestorage.app',
     iosBundleId: 'com.example.cjvmApp',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyCSnyrNozIF5cFayeg7FcEjsPtJDbDp1_o',
+    appId: '1:168778905526:web:6ea6add88a5ed650117317',
+    messagingSenderId: '168778905526',
+    projectId: 'cvjm-274115',
+    authDomain: 'cvjm-274115.firebaseapp.com',
+    databaseURL: 'https://cvjm-274115.firebaseio.com',
+    storageBucket: 'cvjm-274115.firebasestorage.app',
+    measurementId: 'G-558KH1QH05',
+  );
+
 }
