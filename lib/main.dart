@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'utils/color_utils.dart' as color_utils;
 import 'widgets/home_widget.dart';
 
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -17,7 +17,6 @@ Future main() async {
 class CvjmApp extends StatelessWidget {
   const CvjmApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

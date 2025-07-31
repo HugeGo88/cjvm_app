@@ -1,14 +1,17 @@
+import 'package:cjvm_app/firebase_options.dart';
 import 'package:cjvm_app/pages/about_tab.dart';
 import 'package:cjvm_app/pages/events_tab.dart';
 import 'package:cjvm_app/pages/group_tab.dart';
 import 'package:cjvm_app/pages/start_tab.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import '../pages/posts_tab.dart';
 
 final titles = ['Aktuelles', 'Termine', 'Berichte', 'Gruppen', 'Über'];
+late final FirebaseAnalytics analytics;
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({super.key});
@@ -18,25 +21,57 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  late Future<void> _initialization;
+
+  @override
+  void initState() {
+    super.initState();
+    _initialization = _initializeFirebase();
+  }
+
+  Future<void> _initializeFirebase() async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    analytics = FirebaseAnalytics.instance;
+    analytics.setAnalyticsCollectionEnabled(true);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: PlatformTabScaffold(
-        materialTabs: (_, __) =>
-            MaterialNavBarData(type: BottomNavigationBarType.fixed),
-        appBarBuilder: (_, index) => PlatformAppBar(
-          title: Text(
-            titles[index],
-          ),
-        ),
-        tabController: tabController,
-        items: items(context),
-        bodyBuilder: (BuildContext context, int index) => ParentView(
-          title: titles[index],
-          child: ContentView(index: index),
-        ),
-      ),
+    return FutureBuilder(
+      future: _initialization,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: Text('Error initializing Firebase: ${snapshot.error}'),
+              ),
+            ),
+          );
+        } else {
+          return Material(
+            child: PlatformTabScaffold(
+              materialTabs: (_, __) =>
+                  MaterialNavBarData(type: BottomNavigationBarType.fixed),
+              appBarBuilder: (_, index) => PlatformAppBar(
+                title: Text(
+                  titles[index],
+                ),
+              ),
+              tabController: tabController,
+              items: items(context),
+              bodyBuilder: (BuildContext context, int index) => ParentView(
+                title: titles[index],
+                child: ContentView(index: index),
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -67,11 +102,6 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   // This needs to be captured here in a stateful widget
   PlatformTabController tabController = PlatformTabController();
-  @override
-  void initState() {
-    analytics.setAnalyticsCollectionEnabled(true);
-    super.initState();
-  }
 }
 
 @immutable
@@ -99,8 +129,6 @@ class ContentView extends StatefulWidget {
 }
 
 class _ContentViewState extends State<ContentView> {
-  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
