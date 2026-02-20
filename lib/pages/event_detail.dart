@@ -82,7 +82,6 @@ class _EventDetailState extends State<EventDetail> {
           Builder(
             builder: (context) {
               return PlatformTextButton(
-                child: Text("Teilen"),
                 padding: EdgeInsets.symmetric(horizontal: 0),
                 onPressed: () async {
                   await analytics.logEvent(
@@ -93,6 +92,7 @@ class _EventDetailState extends State<EventDetail> {
                   );
                   _onShare(context, widget.event);
                 },
+                child: Text("Teilen"),
               );
             },
           ),

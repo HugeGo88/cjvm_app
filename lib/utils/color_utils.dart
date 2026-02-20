@@ -1,4 +1,4 @@
-library color_utils;
+library;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
