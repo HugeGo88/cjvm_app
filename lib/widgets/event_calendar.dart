@@ -17,7 +17,7 @@ class _EventCalendarState extends State<EventCalendar> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   bool isLoading = false;
-  bool _showCalendar = true;
+  bool _showCalendar = false;
   final Set<String> _loadedMonths = {};
   final ScrollController _listScrollController = ScrollController();
 
@@ -101,7 +101,7 @@ class _EventCalendarState extends State<EventCalendar> {
           child: Row(
             children: [
               Text(
-                'Termine',
+                '',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const Spacer(),
