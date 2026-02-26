@@ -19,12 +19,40 @@ class _EventCalendarState extends State<EventCalendar> {
   bool isLoading = false;
   bool _showCalendar = true;
   final Set<String> _loadedMonths = {};
+  final ScrollController _listScrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     _selectedDay = _focusedDay;
     _fetchEventsForMonth(_focusedDay);
+    // controller kept for potential programmatic scroll, use NotificationListener for detection
+  }
+
+  @override
+  void dispose() {
+    _listScrollController.dispose();
+    super.dispose();
+  }
+
+  DateTime _parseMonthKey(String key) {
+    final parts = key.split('-');
+    final y = int.tryParse(parts[0]) ?? DateTime.now().year;
+    final m = int.tryParse(parts[1]) ?? DateTime.now().month;
+    return DateTime(y, m, 1);
+  }
+
+  void _fetchNextMonth() {
+    if (_loadedMonths.isEmpty) {
+      _fetchEventsForMonth(_focusedDay);
+      return;
+    }
+    // find last loaded month
+    DateTime maxMonth = _loadedMonths.map(_parseMonthKey).reduce((a, b) {
+      return (a.year * 12 + a.month) >= (b.year * 12 + b.month) ? a : b;
+    });
+    final nextMonth = DateTime(maxMonth.year, maxMonth.month + 1, 1);
+    _fetchEventsForMonth(nextMonth);
   }
 
   Future<void> _fetchEventsForMonth(DateTime focused) async {
@@ -80,7 +108,14 @@ class _EventCalendarState extends State<EventCalendar> {
               IconButton(
                 tooltip:
                     _showCalendar ? 'Kalender ausblenden' : 'Kalender anzeigen',
-                onPressed: () => setState(() => _showCalendar = !_showCalendar),
+                onPressed: () {
+                  final newShow = !_showCalendar;
+                  setState(() => _showCalendar = newShow);
+                  if (!newShow) {
+                    // ensure focused month is loaded when hiding calendar
+                    _fetchEventsForMonth(_focusedDay);
+                  }
+                },
                 icon: Icon(
                     _showCalendar ? Icons.calendar_today : Icons.view_list),
               ),
@@ -144,9 +179,7 @@ class _EventCalendarState extends State<EventCalendar> {
             ),
           ),
         Expanded(
-          child: isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : _buildEventListForSelectedDay(),
+          child: _buildEventListForSelectedDay(),
         ),
       ],
     );
@@ -155,12 +188,8 @@ class _EventCalendarState extends State<EventCalendar> {
   Widget _buildEventListForSelectedDay() {
     List<EventEntity> events;
     if (!_showCalendar) {
-      // show events for focused month (or all loaded events if none)
-      events = allEvents
-          .where((e) =>
-              e.startDate.year == _focusedDay.year &&
-              e.startDate.month == _focusedDay.month)
-          .toList();
+      // show all loaded events (across loaded months)
+      events = List<EventEntity>.from(allEvents);
       events.sort((a, b) => a.startDate.compareTo(b.startDate));
     } else {
       events = _selectedDay == null ? [] : _eventsForDay(_selectedDay!);
@@ -168,6 +197,36 @@ class _EventCalendarState extends State<EventCalendar> {
     if (events.isEmpty) {
       return const Center(
         child: Text('Keine Termine an diesem Tag.'),
+      );
+    }
+
+    if (!_showCalendar) {
+      // show combined month list with lazy-loading bottom indicator
+      final sorted = List<EventEntity>.from(events);
+      final itemCount = sorted.length + (isLoading ? 1 : 0);
+      return NotificationListener<ScrollNotification>(
+        onNotification: (scrollNotification) {
+          if (scrollNotification.metrics.pixels >=
+                  scrollNotification.metrics.maxScrollExtent - 200 &&
+              !isLoading) {
+            _fetchNextMonth();
+          }
+          return false;
+        },
+        child: ListView.separated(
+          controller: _listScrollController,
+          itemCount: itemCount,
+          separatorBuilder: (context, index) => const Divider(height: 1),
+          itemBuilder: (context, index) {
+            if (index >= sorted.length) {
+              return const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Center(child: CircularProgressIndicator()),
+              );
+            }
+            return EventListItem(event: sorted[index]);
+          },
+        ),
       );
     }
 
