@@ -62,6 +62,32 @@ class WpApi {
     return events;
   }
 
+  static Future<List<EventEntity>> getEventListByRange(
+      {required DateTime start,
+      required DateTime end,
+      int category = 0}) async {
+    List<EventEntity> events = [];
+    try {
+      String extra = category != 0 ? '&categories=$category' : '';
+      // tribe/events endpoint supports start_date and end_date as ISO strings
+      final s = Uri.encodeComponent(start.toIso8601String());
+      final e = Uri.encodeComponent(end.toIso8601String());
+      var urll =
+          '${url}wp-json/tribe/events/v1/events?_embed&start_date=$s&end_date=$e$extra';
+      dynamic response = await http.get(Uri.parse(urll));
+      Map<String, dynamic> map = json.decode(response.body);
+      dynamic data = map["events"];
+      if (data != null) {
+        for (var v in (data as List)) {
+          events.add(EventEntity.fromJson(v));
+        }
+      }
+    } catch (e) {
+      //TODO Handle No Internet Response
+    }
+    return events;
+  }
+
   static Future<List<TicketEntity>> getTicketList({int page = 1}) async {
     List<TicketEntity> tickets = [];
     try {
