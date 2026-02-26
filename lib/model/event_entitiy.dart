@@ -15,6 +15,7 @@ class EventEntity {
   late String venue = "";
   late String address = "";
   TicketEntity? ticket;
+  List<String> categories = [];
   //EventEmbedded extra;
 
   String _parseHtmlString(String htmlString) {
@@ -72,6 +73,23 @@ class EventEntity {
           }
           address = "$street$zip $city ";
         }
+      }
+      // parse categories if present
+      try {
+        if (json['categories'] != null) {
+          var cats = json['categories'];
+          if (cats is List) {
+            for (var c in cats) {
+              if (c is Map && c['name'] != null) {
+                categories.add(c['name'].toString());
+              } else {
+                categories.add(c.toString());
+              }
+            }
+          }
+        }
+      } catch (e) {
+        // ignore category parse errors
       }
     } catch (e) {
       //TODO Handle No Internet Response
