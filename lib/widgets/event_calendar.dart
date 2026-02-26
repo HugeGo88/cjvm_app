@@ -20,6 +20,8 @@ class _EventCalendarState extends State<EventCalendar> {
   bool _showCalendar = false;
   final Set<String> _loadedMonths = {};
   final ScrollController _listScrollController = ScrollController();
+  final Set<String> _availableCategories = {};
+  final Set<String> _selectedCategories = {};
 
   @override
   void initState() {
@@ -99,13 +101,32 @@ class _EventCalendarState extends State<EventCalendar> {
     setState(() {
       eventsMap = newMap;
       _loadedMonths.add(key);
+      // update available categories
+      _updateAvailableCategories();
       isLoading = false;
     });
   }
 
+  void _updateAvailableCategories() {
+    final cats = <String>{};
+    for (var e in allEvents) {
+      for (var c in e.categories) {
+        if (c.trim().isNotEmpty) cats.add(c);
+      }
+    }
+    _availableCategories.clear();
+    _availableCategories.addAll(cats);
+    // if selectedCategories contains values that no longer exist, remove them
+    _selectedCategories.retainAll(_availableCategories);
+  }
+
   List<EventEntity> _eventsForDay(DateTime day) {
     final key = DateTime(day.year, day.month, day.day);
-    return eventsMap[key] ?? [];
+    final list = eventsMap[key] ?? [];
+    if (_selectedCategories.isEmpty) return list;
+    return list
+        .where((e) => e.categories.any((c) => _selectedCategories.contains(c)))
+        .toList();
   }
 
   @override
@@ -134,6 +155,78 @@ class _EventCalendarState extends State<EventCalendar> {
                 },
                 icon: Icon(
                     _showCalendar ? Icons.calendar_today : Icons.view_list),
+              ),
+              IconButton(
+                tooltip: 'Filter',
+                onPressed: () async {
+                  await showModalBottomSheet<void>(
+                    context: context,
+                    builder: (ctx) {
+                      final cats = _availableCategories.toList()..sort();
+                      return StatefulBuilder(builder: (c, setModalState) {
+                        return SafeArea(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                title: const Text('Kategorien filtern'),
+                                trailing: TextButton(
+                                  child: const Text('Zurücksetzen'),
+                                  onPressed: () {
+                                    setModalState(
+                                        () => _selectedCategories.clear());
+                                    setState(() {});
+                                  },
+                                ),
+                              ),
+                              if (cats.isEmpty)
+                                const Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: Text('Keine Kategorien geladen.'),
+                                )
+                              else
+                                Flexible(
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: cats.length,
+                                    itemBuilder: (context, idx) {
+                                      final name = cats[idx];
+                                      final checked =
+                                          _selectedCategories.contains(name);
+                                      return CheckboxListTile(
+                                        title: Text(name),
+                                        value: checked,
+                                        onChanged: (v) {
+                                          setModalState(() {
+                                            if (v == true) {
+                                              _selectedCategories.add(name);
+                                            } else {
+                                              _selectedCategories.remove(name);
+                                            }
+                                          });
+                                          setState(() {});
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                              const SizedBox(height: 8),
+                              ElevatedButton(
+                                child: const Text('Fertig'),
+                                onPressed: () => Navigator.of(ctx).pop(),
+                              ),
+                              const SizedBox(height: 8),
+                            ],
+                          ),
+                        );
+                      });
+                    },
+                  );
+                },
+                icon: Icon(
+                  Icons.filter_list,
+                  color: _selectedCategories.isNotEmpty ? Colors.blue : null,
+                ),
               ),
             ],
           ),
@@ -218,7 +311,10 @@ class _EventCalendarState extends State<EventCalendar> {
 
     if (!_showCalendar) {
       // show combined month list with lazy-loading bottom indicator
-      final sorted = List<EventEntity>.from(events);
+      final sorted = List<EventEntity>.from(events.where((e) =>
+          _selectedCategories.isEmpty
+              ? true
+              : e.categories.any((c) => _selectedCategories.contains(c))));
       final itemCount = sorted.length + (isLoading ? 1 : 0);
       return NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
