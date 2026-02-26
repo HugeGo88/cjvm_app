@@ -69,18 +69,34 @@ class _EventCalendarState extends State<EventCalendar> {
     List<EventEntity> events =
         await WpApi.getEventListByRange(start: start, end: end);
 
-    // merge into eventsMap
+    // merge into eventsMap; for multi-day events add an entry for each day in the event range (clamped to the month)
     final newMap = Map<DateTime, List<EventEntity>>.from(eventsMap);
     for (var e in events) {
-      final day =
+      // determine overlap between the event range and the requested month range
+      DateTime evStart =
           DateTime(e.startDate.year, e.startDate.month, e.startDate.day);
-      final list = newMap.putIfAbsent(day, () => []);
-      // avoid duplicates by id
-      if (!list.any((x) => x.id == e.id)) list.add(e);
+      DateTime evEnd = DateTime(e.endDate.year, e.endDate.month, e.endDate.day);
+      DateTime addFrom = evStart.isBefore(start) ? start : evStart;
+      DateTime addTo = evEnd.isAfter(end) ? end : evEnd;
+      for (DateTime d = addFrom;
+          !d.isAfter(addTo);
+          d = d.add(const Duration(days: 1))) {
+        final day = DateTime(d.year, d.month, d.day);
+        final list = newMap.putIfAbsent(day, () => []);
+        if (!list.any((x) => x.id == e.id)) list.add(e);
+      }
+    }
+
+    // merge unique events into allEvents by id
+    final existingIds = allEvents.map((e) => e.id).toSet();
+    for (var e in events) {
+      if (!existingIds.contains(e.id)) {
+        allEvents.add(e);
+        existingIds.add(e.id);
+      }
     }
 
     setState(() {
-      allEvents.addAll(events);
       eventsMap = newMap;
       _loadedMonths.add(key);
       isLoading = false;
