@@ -24,8 +24,7 @@ class PostDetail extends StatefulWidget {
 
 class _PostDetailState extends State<PostDetail> {
   final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  Future<void> _onShare(context, PostEntity post) async {
-    final box = context.findRenderObject() as RenderBox?;
+  Future<void> _onShare(RenderBox? box, PostEntity post) async {
     final urlImage = post.image;
     final url = Uri.parse(urlImage);
     final response = await http.get(url);
@@ -43,8 +42,7 @@ class _PostDetailState extends State<PostDetail> {
     );
   }
 
-  Future<void> _onSharePicture(context, PostEntity post) async {
-    final box = context.findRenderObject() as RenderBox?;
+  Future<void> _onSharePicture(RenderBox? box, PostEntity post) async {
     final urlImage = post.image;
     final url = Uri.parse(urlImage);
     final response = await http.get(url);
@@ -86,13 +84,14 @@ class _PostDetailState extends State<PostDetail> {
                 padding: EdgeInsets.symmetric(horizontal: 0),
                 child: Text("Teilen"),
                 onPressed: () async {
+                  final box = context.findRenderObject() as RenderBox?;
                   await analytics.logEvent(
                     name: "button_tracked",
                     parameters: {
                       "button_name": "SharePostPicture",
                     },
                   );
-                  _onShare(context, widget.post);
+                  await _onShare(box, widget.post);
                 },
               );
             },
@@ -112,13 +111,15 @@ class _PostDetailState extends State<PostDetail> {
                           tag: widget.post.image,
                           child: GestureDetector(
                             onTap: () async {
+                              final box =
+                                  context.findRenderObject() as RenderBox?;
                               await analytics.logEvent(
                                 name: "button_tracked",
                                 parameters: {
                                   "button_name": "SharePost",
                                 },
                               );
-                              _onSharePicture(context, widget.post);
+                              await _onSharePicture(box, widget.post);
                             },
                             child: CachedImage(
                               widget.post.image,

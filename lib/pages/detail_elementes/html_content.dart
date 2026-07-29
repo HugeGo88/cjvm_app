@@ -12,7 +12,8 @@ class HtmlContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColorHex = color_utils.commonThemeData.primaryColor.value
+    final primaryColorHex = color_utils.commonThemeData.primaryColor
+        .toARGB32()
         .toRadixString(16)
         .substring(2);
     return SingleChildScrollView(

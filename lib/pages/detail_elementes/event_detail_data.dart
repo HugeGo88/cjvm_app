@@ -1,4 +1,3 @@
-import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:cjvm_app/model/event_entitiy.dart';
 import 'package:cjvm_app/utils/constants.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:maps_launcher/maps_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/color_utils.dart' as color_utils;
 
@@ -20,6 +18,7 @@ class EventDetailData extends StatefulWidget {
 
 class _EventDetailDataState extends State<EventDetailData> {
   final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
   Future<void> _launchInBrowser(Uri url) async {
     if (!await launchUrl(
       url,
@@ -29,31 +28,39 @@ class _EventDetailDataState extends State<EventDetailData> {
     }
   }
 
+  String _formatCalendarDate(DateTime dateTime) {
+    return DateFormat("yyyyMMdd'T'HHmmss'Z'").format(dateTime.toUtc());
+  }
+
+  Uri _googleCalendarEventUrl() {
+    final DateTime startDate = widget.event.startDate;
+    final DateTime endDate = widget.event.endDate;
+    final String dates;
+
+    if (widget.event.allDay) {
+      final String start = DateFormat('yyyyMMdd').format(startDate);
+      final String endExclusive =
+          DateFormat('yyyyMMdd').format(endDate.add(const Duration(days: 1)));
+      dates = '$start/$endExclusive';
+    } else {
+      dates = '${_formatCalendarDate(startDate)}/${_formatCalendarDate(endDate)}';
+    }
+
+    return Uri.https('calendar.google.com', '/calendar/render', {
+      'action': 'TEMPLATE',
+      'text': widget.event.title,
+      'details': widget.event.description,
+      'location': widget.event.address,
+      'dates': dates,
+    });
+  }
+
   String allDayVenue(DateTime start, DateTime end) {
     if (start.day != end.day) {
       return "${DateFormat.Md('de').format(start)} bis ${DateFormat.yMd('de').format(end)}";
     } else {
       return DateFormat.yMd('de').format(start);
     }
-  }
-
-  Event buildEvent({Recurrence? recurrence}) {
-    return Event(
-      title: widget.event.title,
-      description: widget.event.description,
-      location: widget.event.address,
-      startDate: widget.event.startDate,
-      endDate: widget.event.endDate,
-      allDay: widget.event.allDay,
-      iosParams: IOSParams(
-        reminder: const Duration(minutes: 60),
-        url: widget.event.url,
-      ),
-      androidParams: const AndroidParams(
-        emailInvites: [],
-      ),
-      recurrence: recurrence,
-    );
   }
 
   @override
@@ -101,9 +108,7 @@ class _EventDetailDataState extends State<EventDetailData> {
                     "button_name": "AddCalendar",
                   },
                 );
-                Add2Calendar.addEvent2Cal(
-                  buildEvent(),
-                );
+                await _launchInBrowser(_googleCalendarEventUrl());
               },
             ),
           ],
@@ -144,7 +149,16 @@ class _EventDetailDataState extends State<EventDetailData> {
                       "button_name": "OpenMap",
                     },
                   );
-                  MapsLauncher.launchQuery(widget.event.address);
+                  await _launchInBrowser(
+                    Uri.https(
+                      'www.google.com',
+                      '/maps/search/',
+                      {
+                        'api': '1',
+                        'query': widget.event.address,
+                      },
+                    ),
+                  );
                 },
               ),
             ],
