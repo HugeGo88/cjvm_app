@@ -43,7 +43,8 @@ class _EventDetailDataState extends State<EventDetailData> {
           DateFormat('yyyyMMdd').format(endDate.add(const Duration(days: 1)));
       dates = '$start/$endExclusive';
     } else {
-      dates = '${_formatCalendarDate(startDate)}/${_formatCalendarDate(endDate)}';
+      dates =
+          '${_formatCalendarDate(startDate)}/${_formatCalendarDate(endDate)}';
     }
 
     return Uri.https('calendar.google.com', '/calendar/render', {
