@@ -43,6 +43,8 @@
 	<string>Veranstaltung zu Kalender hinzufügen</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Ortungsdienste</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Mikrofonzugriff wird für Audiofunktionen innerhalb der App benötigt.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
