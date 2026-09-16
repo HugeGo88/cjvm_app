@@ -1,4 +1,5 @@
 import 'package:cjvm_app/firebase_options.dart';
+import 'package:cjvm_app/services/firebase_messaging_service.dart';
 import 'package:cjvm_app/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,17 +12,24 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const CvjmApp());
+  await FirebaseMessagingService.instance.initialize(
+      navigatorKey: appNavigatorKey);
+  runApp(CvjmApp(navigatorKey: appNavigatorKey));
 }
 
+final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
+
 class CvjmApp extends StatelessWidget {
-  const CvjmApp({super.key});
+  final GlobalKey<NavigatorState> navigatorKey;
+
+  const CvjmApp({required this.navigatorKey, super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appTitle,
+      navigatorKey: navigatorKey,
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: color_utils.commonThemeData.primaryColor,

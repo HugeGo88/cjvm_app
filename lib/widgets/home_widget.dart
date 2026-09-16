@@ -1,7 +1,9 @@
 import 'package:cjvm_app/pages/about_tab.dart';
 import 'package:cjvm_app/pages/events_tab.dart';
 import 'package:cjvm_app/pages/group_tab.dart';
+import 'package:cjvm_app/pages/messages_page.dart';
 import 'package:cjvm_app/pages/start_tab.dart';
+import 'package:cjvm_app/services/firebase_messaging_service.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,45 @@ class _HomeWidgetState extends State<HomeWidget> {
           title: Text(
             titles[index],
           ),
+          trailingActions: [
+            ValueListenableBuilder(
+              valueListenable: FirebaseMessagingService.instance.messagesNotifier,
+              builder: (context, messages, _) {
+                final unreadCount =
+                    messages.where((message) => !message.isRead).length;
+                return PlatformIconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      platformPageRoute(
+                        builder: (context) => const MessagesPage(),
+                        context: context,
+                      ),
+                    );
+                  },
+                  icon: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      const Icon(CupertinoIcons.bell),
+                      if (unreadCount > 0)
+                        Positioned(
+                          right: -4,
+                          top: -4,
+                          child: Container(
+                            width: 10,
+                            height: 10,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                );
+              },
+            )
+          ],
         ),
         tabController: tabController,
         items: items(context),
