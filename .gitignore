@@ -53,3 +53,8 @@ ios/Runner/GoogleService-Info.plist
 macos/firebase_app_id_file.json
 ios/firebase_app_id_file.json
 android/app/google-services.json
+windows/flutter/generated_plugins.cmake
+analysis_options.yaml
+ios/Runner.xcodeproj/project.pbxproj
+linux/flutter/generated_plugins.cmake
+macos/Flutter/GeneratedPluginRegistrant.swift
